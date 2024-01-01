@@ -4,12 +4,12 @@ using UnityEngine.Events;
 
 public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkClient>
 {
-    [SerializeField] int maxHP = 100;
+    [SerializeField] protected int maxHP = 100;
     private int currentHP = 0;
     public int HP => currentHP;
 
-    [SerializeField] UnityEvent<NetworkClient> OnDestroyedEvent;
-    [SerializeField] UnityEvent<NetworkClient, Vector3, int> OnDamagedEvent;
+    [SerializeField] protected UnityEvent<NetworkClient> OnDestroyedEvent;
+    [SerializeField] protected UnityEvent<NetworkClient, Vector3, int> OnDamagedEvent;
 
     private bool isDestroyed = false;
 
