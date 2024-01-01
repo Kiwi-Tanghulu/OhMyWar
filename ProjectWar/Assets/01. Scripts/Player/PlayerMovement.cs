@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : PlayerComponent
 {
     [SerializeField] InputReader inputReader = null;
     
@@ -18,9 +18,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isMove = false;
 
-    private void Awake()
+    public override void Init(Player player)
     {
-        inputReader.OnRightClicked += HandleRightClicked;
+        base.Init(player);
+    
+        if(player.IsOwner)
+            inputReader.OnRightClicked += HandleRightClicked;
     }
 
     private void Update()
@@ -44,9 +47,10 @@ public class PlayerMovement : MonoBehaviour
         DoMove();
     }
 
-    private void OnDestroy()
+    public override void Release()
     {
-        inputReader.OnRightClicked -= HandleRightClicked;
+        if(player.IsOwner)
+            inputReader.OnRightClicked -= HandleRightClicked;
     }
 
     private void DoRotate()
