@@ -7,7 +7,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
 {
-    [SerializeField] private float maxHealth;
+    [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool isDie;
     private NetworkVariable<float> currentHealth;
     public float MaxHealth => maxHealth;

@@ -5,6 +5,8 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Playables;
 
+[RequireComponent(typeof(UnitMovement))]
+[RequireComponent(typeof(UnitHealth))]
 public class UnitController : NetworkBehaviour
 {
     private Dictionary<UnitStateType, UnitState> states;
@@ -21,7 +23,7 @@ public class UnitController : NetworkBehaviour
         Movement = GetComponent<UnitMovement>();
         Health = GetComponent<UnitHealth>();
         Attack = GetComponent<UnitAttack>();
-        Anim = GetComponent<UnitAnimation>();
+        Anim = transform.Find("Visual").GetComponent<UnitAnimation>();
 
         Movement.InitCompo(this);
         Health.InitCompo(this);
