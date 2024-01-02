@@ -13,7 +13,7 @@ public class BaseUI : MonoBehaviour
     protected virtual void Awake()
     {
         if (!IsOpen)
-            Hide();
+            HideAnimation();
     }
 
     public virtual void Show()
