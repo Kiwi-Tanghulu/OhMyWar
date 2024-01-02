@@ -54,5 +54,6 @@ public class PlayerInput : PlayerComponent
     private void OnToggleKeyPressedHandle()
     {
         Debug.Log("Toggle Pressed");
+
     }
 }

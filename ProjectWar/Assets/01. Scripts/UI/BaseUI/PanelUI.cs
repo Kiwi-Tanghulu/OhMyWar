@@ -7,12 +7,12 @@ public class PanelUI : BaseUI
     public override void Show()
     {
         base.Show();
-        UIManager.Instance.PushPanelUI(this);
+        //UIManager.Instance.PushPanelUI(this);
     }
 
     public override void Hide()
     {
         base.Hide();
-        UIManager.Instance.PopPanelUI();
+        //UIManager.Instance.PopPanelUI();
     }
 }
