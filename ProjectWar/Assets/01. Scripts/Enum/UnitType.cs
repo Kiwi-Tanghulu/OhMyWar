@@ -1,9 +1,9 @@
 public enum UnitType
 {
     Infantry,
-    Knight,
-    Thief,
     Archer,
     Wizard,
+    Thief,
     Healer,
+    Knight,
 }

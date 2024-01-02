@@ -22,22 +22,10 @@ public class Castle : StructureBase, IUnitSpawner
 
     public void SpawnUnit(int unitIndex, int lineIndex)
     {
-        GenerateServerRPC(unitIndex, lineIndex);
-    }
-
-    private void GenerateUnit(int unitIndex, int lineIndex)
-    {
-        if(unitIndex >= unitPrefabs.PrefabList.Count)
+        if (unitIndex >= unitPrefabs.PrefabList.Count)
             return;
 
-        GameObject unit = Instantiate(unitPrefabs.PrefabList[unitIndex].Prefab, spawnPosition.position, Quaternion.identity);
-        unit.GetComponent<NetworkObject>().Spawn();
-        unit.GetComponent<UnitController>().Movement.SetTargetPosition(spawnPosition.position);
-    }
-    
-    [ServerRpc]
-    private void GenerateServerRPC(int unitIndex, int lineIndex)
-    {
-        GenerateUnit(unitIndex, lineIndex);
+        UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
+            spawnPositions[lineIndex].position, spawnPositions[lineIndex].position);
     }
 }
