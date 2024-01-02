@@ -20,7 +20,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
     public override void InitCompo(UnitController _controller)
     {
         base.InitCompo(_controller);
-
+        currentHealth = new NetworkVariable<float>();
         this.maxHealth = controller.Info.maxHealth;
     }
 
