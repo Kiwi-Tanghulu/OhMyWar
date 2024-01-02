@@ -15,6 +15,16 @@ public class Player : NetworkBehaviour
         components = new List<PlayerComponent>();
         GetComponents<PlayerComponent>(components);
         components.ForEach(component => component?.Init(this));
+
+        if(IsOwner)
+            CameraManager.Instance.MainVCam.Follow = transform;
+
+        if(IsHost && IsOwner)
+        {
+            IngameManager.Instance.RegisterPlayer(this, true);
+        }
+        else
+            IngameManager.Instance.RegisterPlayer(this, false);
     }
 
     private void Update()

@@ -5,7 +5,12 @@ using UnityEngine;
 public class Castle : StructureBase
 {
 	[SerializeField] List<Transform> spawnPositions = null;
-    [SerializeField] NetworkPrefabsList unitPrefabs = null;
+    [SerializeField] Transform spawnPosition = null;
+    public Transform SpawnPosition => spawnPosition;
+
+
+    [Space(10f)]
+    [SerializeField] NetworkPrefabsList unitPrefabs = null; 
 
     private ulong ownerID = 0;
     public ulong OwnerID => ownerID;

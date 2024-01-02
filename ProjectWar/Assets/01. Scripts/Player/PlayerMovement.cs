@@ -77,4 +77,10 @@ public class PlayerMovement : PlayerComponent
     {
         targetPosition = position;
     }
+
+    public void MoveImmediately(Vector2 position)
+    {
+        SetTargetPosition(position);
+        transform.position = position;
+    }
 }
