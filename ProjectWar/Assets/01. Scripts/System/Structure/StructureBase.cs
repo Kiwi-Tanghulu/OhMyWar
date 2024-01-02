@@ -2,19 +2,19 @@ using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkClient>
+public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObject>
 {
     [SerializeField] protected int maxHP = 100;
     private int currentHP = 0;
     public int HP => currentHP;
 
-    [SerializeField] protected UnityEvent<NetworkClient> OnDestroyedEvent;
-    [SerializeField] protected UnityEvent<NetworkClient, Vector3, int> OnDamagedEvent;
+    [SerializeField] protected UnityEvent<NetworkObject> OnDestroyedEvent;
+    [SerializeField] protected UnityEvent<NetworkObject, Vector3, int> OnDamagedEvent;
 
     private bool isDestroyed = false;
 
     // 실질적으로 데미지를 넣는 함수
-    public virtual void OnDamaged(int damage = 0, NetworkClient performer = null, Vector3 point = default)
+    public virtual void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
         if(isDestroyed)
             return;
@@ -50,7 +50,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkClien
     [ClientRpc] // 실질적 대미지 입히기
     private void TakeDamageClientRPC(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID], point);
+        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
 
     public void ModifyHP(int value)

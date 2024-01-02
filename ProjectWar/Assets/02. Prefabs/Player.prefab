@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 39103781044234553}
   - component: {fileID: 1498799885401166733}
   - component: {fileID: 2176207652494473421}
+  - component: {fileID: 290577149772114522}
   - component: {fileID: 5873785078230668928}
   m_Layer: 0
   m_Name: Player
@@ -285,6 +286,18 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 79774e5d7160f5f4d979ef13bd94d130, type: 2}
   skills:
   - {fileID: 725793932262433204}
+--- !u!114 &290577149772114522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813432924912359082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db69256eec37f0e4baf5dcf9b6082011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5873785078230668928
 MonoBehaviour:
   m_ObjectHideFlags: 0
