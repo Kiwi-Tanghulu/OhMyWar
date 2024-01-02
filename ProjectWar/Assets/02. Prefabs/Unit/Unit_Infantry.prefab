@@ -2194,6 +2194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e56e0b64fec81f0419b7fda4c960c24a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  info: {fileID: 0}
   <CurrentState>k__BackingField: 0
 --- !u!114 &5201031032327328735
 MonoBehaviour:
@@ -2217,6 +2218,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
+  attackEffect: {fileID: 0}
 --- !u!1 &2358992626378290331
 GameObject:
   m_ObjectHideFlags: 0
@@ -4576,7 +4578,7 @@ Animator:
   m_GameObject: {fileID: 6247361254812130939}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ab937231d0600440fb0d8757568d78d7, type: 2}
+  m_Controller: {fileID: 9100000, guid: c850fde2252dbbb4d9d6a7b3bd6872e4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

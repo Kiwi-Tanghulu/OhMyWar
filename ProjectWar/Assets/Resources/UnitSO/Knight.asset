@@ -22,6 +22,8 @@ MonoBehaviour:
   attackDistance: 1
   attackDelay: 2.4
   serchDelay: 0.1
+  projectile: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
+  attackEffect: {fileID: 0}
