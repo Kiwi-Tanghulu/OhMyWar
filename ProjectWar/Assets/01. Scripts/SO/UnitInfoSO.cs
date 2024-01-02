@@ -15,19 +15,19 @@ public class UnitInfoSO : ScriptableObject
     public Sprite image;
 
     [Header("Movement")]
-    public float moveSpeed;
-    public float stopDistance;
+    public int moveSpeed;
+    public int stopDistance;
 
     [Space]
     [Header("Health")]
-    public float maxHealth;
+    public int maxHealth;
 
     [Space]
     [Header("Attack")]
-    public float attackDamage;
-    public float attackDistance;
-    public float attackDelay;
-    public float serchDelay;
+    public int attackDamage;
+    public int attackDistance;
+    public int attackDelay;
+    public int serchDelay;
     public NetworkObject projectile;
     public LayerMask targetLayer;
     public ParticleSystem attackEffect;
