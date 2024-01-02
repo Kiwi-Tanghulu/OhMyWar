@@ -8,6 +8,8 @@ public class PlayerMovement : PlayerComponent
     [Space(10f)]
     [SerializeField] float speed = 10f;
 
+    private Transform visual = null;
+
     private Vector2 moveDirection = Vector2.zero;
 
     private Vector2 targetPosition = Vector2.zero;
@@ -22,6 +24,8 @@ public class PlayerMovement : PlayerComponent
     {
         base.Init(player);
     
+        visual = transform.Find("Visual");
+
         if(player.IsOwner)
             inputReader.OnRightClicked += HandleRightClicked;
     }
@@ -59,7 +63,8 @@ public class PlayerMovement : PlayerComponent
 
         float angle = (facingDirection == 1) ? 0f : 180f;
         Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+        // visual.rotation = Quaternion.Lerp(visual.rotation, targetRotation, 10f * Time.fixedDeltaTime);
+        visual.rotation = targetRotation;
     }
 
     private void DoMove()
