@@ -15,6 +15,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnSkill1Pressed;
     public event Action OnSkill2Pressed;
     public event Action OnToggleKeyPressed;
+    public event Action OnViewChanged;
 
     public Vector2 MousePosition { get; private set; } = Vector2.zero;
 
@@ -78,5 +79,11 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         if(context.performed)
             OnArrowKeyPressed?.Invoke(context.ReadValue<float>());
+    }
+
+    public void OnViewChange(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnViewChanged?.Invoke();
     }
 }

@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "ViewChange",
+                    "type": "Button",
+                    "id": "afd22afb-01d6-4f4d-a8eb-02f1b8db18fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -331,6 +340,17 @@
                     "action": "Arrow",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a549fad7-14c6-4c42-807e-54a1385209e6",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ViewChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

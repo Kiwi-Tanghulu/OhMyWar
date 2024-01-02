@@ -98,6 +98,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ViewChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""afd22afb-01d6-4f4d-a8eb-02f1b8db18fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -353,6 +362,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Arrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a549fad7-14c6-4c42-807e-54a1385209e6"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ViewChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -386,6 +406,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Skill2 = m_Player.FindAction("Skill2", throwIfNotFound: true);
         m_Player_Toggle = m_Player.FindAction("Toggle", throwIfNotFound: true);
         m_Player_Arrow = m_Player.FindAction("Arrow", throwIfNotFound: true);
+        m_Player_ViewChange = m_Player.FindAction("ViewChange", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -455,6 +476,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Skill2;
     private readonly InputAction m_Player_Toggle;
     private readonly InputAction m_Player_Arrow;
+    private readonly InputAction m_Player_ViewChange;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -467,6 +489,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
         public InputAction @Toggle => m_Wrapper.m_Player_Toggle;
         public InputAction @Arrow => m_Wrapper.m_Player_Arrow;
+        public InputAction @ViewChange => m_Wrapper.m_Player_ViewChange;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -500,6 +523,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Arrow.started += instance.OnArrow;
             @Arrow.performed += instance.OnArrow;
             @Arrow.canceled += instance.OnArrow;
+            @ViewChange.started += instance.OnViewChange;
+            @ViewChange.performed += instance.OnViewChange;
+            @ViewChange.canceled += instance.OnViewChange;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -528,6 +554,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Arrow.started -= instance.OnArrow;
             @Arrow.performed -= instance.OnArrow;
             @Arrow.canceled -= instance.OnArrow;
+            @ViewChange.started -= instance.OnViewChange;
+            @ViewChange.performed -= instance.OnViewChange;
+            @ViewChange.canceled -= instance.OnViewChange;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -564,5 +593,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnSkill2(InputAction.CallbackContext context);
         void OnToggle(InputAction.CallbackContext context);
         void OnArrow(InputAction.CallbackContext context);
+        void OnViewChange(InputAction.CallbackContext context);
     }
 }
