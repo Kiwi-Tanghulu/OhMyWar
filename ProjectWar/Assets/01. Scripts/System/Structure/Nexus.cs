@@ -3,32 +3,83 @@ using UnityEngine;
 
 public class Nexus : StructureBase, IUnitSpawner
 {
-    [SerializeField] Transform spawnPosition = null;
+    [field:SerializeField] public Transform SpawnPosition {get; private set;} = null;
     [SerializeField] NetworkPrefabsList unitPrefabs = null;
 
     [Space(10f)]
     [SerializeField] Sprite blueSprite = null;
     [SerializeField] Sprite redSprite = null;
 
+    private SpriteRenderer spRenderer = null;
+
     private ulong ownerID = ulong.MaxValue;
     public ulong OwnerID => ownerID;
 
-    public void Init(ulong ownerID)
+    private ulong attackerID = ulong.MaxValue;
+
+    public bool IsEmpty => (ownerID == ulong.MaxValue);
+
+    private void Awake()
     {
-        this.ownerID = ownerID;
+        spRenderer = GetComponent<SpriteRenderer>();
     }
 	
     public void SpawnUnit(int unitIndex, int lineIndex)
     {
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
-            spawnPosition.position, spawnPosition.position);
+            SpawnPosition.position, SpawnPosition.position);
     }
 
-    public void ChangeOwner(NetworkClient networkCliet)
+    public override void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
-        this.ownerID = networkCliet.ClientId;
+        if (isDestroyed)
+            return;
+
+        if (IsEmpty) // 비어있을 때
+        {
+            if(attackerID == ulong.MaxValue) // 클린한 상태
+                attackerID = performer.OwnerClientId;
+            else if(attackerID != performer.OwnerClientId) // 다른 애가 때린 거라면
+            {
+                ModifyHP(damage); // 힐 하기
+                OnDamagedEvent?.Invoke(performer, point, damage);
+
+                if(HP >= maxHP) // 공격자 전환
+                    attackerID = performer.OwnerClientId;
+            }
+            else
+            {
+                ModifyHP(-damage);
+                OnDamagedEvent?.Invoke(performer, point, damage);
+
+                if(HP <= 0)
+                {
+                    isDestroyed = true;
+                    OnDestroyedEvent?.Invoke(performer);
+                }
+            }
+        }
+        else
+            base.OnDamaged(damage, performer, point);        
+    }
+
+    public override void OnDie(NetworkObject performer)
+    {
+        ChangeOwner(performer);
+        base.OnDie(performer);
+    }
+
+    public void ChangeOwner(NetworkObject performer)
+    {
+        this.ownerID = performer.OwnerClientId;
         ModifyHP(maxHP);
 
+        isDestroyed = false;
+
+        if(ownerID == IngameManager.Instance.BluePlayer.OwnerClientId)
+            spRenderer.sprite = blueSprite;
+        else
+            spRenderer.sprite = redSprite;
         // change spawn position
     }
 }

@@ -11,7 +11,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     [SerializeField] protected UnityEvent<NetworkObject> OnDestroyedEvent;
     [SerializeField] protected UnityEvent<NetworkObject, Vector3, int> OnDamagedEvent;
 
-    private bool isDestroyed = false;
+    protected bool isDestroyed = false;
 
     // 실질적으로 데미지를 넣는 함수
     public virtual void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
@@ -25,8 +25,13 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         if(currentHP <= 0)
         {
             isDestroyed = true;
-            OnDestroyedEvent?.Invoke(performer);
+            OnDie(performer);
         }
+    }
+    
+    public virtual void OnDie(NetworkObject performer)
+    {
+        OnDestroyedEvent?.Invoke(performer);
     }
 
     // 데미지를 넣기 위해 호출하는 함수
