@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class IngameManager : MonoBehaviour
+public class IngameManager : NetworkBehaviour
 {
     private static IngameManager instance;
     public static IngameManager Instance {
@@ -12,20 +12,19 @@ public class IngameManager : MonoBehaviour
         }
     }
 
-    [SerializeField] Castle blueCastle = null;
-    [SerializeField] Castle redCastle = null;
+    [field: SerializeField] public Castle BlueCastle { get; private set; } = null;
+    [field: SerializeField] public Castle RedCastle { get; private set; } = null;
 
-    [Space(10f)]
-    [SerializeField] Nexus topNexus = null;
-    [SerializeField] Nexus midNexus = null;
-    [SerializeField] Nexus bottomNexus = null;
+    [field: SerializeField] public Nexus TopNexus { get; private set; } = null;
+    [field: SerializeField] public Nexus MidNexus { get; private set; } = null;
+    [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
-    private NetworkClient player1 = null;
-    private NetworkClient player2 = null;
+    [SerializeField] private Player player1 = null;
+    [SerializeField] private Player player2 = null;
 
-    public void ReadyGame()
+    public override void OnNetworkSpawn()
     {
-        ReadyServerRPC(NetworkManager.Singleton.LocalClient, NetworkManager.Singleton.IsHost);
+        NetworkManager.Singleton.OnClientConnectedCallback += ReadyGameServerRPC;
     }
 
     public void CloseGame(Castle loser)
@@ -34,8 +33,12 @@ public class IngameManager : MonoBehaviour
     }
 
     [ServerRpc]
-    private void ReadyServerRPC(NetworkClient player, bool isHost)
+    private void ReadyGameServerRPC(ulong playerID)
     {
+        NetworkClient client = NetworkManager.Singleton.ConnectedClients[playerID];
+        Player player = client.PlayerObject.GetComponent<Player>();
+        bool isHost = player.IsHost && player.IsOwner;
+
         if(isHost)
             player1 = player;
         else

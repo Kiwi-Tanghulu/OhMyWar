@@ -498,6 +498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1204676961}
+  - component: {fileID: 1204676963}
   - component: {fileID: 1204676962}
   m_Layer: 0
   m_Name: IngameManager
@@ -533,11 +534,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85dcdec9410d4f24d82b68bfd342954c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blueCastle: {fileID: 0}
-  redCastle: {fileID: 0}
-  topNexus: {fileID: 0}
-  midNexus: {fileID: 0}
-  bottomNexus: {fileID: 0}
+  <BlueCastle>k__BackingField: {fileID: 0}
+  <RedCastle>k__BackingField: {fileID: 0}
+  <TopNexus>k__BackingField: {fileID: 0}
+  <MidNexus>k__BackingField: {fileID: 0}
+  <BottomNexus>k__BackingField: {fileID: 0}
+--- !u!114 &1204676963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204676960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3208674958
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1 &1267500581
 GameObject:
   m_ObjectHideFlags: 0
