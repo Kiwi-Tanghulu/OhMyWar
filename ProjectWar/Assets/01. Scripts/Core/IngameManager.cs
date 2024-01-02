@@ -21,8 +21,8 @@ public class IngameManager : NetworkBehaviour
 
     public Transform OwnerPlayer;
 
-    private Player bluePlayer;
-    private Player redPlayer;
+    public Player BluePlayer {get; private set;} = null;
+    public Player RedPlayer {get; private set;} = null;
 
     public IUnitSpawner CurrentSpawner { get; private set; } = null;
     public int FocusedLine { get; private set; } = 0;
@@ -31,12 +31,12 @@ public class IngameManager : NetworkBehaviour
     {
         if(isBluePlayer)
         {
-            bluePlayer = player;
+            BluePlayer = player;
             player.GetComponent<PlayerMovement>().MoveImmediately(BlueCastle.SpawnPosition.position);
         }
         else
         {
-            redPlayer = player;
+            RedPlayer = player;
             player.GetComponent<PlayerMovement>().MoveImmediately(RedCastle.SpawnPosition.position);
         }
     }
@@ -45,7 +45,7 @@ public class IngameManager : NetworkBehaviour
     {
         FocusedLine = lineIndex;
 
-        bool isBlue = player == bluePlayer;
+        bool isBlue = player == BluePlayer;
         CurrentSpawner = isBlue ? BlueCastle : RedCastle;
 
         if(lineIndex == 0) // top
