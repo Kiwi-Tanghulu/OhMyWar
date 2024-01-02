@@ -3032,6 +3032,7 @@ GameObject:
   - component: {fileID: 5396178737262827930}
   - component: {fileID: 6586037896323004238}
   - component: {fileID: 2175994749941201964}
+  - component: {fileID: -6421824669155446775}
   m_Layer: 5
   m_Name: Unit_Healer
   m_TagString: Untagged
@@ -3090,7 +3091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2463375564
+  GlobalObjectIdHash: 2574633814
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3169,6 +3170,36 @@ MonoBehaviour:
   attackEffect: {fileID: 0}
   healAmount: 10
   dealEffect: {fileID: 4371187270557632065, guid: 07846a3ce4ea4d74d98af88b68199228, type: 3}
+--- !u!114 &-6421824669155446775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6160628121563532580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 0
+  SyncRotAngleX: 0
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 0
+  SyncScaleX: 0
+  SyncScaleY: 0
+  SyncScaleZ: 0
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &6177048181424473715
 GameObject:
   m_ObjectHideFlags: 0
