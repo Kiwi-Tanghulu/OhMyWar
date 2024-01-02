@@ -8,9 +8,11 @@ using static UnityEngine.Rendering.DebugUI;
 public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
 {
     [SerializeField] private float maxHealth;
+    [SerializeField] private bool isDie;
     private NetworkVariable<float> currentHealth;
     public float MaxHealth => maxHealth;
     public float CurrentHealth => currentHealth.Value;
+    public bool IsDie => isDie;
 
     public event Action OnHeal;
     public event Action OnDie;
@@ -49,6 +51,8 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
         if (!IsServer)
             return;
 
+        controller.ChangeState(UnitStateType.Die);
+        isDie = true;
         DieClientRpc();
     }
     [ClientRpc] private void DieClientRpc()

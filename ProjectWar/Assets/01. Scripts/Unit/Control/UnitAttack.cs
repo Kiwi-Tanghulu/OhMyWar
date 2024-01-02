@@ -7,9 +7,16 @@ public abstract class UnitAttack : UnitComponent
     [SerializeField] protected float attackDamage;
     [SerializeField] protected float attackDistance;
     [SerializeField] protected float attackDelay;
+    [SerializeField] protected float serchDelay;
     [SerializeField] protected bool canAttack = false;
-    
-    private WaitForSeconds wfs;
+    [SerializeField] protected bool shouldAttack = false;
+    [SerializeField] protected LayerMask layer;
+    [SerializeField] GameObject target;
+
+    private WaitForSeconds attackWfs;
+    private WaitForSeconds serchWfs;
+
+    public bool ShouldAttack => shouldAttack;
 
     public float AttackDamage => attackDamage;
     public float AttackDistance => attackDistance;
@@ -18,30 +25,61 @@ public abstract class UnitAttack : UnitComponent
 
     private void Awake()
     {
-        wfs = new WaitForSeconds(attackDelay);   
+        attackWfs = new WaitForSeconds(attackDelay);
+        serchWfs = new WaitForSeconds(serchDelay);   
     }
 
-    public void DoAttack()
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if(IsServer)
+            StartCoroutine(SerchDelayCo());
+    }
+
+    public bool StartAttack()
     {
         if (!IsServer)
-            return;
+            return false;
 
         if (!canAttack)
-            return;
+            return false;
 
         canAttack = false;
 
-        Attack();
+        StartCoroutine(AttackDelayCo());
 
-        StartCoroutine(Delay());
+        return true;
     }
 
-    protected abstract void Attack();
+    public abstract void Attack();
 
-    protected IEnumerator Delay()
+    private void SerchTarget()
     {
-        yield return wfs;
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, AttackDistance, layer, -1, 1);
+
+        if(cols.Length > 0)
+        {
+            target = cols[0].gameObject;
+            shouldAttack = true;
+        }
+    }
+
+    protected IEnumerator AttackDelayCo()
+    {
+        yield return attackWfs;
 
         canAttack = true;
+    }
+
+    protected IEnumerator SerchDelayCo()
+    {
+        while(true)
+        {
+            yield return serchWfs;
+
+            if (!shouldAttack)
+                SerchTarget();
+        }
     }
 }

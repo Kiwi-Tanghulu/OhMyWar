@@ -1,43 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
-public class UnitMoveState : UnitState
+public class UnitAttackState : UnitState
 {
     protected override void OnServerEnter()
     {
         base.OnServerEnter();
 
-        controller.Anim.SetBoolPropretyClientRpc("Move", true);
+        controller.Anim.OnAnimEvent += controller.Attack.Attack;
     }
 
     protected override void OnServerUpdate()
     {
         base.OnServerUpdate();
 
-        controller.Movement.Move();
-
+        if (controller.Attack.StartAttack())
+            controller.Anim.SetTriggerPropretyClientRpc("Attack");
         IdleHandle();
-        AttackHandle();
     }
 
     protected override void OnServerExit()
     {
         base.OnServerExit();
 
-        controller.Movement.Stop();
-        controller.Anim.SetBoolPropretyClientRpc("Move", false);
+        controller.Anim.OnAnimEvent -= controller.Attack.Attack;
     }
 
     private void IdleHandle()
     {
-        if (controller.Movement.IsArrived)
+        if (!controller.Attack.ShouldAttack)
             controller.ChangeState(UnitStateType.Idle);
-    }
-
-    private void AttackHandle()
-    {
-        if (controller.Attack.ShouldAttack)
-            controller.ChangeState(UnitStateType.Attack);
     }
 }

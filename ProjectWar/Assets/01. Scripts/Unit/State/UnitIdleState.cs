@@ -17,11 +17,18 @@ public class UnitIdleState : UnitState
         base.OnServerUpdate();
 
         MoveHandle();
+        AttackHandle();
     }
 
     private void MoveHandle()
     {
         if (controller.Movement.ShouldMove)
             controller.ChangeState(UnitStateType.Move);
+    }
+
+    private void AttackHandle()
+    {
+        if (controller.Attack.ShouldAttack)
+            controller.ChangeState(UnitStateType.Attack);
     }
 }

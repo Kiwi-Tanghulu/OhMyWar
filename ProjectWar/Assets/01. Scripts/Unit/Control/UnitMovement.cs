@@ -12,6 +12,7 @@ public class UnitMovement : UnitComponent
     [SerializeField] private bool shouldMove = false;
 
     public bool ShouldMove => shouldMove;
+    public bool IsArrived => isArrived;
 
     public void SetTargetPosition(Vector2 pos)
     {
