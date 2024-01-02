@@ -61,4 +61,9 @@ public class IngameManager : NetworkBehaviour
         if(nexus.OwnerID == player.OwnerClientId)
             CurrentSpawner = nexus;
     }
+
+    public void SpawnUnit(int unitIndex)
+    {
+        CurrentSpawner?.SpawnUnit(unitIndex, FocusedLine);
+    }
 }

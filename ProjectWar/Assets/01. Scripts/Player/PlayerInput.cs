@@ -5,8 +5,6 @@ public class PlayerInput : PlayerComponent
 {
     [SerializeField] InputReader inputReader;
 
-    private int currentLine = 1;
-
     public override void Init(Player player)
     {
         base.Init(player);
@@ -15,7 +13,6 @@ public class PlayerInput : PlayerComponent
             return;
 
         inputReader.OnNumberKeyPressed += OnNumberKeyPressedHandle;
-        inputReader.OnArrowKeyPressed += OnArrowKeyPressedHandle;
         inputReader.OnToggleKeyPressed += OnToggleKeyPressedHandle;
     }
 
@@ -25,7 +22,6 @@ public class PlayerInput : PlayerComponent
             return;
         
         inputReader.OnNumberKeyPressed -= OnNumberKeyPressedHandle;
-        inputReader.OnArrowKeyPressed -= OnArrowKeyPressedHandle;
         inputReader.OnToggleKeyPressed -= OnToggleKeyPressedHandle;
     }
 
@@ -36,20 +32,7 @@ public class PlayerInput : PlayerComponent
         index--;
 
         IngameManager manager = IngameManager.Instance;
-        manager.CurrentSpawner?.SpawnUnit(index, manager.FocusedLine);
-    }
-
-    private void OnArrowKeyPressedHandle(float value)
-    {
-        if(player.IsHost == false)
-            value *= -1;
-
-        currentLine += (int)Mathf.Sign(value);
-        currentLine %= 3;
-        if(currentLine < 0)
-            currentLine = 2;
-
-        IngameManager.Instance.ToggleCurrentSpawner(player, currentLine);
+        manager?.SpawnUnit(index);
     }
 
     private void OnToggleKeyPressedHandle()
