@@ -27,4 +27,5 @@ public class UnitInfoSO : ScriptableObject
     public float serchDelay;
     public NetworkObject projectile;
     public LayerMask targetLayer;
+    public ParticleSystem attackEffect;
 }

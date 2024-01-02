@@ -12,6 +12,7 @@ public abstract class UnitAttack : UnitComponent
     [SerializeField] protected bool shouldAttack = false;
     [SerializeField] protected LayerMask layer;
     [SerializeField] protected GameObject target;
+    [SerializeField] protected ParticleSystem attackEffect;
 
     private WaitForSeconds attackWfs;
     private WaitForSeconds serchWfs;
@@ -35,6 +36,10 @@ public abstract class UnitAttack : UnitComponent
         this.attackDelay = controller.Info.attackDelay;
         this.serchDelay = controller.Info.serchDelay;
         this.layer = controller.Info.targetLayer;
+        this.attackEffect = Instantiate(controller.Info.attackEffect, transform);
+
+        var main = attackEffect.main;
+        main.loop = false;
     }
 
     public override void OnNetworkSpawn()
@@ -60,7 +65,12 @@ public abstract class UnitAttack : UnitComponent
         return true;
     }
 
-    public abstract void Attack();
+    public virtual void Attack()
+    {
+        attackEffect.transform.position = target.transform.position;
+        attackEffect?.Play();
+    }
+
 
     private void SerchTarget()
     {

@@ -11,7 +11,7 @@ public class HealAttack : UnitAttack
     {
         if (target.TryGetComponent<UnitHealth>(out UnitHealth attackedObj))
         {
-            if (target.CompareTag("Friendly"))
+            if (target.layer == 6)
             {
                 attackedObj.Heal((int)healAmount);
             }

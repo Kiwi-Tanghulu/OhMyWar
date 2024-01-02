@@ -44,6 +44,11 @@ public class UnitController : NetworkBehaviour
     {
         base.OnNetworkSpawn();
 
+        if (IsOwner)
+            gameObject.layer = 6;
+        else 
+            gameObject.layer = 7;
+
         ChangeState(UnitStateType.Idle);
     }
 
