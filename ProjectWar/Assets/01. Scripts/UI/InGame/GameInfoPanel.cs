@@ -28,12 +28,14 @@ public class GameInfoPanel : PanelUI
     }
     public override void ShowAnimation()
     {
-        gameInfoPanelTrm.DOAnchorPos(showTrm.position, showDuration).SetEase(Ease.OutQuart);
+        gameInfoPanelTrm.DOAnchorPos(showTrm.anchoredPosition, showDuration).SetEase(Ease.OutQuart);
+        Debug.Log("show");
     }
 
     public override void HideAnimation()
     {
-        gameInfoPanelTrm.DOAnchorPos(hideTrm.position, hideDuration).SetEase(Ease.InOutQuint);
+        gameInfoPanelTrm.DOAnchorPos(hideTrm.anchoredPosition, hideDuration).SetEase(Ease.InOutQuint);
+        Debug.Log("hide");
     }
 
     private void HandleGameInfoPanel()
