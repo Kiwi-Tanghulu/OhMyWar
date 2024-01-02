@@ -41,6 +41,9 @@ public class PlayerInput : PlayerComponent
 
     private void OnArrowKeyPressedHandle(float value)
     {
+        if(player.IsHost == false)
+            value *= -1;
+
         currentLine += (int)Mathf.Sign(value);
         currentLine %= 3;
         if(currentLine < 0)
