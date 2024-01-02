@@ -11,8 +11,23 @@ public class UnitController : NetworkBehaviour
     [field: SerializeField]
     public UnitStateType CurrentState { get; private set; }
 
+    public UnitMovement Movement { get; private set; }
+    public UnitHealth Health { get; private set; }
+    public UnitAttack Attack { get; private set; }
+    public UnitAnimation Anim { get; private set; }
+
     private void Awake()
     {
+        Movement = GetComponent<UnitMovement>();
+        Health = GetComponent<UnitHealth>();
+        Attack = GetComponent<UnitAttack>();
+        Anim = GetComponent<UnitAnimation>();
+
+        Movement.InitCompo(this);
+        Health.InitCompo(this);
+        Attack.InitCompo(this);
+        Anim.InitCompo(this);
+
         InitState();
     }
 
