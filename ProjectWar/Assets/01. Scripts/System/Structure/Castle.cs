@@ -20,20 +20,10 @@ public class Castle : StructureBase
         this.ownerID = ownerID;
     }
 
-    private void SpawnUnit(int unitIndex, int spawnIndex)
+    public void SpawnUnit(int unitIndex, int spawnIndex)
     {
         GameObject unit = Instantiate(unitPrefabs.PrefabList[unitIndex].Prefab, spawnPositions[spawnIndex].position, Quaternion.identity);
         unit.GetComponent<NetworkObject>().Spawn();
-    }
-
-    public void GenerateUnit(int unitIndex, int spawnIndex)
-    {
-        GenerateUnitServerRPC(unitIndex, spawnIndex);
-    }
-
-    [ServerRpc]
-    private void GenerateUnitServerRPC(int unitIndex, int spawnIndex)
-    {
-        SpawnUnit(unitIndex, spawnIndex);
+        unit.GetComponent<UnitController>().Movement.SetTargetPosition(spawnPositions[spawnIndex].position);
     }
 }

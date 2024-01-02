@@ -59,7 +59,7 @@ public class PlayerMovement : PlayerComponent
 
         float angle = (facingDirection == 1) ? 0f : 180f;
         Quaternion targetRotation = Quaternion.Euler(0, angle, 0);
-        transform.rotation = targetRotation;
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, 10f * Time.fixedDeltaTime);
     }
 
     private void DoMove()

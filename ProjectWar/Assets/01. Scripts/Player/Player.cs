@@ -10,6 +10,14 @@ public class Player : NetworkBehaviour
 
     private List<PlayerComponent> components;
 
+    private void Start()
+    {
+        if(IsHost && IsOwner)
+            IngameManager.Instance.RegisterPlayer(this, true);
+        else
+            IngameManager.Instance.RegisterPlayer(this, false);
+    }
+
     public override void OnNetworkSpawn()
     {
         components = new List<PlayerComponent>();
@@ -18,13 +26,6 @@ public class Player : NetworkBehaviour
 
         if(IsOwner)
             CameraManager.Instance.MainVCam.Follow = transform;
-
-        if(IsHost && IsOwner)
-        {
-            IngameManager.Instance.RegisterPlayer(this, true);
-        }
-        else
-            IngameManager.Instance.RegisterPlayer(this, false);
     }
 
     private void Update()
