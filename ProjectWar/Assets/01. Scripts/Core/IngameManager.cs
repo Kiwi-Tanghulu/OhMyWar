@@ -43,6 +43,8 @@ public class IngameManager : NetworkBehaviour
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)
     {
+        FocusedLine = lineIndex;
+
         bool isBlue = player == bluePlayer;
         CurrentSpawner = isBlue ? BlueCastle : RedCastle;
 
