@@ -38,6 +38,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 3022627213
+    locked: 0
+  - name: Environment
+    uniqueID: 3546258135
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Structure
+    uniqueID: 2493728553
+    locked: 0
+  - name: Entity
+    uniqueID: 2727597263
+    locked: 0
+  - name: Player
+    uniqueID: 256130371
     locked: 0
