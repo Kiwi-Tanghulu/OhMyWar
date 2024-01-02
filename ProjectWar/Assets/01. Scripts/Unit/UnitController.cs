@@ -7,6 +7,7 @@ using UnityEngine.Playables;
 
 [RequireComponent(typeof(UnitMovement))]
 [RequireComponent(typeof(UnitHealth))]
+[RequireComponent(typeof(UnitStat))]
 public class UnitController : NetworkBehaviour
 {
     [SerializeField] private UnitInfoSO info;
@@ -19,18 +20,21 @@ public class UnitController : NetworkBehaviour
     public UnitHealth Health { get; private set; }
     public UnitAttack Attack { get; private set; }
     public UnitAnimation Anim { get; private set; }
+    public UnitStat Stat { get; private set; }
 
     private void Awake()
     {
         Movement = GetComponent<UnitMovement>();
         Health = GetComponent<UnitHealth>();
         Attack = GetComponent<UnitAttack>();
+        Stat = GetComponent<UnitStat>();
         Anim = transform.Find("Visual").GetComponent<UnitAnimation>();
 
         Movement.InitCompo(this);
         Health.InitCompo(this);
         Attack.InitCompo(this);
         Anim.InitCompo(this);
+        Stat.InitCompo(this);
 
         InitState();
     }
