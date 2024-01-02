@@ -64,7 +64,7 @@ public class UnitController : NetworkBehaviour
 
         ChangeStateServerRpc(type);
     }
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void ChangeStateServerRpc(UnitStateType type)
     {
         ChangeStateClientRpc(type);
@@ -76,7 +76,7 @@ public class UnitController : NetworkBehaviour
         {
             if (state == null)
             {
-                Debug.LogError($"Unit{type}State¾øÀ½");
+                Debug.LogError($"Unit{type}Stateï¿½ï¿½ï¿½ï¿½");
                 return;
             }
         }
@@ -100,7 +100,7 @@ public class UnitController : NetworkBehaviour
             
             if (state == null || stateTrm == null)
             {
-                Debug.LogError($"Unit{type}State¾øÀ½");
+                Debug.LogError($"Unit{type}Stateï¿½ï¿½ï¿½ï¿½");
                 continue;
             }
 

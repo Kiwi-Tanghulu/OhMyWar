@@ -26,6 +26,7 @@ public class Castle : StructureBase, IUnitSpawner
         if (unitIndex >= unitPrefabs.PrefabList.Count)
             return;
 
+        Debug.Log(spawnPositions[lineIndex].position);
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
             spawnPositions[lineIndex].position, midNexus[lineIndex].position);
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerSkillHandler : PlayerComponent
@@ -27,7 +28,7 @@ public class PlayerSkillHandler : PlayerComponent
         inputReader.OnSkill2Pressed -= HandleSkill2;    
     }
 
-    private void HandleSkill(int index)
+    public void HandleSkill(int index)
     {
         if(index == 0)
             index = 10;
@@ -41,7 +42,13 @@ public class PlayerSkillHandler : PlayerComponent
             return;
 
         player.ModifyGold(-skill.Cost);
-        skill?.Operate(player);
+        SkillServerRPC(index);
+    }
+
+    [ServerRpc]
+    private void SkillServerRPC(int index)
+    {
+        skills[index]?.Operate(player);
     }
 
     private void HandleSkill1()
