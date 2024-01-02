@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383445292e933c4d938ab671432dea4, type: 3}
   m_Name: Wizard
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 4
   cost: 15
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 60c50c50d98e97046ac46b1a91c85364, type: 3}
   moveSpeed: 2
   stopDistance: 0.1
   maxHealth: 15

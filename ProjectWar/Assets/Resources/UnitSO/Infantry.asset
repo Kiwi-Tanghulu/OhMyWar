@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitType: 0
   cost: 5
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: f6036a767af007043a2254b383b18f4c, type: 3}
   moveSpeed: 3
   stopDistance: 0.1
   maxHealth: 20

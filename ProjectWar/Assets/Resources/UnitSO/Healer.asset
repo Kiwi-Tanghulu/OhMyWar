@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383445292e933c4d938ab671432dea4, type: 3}
   m_Name: Healer
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 5
   cost: 25
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: d38bb46e06f3ae345ad75bcd5d54198d, type: 3}
   moveSpeed: 2
   stopDistance: 0.1
   maxHealth: 7

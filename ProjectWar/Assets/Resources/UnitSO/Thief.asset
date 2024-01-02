@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383445292e933c4d938ab671432dea4, type: 3}
   m_Name: Thief
   m_EditorClassIdentifier: 
-  unitType: 0
+  unitType: 2
   cost: 20
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: fb6edfe3d1347b34b9fea66f2cb48ca2, type: 3}
   moveSpeed: 6
   stopDistance: 0.1
   maxHealth: 20
