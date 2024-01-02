@@ -24,8 +24,9 @@ public class Player : NetworkBehaviour
         GetComponents<PlayerComponent>(components);
         components.ForEach(component => component?.Init(this));
 
-        if(IsOwner)
-            CameraManager.Instance.MainVCam.Follow = transform;
+        if (IsOwner)
+            IngameManager.Instance.OwnerPlayer = transform;
+            //CameraManager.Instance.MainVCam.Follow = transform;
     }
 
     private void Update()

@@ -16,6 +16,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnSkill2Pressed;
     public event Action OnToggleKeyPressed;
     public event Action OnViewChanged;
+    public event Action<bool> OnSpacePressed;
 
     public Vector2 MousePosition { get; private set; } = Vector2.zero;
 
@@ -85,5 +86,13 @@ public class InputReader : ScriptableObject, IPlayerActions
     {
         if(context.performed)
             OnViewChanged?.Invoke();
+    }
+
+    public void OnSpace(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnSpacePressed?.Invoke(true);
+        if (context.canceled)
+            OnSpacePressed?.Invoke(false);
     }
 }

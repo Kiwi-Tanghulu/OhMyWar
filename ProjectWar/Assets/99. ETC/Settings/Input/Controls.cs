@@ -107,6 +107,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Space"",
+                    ""type"": ""Button"",
+                    ""id"": ""14dabd01-b382-4cfa-a936-cd4d9d051941"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -373,6 +382,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""ViewChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f2e8a7e-c1cb-409c-9941-44b91388c4cf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Space"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -407,6 +427,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Toggle = m_Player.FindAction("Toggle", throwIfNotFound: true);
         m_Player_Arrow = m_Player.FindAction("Arrow", throwIfNotFound: true);
         m_Player_ViewChange = m_Player.FindAction("ViewChange", throwIfNotFound: true);
+        m_Player_Space = m_Player.FindAction("Space", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,6 +498,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Toggle;
     private readonly InputAction m_Player_Arrow;
     private readonly InputAction m_Player_ViewChange;
+    private readonly InputAction m_Player_Space;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -490,6 +512,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Toggle => m_Wrapper.m_Player_Toggle;
         public InputAction @Arrow => m_Wrapper.m_Player_Arrow;
         public InputAction @ViewChange => m_Wrapper.m_Player_ViewChange;
+        public InputAction @Space => m_Wrapper.m_Player_Space;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -526,6 +549,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ViewChange.started += instance.OnViewChange;
             @ViewChange.performed += instance.OnViewChange;
             @ViewChange.canceled += instance.OnViewChange;
+            @Space.started += instance.OnSpace;
+            @Space.performed += instance.OnSpace;
+            @Space.canceled += instance.OnSpace;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -557,6 +583,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @ViewChange.started -= instance.OnViewChange;
             @ViewChange.performed -= instance.OnViewChange;
             @ViewChange.canceled -= instance.OnViewChange;
+            @Space.started -= instance.OnSpace;
+            @Space.performed -= instance.OnSpace;
+            @Space.canceled -= instance.OnSpace;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -594,5 +623,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnToggle(InputAction.CallbackContext context);
         void OnArrow(InputAction.CallbackContext context);
         void OnViewChange(InputAction.CallbackContext context);
+        void OnSpace(InputAction.CallbackContext context);
     }
 }

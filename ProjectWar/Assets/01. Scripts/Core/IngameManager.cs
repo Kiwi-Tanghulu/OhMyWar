@@ -19,6 +19,8 @@ public class IngameManager : NetworkBehaviour
     [field: SerializeField] public Nexus MidNexus { get; private set; } = null;
     [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
+    public Transform OwnerPlayer;
+
     private Player bluePlayer;
     private Player redPlayer;
 
