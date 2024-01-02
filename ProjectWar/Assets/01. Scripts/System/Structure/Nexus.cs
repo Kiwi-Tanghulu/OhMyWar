@@ -10,7 +10,7 @@ public class Nexus : StructureBase, IUnitSpawner
     [SerializeField] Sprite blueSprite = null;
     [SerializeField] Sprite redSprite = null;
 
-    private ulong ownerID = 0;
+    private ulong ownerID = ulong.MaxValue;
     public ulong OwnerID => ownerID;
 
     public void Init(ulong ownerID)

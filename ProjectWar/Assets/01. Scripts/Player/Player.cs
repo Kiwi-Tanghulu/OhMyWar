@@ -16,6 +16,8 @@ public class Player : NetworkBehaviour
             IngameManager.Instance.RegisterPlayer(this, true);
         else
             IngameManager.Instance.RegisterPlayer(this, false);
+
+        IngameManager.Instance.ToggleCurrentSpawner(this, 1);
     }
 
     public override void OnNetworkSpawn()

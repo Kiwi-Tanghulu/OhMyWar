@@ -17,8 +17,6 @@ public class PlayerInput : PlayerComponent
         inputReader.OnNumberKeyPressed += OnNumberKeyPressedHandle;
         inputReader.OnArrowKeyPressed += OnArrowKeyPressedHandle;
         inputReader.OnToggleKeyPressed += OnToggleKeyPressedHandle;
-
-        IngameManager.Instance.ToggleCurrentSpawner(player, 1);
     }
 
     public override void Release()
