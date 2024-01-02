@@ -74,6 +74,8 @@ public class Nexus : StructureBase, IUnitSpawner
         this.ownerID = performer.OwnerClientId;
         ModifyHP(maxHP);
 
+        isDestroyed = false;
+
         if(ownerID == IngameManager.Instance.BluePlayer.OwnerClientId)
             spRenderer.sprite = blueSprite;
         else
