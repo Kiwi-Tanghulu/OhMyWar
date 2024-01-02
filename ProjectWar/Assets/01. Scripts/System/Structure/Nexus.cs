@@ -6,6 +6,10 @@ public class Nexus : StructureBase
     [SerializeField] Transform spawnPosition = null;
     [SerializeField] NetworkPrefabsList unitPrefabs = null;
 
+    [Space(10f)]
+    [SerializeField] Sprite blueSprite = null;
+    [SerializeField] Sprite redSprite = null;
+
     private ulong ownerID = 0;
     public ulong OwnerID => ownerID;
 
