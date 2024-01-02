@@ -65,10 +65,15 @@ public abstract class UnitAttack : UnitComponent
         return true;
     }
 
-    public virtual void Attack()
+    public abstract void Attack();
+
+    protected void PlayEffect()
     {
+        if (attackEffect == null)
+            return;
+
         attackEffect.transform.position = target.transform.position;
-        attackEffect?.Play();
+        attackEffect.Play();
     }
 
 

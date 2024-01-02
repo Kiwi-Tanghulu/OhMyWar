@@ -3042,6 +3042,7 @@ MonoBehaviour:
   target: {fileID: 0}
   attackEffect: {fileID: 0}
   healAmount: 10
+  dealEffect: {fileID: 4371187270557632065, guid: 07846a3ce4ea4d74d98af88b68199228, type: 3}
 --- !u!1 &6177048181424473715
 GameObject:
   m_ObjectHideFlags: 0
