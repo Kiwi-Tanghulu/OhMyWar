@@ -11,7 +11,7 @@ public abstract class UnitAttack : UnitComponent
     [SerializeField] protected bool canAttack = false;
     [SerializeField] protected bool shouldAttack = false;
     [SerializeField] protected LayerMask layer;
-    [SerializeField] GameObject target;
+    [SerializeField] protected GameObject target;
 
     private WaitForSeconds attackWfs;
     private WaitForSeconds serchWfs;

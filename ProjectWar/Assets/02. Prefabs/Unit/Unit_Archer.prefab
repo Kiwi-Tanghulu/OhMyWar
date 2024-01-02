@@ -928,6 +928,7 @@ GameObject:
   - component: {fileID: 2260915029835611722}
   - component: {fileID: 982808970122486043}
   - component: {fileID: 493735604810835029}
+  - component: {fileID: 8992511931389390529}
   m_Layer: 5
   m_Name: Unit_Archer
   m_TagString: Untagged
@@ -1038,6 +1039,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CurrentState>k__BackingField: 0
+--- !u!114 &8992511931389390529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712850505771413865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eb76c0d0bf01b4c99d64f94a740db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackDistance: 0
+  attackDelay: 0
+  serchDelay: 0
+  canAttack: 0
+  shouldAttack: 0
+  layer:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
+  projectile: {fileID: 0}
 --- !u!1 &2311009015124977836
 GameObject:
   m_ObjectHideFlags: 0
