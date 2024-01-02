@@ -11,14 +11,20 @@ public class PlayerSkillHandler : PlayerComponent
     {
         base.Init(player);
 
-        if(player.IsOwner)
-            inputReader.OnNumberKeyPressed += HandleSkill;
+        if(player.IsOwner == false)
+            return;
+        
+        inputReader.OnSkill1Pressed += HandleSkill1;
+        inputReader.OnSkill2Pressed += HandleSkill2;
     }
 
     public override void Release()
     {
-        if(player.IsOwner)
-            inputReader.OnNumberKeyPressed -= HandleSkill;
+        if(player.IsOwner == false)
+            return;
+        
+        inputReader.OnSkill1Pressed -= HandleSkill1;
+        inputReader.OnSkill2Pressed -= HandleSkill2;    
     }
 
     private void HandleSkill(int index)
@@ -36,5 +42,15 @@ public class PlayerSkillHandler : PlayerComponent
 
         player.ModifyGold(-skill.Cost);
         skill?.Operate(player);
+    }
+
+    private void HandleSkill1()
+    {
+        HandleSkill(1);
+    }
+
+    private void HandleSkill2()
+    {
+        HandleSkill(2);
     }
 }

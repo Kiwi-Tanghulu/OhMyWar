@@ -22,6 +22,9 @@ public class IngameManager : NetworkBehaviour
     private Player bluePlayer;
     private Player redPlayer;
 
+    public IUnitSpawner CurrentSpawner { get; private set; } = null;
+    public int FocusedLine { get; private set; } = 0;
+
     public void RegisterPlayer(Player player, bool isBluePlayer)
     {
         if(isBluePlayer)
@@ -34,5 +37,24 @@ public class IngameManager : NetworkBehaviour
             redPlayer = player;
             player.GetComponent<PlayerMovement>().MoveImmediately(RedCastle.SpawnPosition.position);
         }
+    }
+
+    public void ToggleCurrentSpawner(Player player, int lineIndex)
+    {
+        bool isBlue = player == bluePlayer;
+        CurrentSpawner = isBlue ? BlueCastle : RedCastle;
+
+        if(lineIndex == 0) // top
+            CheckNexus(TopNexus, player);
+        else if(lineIndex == 1) // mid
+            CheckNexus(MidNexus, player);
+        else if(lineIndex == 2) // bottom
+            CheckNexus(BottomNexus, player);
+    }
+
+    private void CheckNexus(Nexus nexus, Player player)
+    {
+        if(nexus.OwnerID == player.OwnerClientId)
+            CurrentSpawner = nexus;
     }
 }

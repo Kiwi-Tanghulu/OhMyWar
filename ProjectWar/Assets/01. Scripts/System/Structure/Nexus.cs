@@ -1,7 +1,7 @@
 using Unity.Netcode;
 using UnityEngine;
 
-public class Nexus : StructureBase
+public class Nexus : StructureBase, IUnitSpawner
 {
     [SerializeField] Transform spawnPosition = null;
     [SerializeField] NetworkPrefabsList unitPrefabs = null;
@@ -18,22 +18,25 @@ public class Nexus : StructureBase
         this.ownerID = ownerID;
     }
 	
-    private void SpawnUnit(int unitIndex)
+    public void SpawnUnit(int unitIndex, int lineIndex)
     {
+        GenerateServerRPC(unitIndex, lineIndex);
+    }
+
+    private void GenerateUnit(int unitIndex, int lineIndex)
+    {
+        if(unitIndex >= unitPrefabs.PrefabList.Count)
+            return;
+
         GameObject unit = Instantiate(unitPrefabs.PrefabList[unitIndex].Prefab, spawnPosition.position, Quaternion.identity);
         unit.GetComponent<NetworkObject>().Spawn();
-        // initialize unit here
+        unit.GetComponent<UnitController>().Movement.SetTargetPosition(spawnPosition.position);
     }
-
-    public void GenerateUnit(int unitIndex)
-    {
-        GenerateUnitServerRPC(unitIndex);
-    }
-
+    
     [ServerRpc]
-    private void GenerateUnitServerRPC(int unitIndex)
+    private void GenerateServerRPC(int unitIndex, int lineIndex)
     {
-        SpawnUnit(unitIndex);
+        GenerateUnit(unitIndex, lineIndex);
     }
 
     public void ChangeOwner(NetworkClient networkCliet)
