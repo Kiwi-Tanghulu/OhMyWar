@@ -26,4 +26,4 @@ MonoBehaviour:
   targetLayer:
     serializedVersion: 2
     m_Bits: 128
-  attackEffect: {fileID: 0}
+  attackEffect: {fileID: 778403590197639471, guid: 2db545caeb328564fb055967ed888ec8, type: 3}
