@@ -23,10 +23,18 @@ public abstract class UnitAttack : UnitComponent
     public float AttackDelay => attackDelay;
     public bool CanAttack => canAttack;
 
-    private void Awake()
+    public override void InitCompo(UnitController _controller)
     {
+        base.InitCompo(_controller);
+
         attackWfs = new WaitForSeconds(attackDelay);
-        serchWfs = new WaitForSeconds(serchDelay);   
+        serchWfs = new WaitForSeconds(serchDelay);
+
+        this.attackDamage = controller.Info.attackDamage;
+        this.attackDistance = controller.Info.attackDistance;
+        this.attackDelay = controller.Info.attackDelay;
+        this.serchDelay = controller.Info.serchDelay;
+        this.layer = controller.Info.targetLayer;
     }
 
     public override void OnNetworkSpawn()

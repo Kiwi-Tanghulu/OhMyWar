@@ -17,6 +17,13 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
     public event Action OnHeal;
     public event Action OnDie;
 
+    public override void InitCompo(UnitController _controller)
+    {
+        base.InitCompo(_controller);
+
+        this.maxHealth = controller.Info.maxHealth;
+    }
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();

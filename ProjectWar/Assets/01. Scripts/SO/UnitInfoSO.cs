@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "SO/UnitInfo")]
@@ -24,5 +25,6 @@ public class UnitInfoSO : ScriptableObject
     public float attackDistance;
     public float attackDelay;
     public float serchDelay;
+    public NetworkObject projectile;
     public LayerMask targetLayer;
 }

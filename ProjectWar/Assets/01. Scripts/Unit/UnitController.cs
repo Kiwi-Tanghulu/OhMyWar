@@ -9,6 +9,8 @@ using UnityEngine.Playables;
 [RequireComponent(typeof(UnitHealth))]
 public class UnitController : NetworkBehaviour
 {
+    [SerializeField] private UnitInfoSO info;
+    public UnitInfoSO Info => info;
     private Dictionary<UnitStateType, UnitState> states;
     [field: SerializeField]
     public UnitStateType CurrentState { get; private set; }

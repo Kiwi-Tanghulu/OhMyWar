@@ -14,6 +14,14 @@ public class UnitMovement : UnitComponent
     public bool ShouldMove => shouldMove;
     public bool IsArrived => isArrived;
 
+    public override void InitCompo(UnitController _controller)
+    {
+        base.InitCompo(_controller);
+
+        this.moveSpeed = controller.Info.moveSpeed;
+        this.stopDistance = controller.Info.stopDistance;
+    }
+
     public void SetTargetPosition(Vector2 pos)
     {
         if (!IsServer)
