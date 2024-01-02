@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class Castle : StructureBase
+public class Castle : StructureBase, IUnitSpawner
 {
 	[SerializeField] List<Transform> spawnPositions = null;
     [SerializeField] Transform spawnPosition = null;
@@ -20,10 +20,24 @@ public class Castle : StructureBase
         this.ownerID = ownerID;
     }
 
-    public void SpawnUnit(int unitIndex, int spawnIndex)
+    public void SpawnUnit(int unitIndex, int lineIndex)
     {
-        GameObject unit = Instantiate(unitPrefabs.PrefabList[unitIndex].Prefab, spawnPositions[spawnIndex].position, Quaternion.identity);
+        GenerateServerRPC(unitIndex, lineIndex);
+    }
+
+    private void GenerateUnit(int unitIndex, int lineIndex)
+    {
+        if(unitIndex >= unitPrefabs.PrefabList.Count)
+            return;
+
+        GameObject unit = Instantiate(unitPrefabs.PrefabList[unitIndex].Prefab, spawnPosition.position, Quaternion.identity);
         unit.GetComponent<NetworkObject>().Spawn();
-        unit.GetComponent<UnitController>().Movement.SetTargetPosition(spawnPositions[spawnIndex].position);
+        unit.GetComponent<UnitController>().Movement.SetTargetPosition(spawnPosition.position);
+    }
+    
+    [ServerRpc]
+    private void GenerateServerRPC(int unitIndex, int lineIndex)
+    {
+        GenerateUnit(unitIndex, lineIndex);
     }
 }

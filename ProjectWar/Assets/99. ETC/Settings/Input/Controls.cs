@@ -62,6 +62,51 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Skill1"",
+                    ""type"": ""Button"",
+                    ""id"": ""9c4b8370-71ae-4be2-bb3f-a9cd1db4bfeb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skill2"",
+                    ""type"": ""Button"",
+                    ""id"": ""806990e0-83c8-4e76-ae2c-23d618090296"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cfb68da-7468-42a6-81d6-09d60789b582"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Arrow"",
+                    ""type"": ""Value"",
+                    ""id"": ""826651d6-a03a-4f16-b63d-8bdb7a79e50f"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ViewChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""afd22afb-01d6-4f4d-a8eb-02f1b8db18fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +252,127 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""911ebaf1-b759-4fc7-b3e6-b97f66204e98"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d33687bb-6677-4f8c-b1c7-2fc14827882f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5c96649e-8733-4af0-9aa7-8e5d3dac55e5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0347ae62-7b6c-4a46-9ce5-4e34967dfce0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""ArrowUpDown"",
+                    ""id"": ""69f7b572-1e03-4ff7-8df5-98dea7903d0a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""a8bd3212-22f6-496a-9036-86f447e70ecd"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""89bd9434-f1a5-4101-8c11-9086ad91ac70"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""ArrowLeftRight"",
+                    ""id"": ""e1fdd005-2390-4b21-86d0-fcfac52582f6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6a263380-5cf1-4f14-ab3c-37165bddba7b"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3347ac5d-cfcb-4deb-b471-2395d4b9292b"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a549fad7-14c6-4c42-807e-54a1385209e6"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ViewChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,6 +402,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_LeftClick = m_Player.FindAction("LeftClick", throwIfNotFound: true);
         m_Player_Numbers = m_Player.FindAction("Numbers", throwIfNotFound: true);
         m_Player_MousePosition = m_Player.FindAction("MousePosition", throwIfNotFound: true);
+        m_Player_Skill1 = m_Player.FindAction("Skill1", throwIfNotFound: true);
+        m_Player_Skill2 = m_Player.FindAction("Skill2", throwIfNotFound: true);
+        m_Player_Toggle = m_Player.FindAction("Toggle", throwIfNotFound: true);
+        m_Player_Arrow = m_Player.FindAction("Arrow", throwIfNotFound: true);
+        m_Player_ViewChange = m_Player.FindAction("ViewChange", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +472,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftClick;
     private readonly InputAction m_Player_Numbers;
     private readonly InputAction m_Player_MousePosition;
+    private readonly InputAction m_Player_Skill1;
+    private readonly InputAction m_Player_Skill2;
+    private readonly InputAction m_Player_Toggle;
+    private readonly InputAction m_Player_Arrow;
+    private readonly InputAction m_Player_ViewChange;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -309,6 +485,11 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @LeftClick => m_Wrapper.m_Player_LeftClick;
         public InputAction @Numbers => m_Wrapper.m_Player_Numbers;
         public InputAction @MousePosition => m_Wrapper.m_Player_MousePosition;
+        public InputAction @Skill1 => m_Wrapper.m_Player_Skill1;
+        public InputAction @Skill2 => m_Wrapper.m_Player_Skill2;
+        public InputAction @Toggle => m_Wrapper.m_Player_Toggle;
+        public InputAction @Arrow => m_Wrapper.m_Player_Arrow;
+        public InputAction @ViewChange => m_Wrapper.m_Player_ViewChange;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +511,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Skill1.started += instance.OnSkill1;
+            @Skill1.performed += instance.OnSkill1;
+            @Skill1.canceled += instance.OnSkill1;
+            @Skill2.started += instance.OnSkill2;
+            @Skill2.performed += instance.OnSkill2;
+            @Skill2.canceled += instance.OnSkill2;
+            @Toggle.started += instance.OnToggle;
+            @Toggle.performed += instance.OnToggle;
+            @Toggle.canceled += instance.OnToggle;
+            @Arrow.started += instance.OnArrow;
+            @Arrow.performed += instance.OnArrow;
+            @Arrow.canceled += instance.OnArrow;
+            @ViewChange.started += instance.OnViewChange;
+            @ViewChange.performed += instance.OnViewChange;
+            @ViewChange.canceled += instance.OnViewChange;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -346,6 +542,21 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Skill1.started -= instance.OnSkill1;
+            @Skill1.performed -= instance.OnSkill1;
+            @Skill1.canceled -= instance.OnSkill1;
+            @Skill2.started -= instance.OnSkill2;
+            @Skill2.performed -= instance.OnSkill2;
+            @Skill2.canceled -= instance.OnSkill2;
+            @Toggle.started -= instance.OnToggle;
+            @Toggle.performed -= instance.OnToggle;
+            @Toggle.canceled -= instance.OnToggle;
+            @Arrow.started -= instance.OnArrow;
+            @Arrow.performed -= instance.OnArrow;
+            @Arrow.canceled -= instance.OnArrow;
+            @ViewChange.started -= instance.OnViewChange;
+            @ViewChange.performed -= instance.OnViewChange;
+            @ViewChange.canceled -= instance.OnViewChange;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -378,5 +589,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnLeftClick(InputAction.CallbackContext context);
         void OnNumbers(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnSkill1(InputAction.CallbackContext context);
+        void OnSkill2(InputAction.CallbackContext context);
+        void OnToggle(InputAction.CallbackContext context);
+        void OnArrow(InputAction.CallbackContext context);
+        void OnViewChange(InputAction.CallbackContext context);
     }
 }
