@@ -27,7 +27,7 @@ public class PlayerSkillHandler : PlayerComponent
         inputReader.OnSkill2Pressed -= HandleSkill2;    
     }
 
-    private void HandleSkill(int index)
+    public void HandleSkill(int index)
     {
         if(index == 0)
             index = 10;
