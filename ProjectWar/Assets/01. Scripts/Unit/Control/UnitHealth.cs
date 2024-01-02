@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
+public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool isDie;
@@ -60,7 +60,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
         OnDie?.Invoke();
     }
 
-    public void OnDamaged(int damage = 0, NetworkBehaviour performer = null, Vector3 point = default)
+    public void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
         if (!IsServer)
             return;
@@ -71,5 +71,10 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkBehaviour>
         {
             Die();
         }
+    }
+
+    public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
+    {
+        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
 }
