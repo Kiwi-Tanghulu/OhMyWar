@@ -9,15 +9,23 @@ public class UnitMovement : UnitComponent
     [SerializeField] private float moveSpeed;
     [SerializeField] private float stopDistance;
     [SerializeField] private bool isArrived = false;
+    [SerializeField] private bool shouldMove = false;
+
+    public bool ShouldMove => shouldMove;
 
     public void SetTargetPosition(Vector2 pos)
     {
         if (!IsServer)
             return;
 
-        isArrived = false;
         targetPosition = pos;
         moveDir = (targetPosition - (Vector2)transform.position).normalized;
+
+        if (Vector2.Distance(transform.position, targetPosition) > stopDistance)
+        {
+            isArrived = false;
+            shouldMove = true;
+        }
     }
 
     public void Move()
@@ -34,8 +42,17 @@ public class UnitMovement : UnitComponent
 
         if(Vector2.Distance(transform.position, targetPosition) <= stopDistance)
         {
-            SetTargetPosition(transform.position);
-            isArrived = true;
+            Stop();
         }
+    }
+
+    public void Stop()
+    {
+        if (!IsServer)
+            return;
+
+        SetTargetPosition(transform.position);
+        isArrived = true;
+        shouldMove = false;
     }
 }
