@@ -23,6 +23,15 @@ public class UnitMovement : UnitComponent
         this.stopDistance = controller.Info.stopDistance;
 
         visualTrm = transform.Find("Visual");
+
+        controller.Stat.GetStat(UnitStatType.moveSpeed).OnValueChangeEvent += MoveSpeedValueChange; 
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        controller.Stat.GetStat(UnitStatType.moveSpeed).OnValueChangeEvent -= MoveSpeedValueChange;
     }
 
     public void SetTargetPosition(Vector2 pos)
@@ -69,4 +78,6 @@ public class UnitMovement : UnitComponent
         isArrived = true;
         shouldMove = false;
     }
+
+    private void MoveSpeedValueChange(int value) => moveSpeed = value;
 }

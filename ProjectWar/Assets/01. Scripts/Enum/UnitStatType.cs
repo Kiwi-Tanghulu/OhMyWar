@@ -5,5 +5,4 @@ public enum UnitStatType
     attackDamage,
     attackDistance,
     attackDelay,
-    serchDelay,
 }

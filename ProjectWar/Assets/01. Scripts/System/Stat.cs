@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Stat
 {
-    private int value;
-    private List<int> modifiers;
+    [SerializeField] private int value;
+    [SerializeField] private List<int> modifiers;
+    public event Action<int> OnValueChangeEvent;
 
     public Stat(int defaultValue)
     {
@@ -28,12 +31,18 @@ public class Stat
     public void AddModifier(int value)
     {
         if (value != 0)
+        {
             modifiers.Add(value);
+            OnValueChangeEvent?.Invoke(GetValue());
+        }
     }
 
     public void RemoveModifier(int value)
     {
         if(value != 0)
+        {
             modifiers.Remove(value);
+            OnValueChangeEvent?.Invoke(GetValue());
+        }
     }
 }

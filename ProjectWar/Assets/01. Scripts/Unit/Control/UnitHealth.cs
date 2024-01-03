@@ -26,22 +26,28 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     {
         base.InitCompo(_controller);
         this.maxHealth = controller.Info.maxHealth;
-    }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-
-        if(IsServer)
+        if (IsServer)
         {
             currentHealth.Value = maxHealth;
         }
+
+        controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent += MaxHealthValueChange;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent -= MaxHealthValueChange;
     }
 
     private void SetHealth(float value)
     {
         if (IsServer)
-            currentHealth.Value += value;
+        {
+            currentHealth.Value = Mathf.Clamp(currentHealth.Value + value, 0, maxHealth);
+        }
     }
 
     public void Heal(float value)
@@ -91,4 +97,6 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     {
         controller.ChangeState(UnitStateType.Stun);
     }
+
+    private void MaxHealthValueChange(int value) => maxHealth = value;
 }

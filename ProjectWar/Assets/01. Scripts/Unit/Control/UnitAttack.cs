@@ -41,14 +41,22 @@ public abstract class UnitAttack : UnitComponent
 
         var main = attackEffect.main;
         main.loop = false;
+
+        if (IsServer)
+            StartCoroutine(SerchDelayCo());
+
+        controller.Stat.GetStat(UnitStatType.attackDamage).OnValueChangeEvent += AttackDamageValueChange;
+        controller.Stat.GetStat(UnitStatType.attackDistance).OnValueChangeEvent += AttackDistanceValueChange;
+        controller.Stat.GetStat(UnitStatType.attackDelay).OnValueChangeEvent += AttackDelayValueChange;
     }
 
-    public override void OnNetworkSpawn()
+    public override void OnNetworkDespawn()
     {
-        base.OnNetworkSpawn();
-        
-        if(IsServer)
-            StartCoroutine(SerchDelayCo());
+        base.OnNetworkDespawn();
+
+        controller.Stat.GetStat(UnitStatType.attackDamage).OnValueChangeEvent -= AttackDamageValueChange;
+        controller.Stat.GetStat(UnitStatType.attackDistance).OnValueChangeEvent -= AttackDistanceValueChange;
+        controller.Stat.GetStat(UnitStatType.attackDelay).OnValueChangeEvent -= AttackDelayValueChange;
     }
 
     public bool StartAttack()
@@ -105,5 +113,13 @@ public abstract class UnitAttack : UnitComponent
             if (!shouldAttack)
                 SerchTarget();
         }
+    }
+
+    private void AttackDamageValueChange(int value) => attackDamage = value;
+    private void AttackDistanceValueChange(int value) => attackDistance = value;
+    private void AttackDelayValueChange(int value)
+    {
+        attackDelay = value;
+        attackWfs = new WaitForSeconds(attackDelay);
     }
 }

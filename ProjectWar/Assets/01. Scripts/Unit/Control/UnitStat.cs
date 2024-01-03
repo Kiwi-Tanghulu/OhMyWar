@@ -22,9 +22,9 @@ public class UnitStat : UnitComponent
         }
     }
 
-    public int GetStat(UnitStatType type)
+    public Stat GetStat(UnitStatType type)
     {
-        return stats[type].GetValue();
+        return stats[type];
     }
 
     public void AddModifier(UnitStatType type, int value)
