@@ -41,17 +41,17 @@ public class UnitController : NetworkBehaviour
 
         gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");
 
+        Stat = GetComponent<UnitStat>();
         Movement = GetComponent<UnitMovement>();
         Health = GetComponent<UnitHealth>();
         Attack = GetComponent<UnitAttack>();
-        Stat = GetComponent<UnitStat>();
         Anim = transform.Find("Visual").GetComponent<UnitAnimation>();
 
+        Stat.InitCompo(this);
         Movement.InitCompo(this);
         Health.InitCompo(this);
         Attack.InitCompo(this);
         Anim.InitCompo(this);
-        Stat.InitCompo(this);
 
         InitState();
     }

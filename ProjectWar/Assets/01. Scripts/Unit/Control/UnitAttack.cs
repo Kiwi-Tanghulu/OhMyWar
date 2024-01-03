@@ -82,7 +82,7 @@ public abstract class UnitAttack : UnitComponent
             return;
 
         attackEffect.transform.position = target.transform.position;
-        attackEffect.Play();
+        //attackEffect.Play();
     }
 
 

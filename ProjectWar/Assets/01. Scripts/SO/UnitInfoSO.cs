@@ -53,9 +53,6 @@ public class UnitInfoSO : ScriptableObject
             case UnitStatType.attackDelay:
                 attackDelay += value;
                 break;
-            case UnitStatType.serchDelay:
-                serchDelay += value;
-                break;
         }
     }
 }
