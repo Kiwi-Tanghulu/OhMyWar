@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -20,7 +21,7 @@ public class IngameManager : NetworkBehaviour
     [field: SerializeField] public Nexus MidNexus { get; private set; } = null;
     [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
-    [SerializeField] Player playerPrefab;
+    [SerializeField] List<Player> playerPrefabs;
 
     public Player OwnerPlayer;
 
@@ -80,14 +81,14 @@ public class IngameManager : NetworkBehaviour
     }
 
     // 서버만 호출하는 함수
-    public void StartGame()
+    public void StartGame(CharacterType blueType, CharacterType redType)
     {
         startedTime.Value = Time.time;
 
-        BluePlayer = Instantiate(playerPrefab);
+        BluePlayer = Instantiate(playerPrefabs[(int)blueType]);
         BluePlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.HostID.Value);
         
-        RedPlayer = Instantiate(playerPrefab);
+        RedPlayer = Instantiate(playerPrefabs[(int)redType]);
         RedPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.GuestID.Value);
     }
 

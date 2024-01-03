@@ -19,6 +19,9 @@ public class LobbyManager : NetworkBehaviour
 
     private bool otherReady = false;
 
+    private CharacterType blueCharacterType;
+    private CharacterType redCharacterType;
+
     public override void OnNetworkSpawn()
     {
         Transform lobbyPanelTrm = GameObject.Find("LobbyPanel").transform;
@@ -48,6 +51,11 @@ public class LobbyManager : NetworkBehaviour
     public void CharacterButtonPressServerRPC(UserType user, CharacterType character)
     {
         ChangeUIInfoClientRPC(user, character);
+
+        if(user == UserType.Blue)
+            blueCharacterType = character;
+        else
+            redCharacterType = character;
     }
     [ClientRpc]
     public void ChangeUIInfoClientRPC(UserType user, CharacterType character)
@@ -80,6 +88,6 @@ public class LobbyManager : NetworkBehaviour
 
     private void HandleLoadCompleted(string sceneName, LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        IngameManager.Instance.StartGame();
+        IngameManager.Instance.StartGame(blueCharacterType, redCharacterType);
     }
 }
