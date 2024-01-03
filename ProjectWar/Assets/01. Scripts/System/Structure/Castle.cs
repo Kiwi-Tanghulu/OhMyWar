@@ -23,6 +23,7 @@ public class Castle : StructureBase, IUnitSpawner
 
     public void SpawnUnit(int unitIndex, int lineIndex)
     {
+        Debug.Log(name);
         if (unitIndex >= unitPrefabs.PrefabList.Count)
             return;
 

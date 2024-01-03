@@ -1,3 +1,4 @@
+using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class IngameManager : NetworkBehaviour
     [field: SerializeField] public Nexus MidNexus { get; private set; } = null;
     [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
+    [SerializeField] Player playerPrefab;
+
     public Transform OwnerPlayer;
 
     public Player BluePlayer {get; private set;} = null;
@@ -27,28 +30,26 @@ public class IngameManager : NetworkBehaviour
     public IUnitSpawner CurrentSpawner { get; private set; } = null;
     public int FocusedLine { get; private set; } = 0;
 
-    public void RegisterPlayer(Player player, bool isBluePlayer)
+    public void RegisterPlayer(Player player)
     {
-        if(isBluePlayer)
-        {
+        if(player.IsBlue)
             BluePlayer = player;
-            player.IsBlue = true;
-            player.GetComponent<PlayerMovement>().MoveImmediately(BlueCastle.SpawnPosition.position);
-        }
         else
-        {
             RedPlayer = player;
-            player.IsBlue = true;
-            player.GetComponent<PlayerMovement>().MoveImmediately(RedCastle.SpawnPosition.position);
-        }
     }
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)
     {
         FocusedLine = lineIndex;
 
-        bool isBlue = player == BluePlayer;
+        bool isBlue = player.IsBlue;
         CurrentSpawner = isBlue ? BlueCastle : RedCastle;
+        Debug.Log($"IsBlue : {isBlue} / Spawner : {(isBlue ? BlueCastle : RedCastle).name}");
+
+        // if(IsServer)
+        //     CurrentSpawner = BlueCastle;
+        // else
+        //     CurrentSpawner = RedCastle;
 
         if(lineIndex == 0) // top
             CheckNexus(TopNexus, player);
@@ -67,5 +68,15 @@ public class IngameManager : NetworkBehaviour
     public void SpawnUnit(int unitIndex)
     {
         CurrentSpawner?.SpawnUnit(unitIndex, FocusedLine);
+    }
+
+    // 서버만 호출하는 함수
+    public void StartGame()
+    {
+        BluePlayer = Instantiate(playerPrefab);
+        BluePlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.HostID.Value);
+        
+        RedPlayer = Instantiate(playerPrefab);
+        RedPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.GuestID.Value);
     }
 }

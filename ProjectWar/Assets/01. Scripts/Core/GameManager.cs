@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Unity.Netcode;
 using System;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
 	private static GameManager instance = null;
     public static GameManager Instance {
@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    public NetworkVariable<ulong> HostID;
+    public NetworkVariable<ulong> GuestID;
 
     private void Awake()
     {
