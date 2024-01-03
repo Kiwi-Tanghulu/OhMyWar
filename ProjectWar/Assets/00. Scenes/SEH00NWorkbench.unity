@@ -375,8 +375,10 @@ MonoBehaviour:
   OnDamagedEvent:
     m_PersistentCalls:
       m_Calls: []
-  spawnPosition: {fileID: 0}
+  <SpawnPosition>k__BackingField: {fileID: 0}
   unitPrefabs: {fileID: 0}
+  blueSprite: {fileID: 0}
+  redSprite: {fileID: 0}
 --- !u!1 &1450952270
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +511,8 @@ MonoBehaviour:
   - {fileID: 573259373}
   - {fileID: 1232667285}
   - {fileID: 1658303266}
+  midNexus: []
+  spawnPosition: {fileID: 0}
   unitPrefabs: {fileID: 11400000, guid: 3283130cca4f5c04288d445174717565, type: 2}
 --- !u!1 &1658303265
 GameObject:
