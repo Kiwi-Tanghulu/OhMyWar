@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : PlayerComponent
 {
     [SerializeField] InputReader inputReader = null;
-    
+
     [Space(10f)]
     [SerializeField] float speed = 10f;
 
@@ -19,6 +19,7 @@ public class PlayerMovement : PlayerComponent
     public int FacingDirection => facingDirection;
 
     private bool isMove = false;
+    private PlayerAnimator playerAnimator;
 
     public override void Init(Player player)
     {
@@ -28,6 +29,8 @@ public class PlayerMovement : PlayerComponent
 
         if(player.IsOwner)
             inputReader.OnRightClicked += HandleRightClicked;
+
+        playerAnimator = visual.GetComponent<PlayerAnimator>();
     }
 
     private void Update()
@@ -43,7 +46,10 @@ public class PlayerMovement : PlayerComponent
     {
         moveDirection = targetPosition - (Vector2)transform.position;
         if (moveDirection.sqrMagnitude < 0.1f)
+        {
+            playerAnimator.AServerRPC(false);
             return;
+        }
 
         moveDirection.Normalize();
 
@@ -76,12 +82,15 @@ public class PlayerMovement : PlayerComponent
     private void HandleRightClicked(bool value)
     {
         isMove = value;
+
     }
 
     public void SetTargetPosition(Vector2 position)
     {
         targetPosition = position;
+        playerAnimator.AServerRPC(true);
     }
+
 
     public void MoveImmediately(Vector2 position)
     {
