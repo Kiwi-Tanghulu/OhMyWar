@@ -34,13 +34,14 @@ public class UnitManager : NetworkBehaviour
 
     public void SpawnUnit(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition)
     {
-        SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition);
+        Vector2 offset = new Vector2(0, Random.Range(-3f, 3f));
+        SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnUnitServerRpc(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition)
+    private void SpawnUnitServerRpc(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition, Vector2 offset)
     {
-        UnitController unit = Instantiate(unitDictionary[type], spawnPosition, Quaternion.identity);
+        UnitController unit = Instantiate(unitDictionary[type], spawnPosition + offset, Quaternion.identity);
         NetworkObject unitNetworkObject = unit.GetComponent<NetworkObject>();
         unitNetworkObject.SpawnWithOwnership(clientId, true);
 
@@ -48,6 +49,7 @@ public class UnitManager : NetworkBehaviour
             playerUnitContainer.Add(clientId, new());
 
         playerUnitContainer[clientId].Add(unit);
+        unit.SetOffset(offset);
         unit.Movement.SetTargetPosition(targetPosition);
     }
 }

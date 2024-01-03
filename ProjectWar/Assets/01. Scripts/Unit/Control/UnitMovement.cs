@@ -36,7 +36,7 @@ public class UnitMovement : UnitComponent
 
     public void SetTargetPosition(Vector2 pos)
     {
-        targetPosition = pos;
+        targetPosition = pos + controller.Offset;
         moveDir = (targetPosition - (Vector2)transform.position).normalized;
 
         if (moveDir.x < 0)
