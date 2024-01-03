@@ -8,6 +8,7 @@ public class UnitDieState : UnitState
     {
         base.OnServerEnter();
 
+        Debug.Log("die");
         controller.Anim.SetTriggerPropretyClientRpc("Die");
     }
 }

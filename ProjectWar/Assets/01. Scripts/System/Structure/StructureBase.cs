@@ -18,6 +18,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     private void Start()
     {
         healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        currentHP = maxHP;
     }
 
     // 실질적으로 데미지를 넣는 함수

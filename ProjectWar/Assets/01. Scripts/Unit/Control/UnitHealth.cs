@@ -112,7 +112,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 
     public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        if (IsServer)
+        if (IsServer && isDie == false)
             OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
 
