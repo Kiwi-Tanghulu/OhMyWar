@@ -26,20 +26,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SceneLoader.Instance = new SceneLoader();
-
-
-        NetworkManager.Singleton.ConnectionApprovalCallback += HandleConnectionApproval;
-    }
-
-    private void HandleConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
-    {
-        response.Approved = true;
-        response.CreatePlayerObject = false;
     }
 
     private async void Start()
     {
         bool authenticated = await SetNetwork();
+        NetworkManager.Singleton.ConnectionApprovalCallback += HandleConnectionApproval;
+
         if(authenticated)
             SceneLoader.Instance.LoadSceneAsync("MenuScene");
     }
@@ -52,5 +45,11 @@ public class GameManager : MonoBehaviour
         HostManager.Instance = new HostManager();
 
         return authenticated;
+    }
+
+    private void HandleConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        response.Approved = true;
+        response.CreatePlayerObject = false;
     }
 }

@@ -28,8 +28,6 @@ public class TMainMenu : MonoBehaviour
 
     private void HandleRoomCreated()
     {
-        SceneLoader.Instance.LoadSceneAsync("GameScene", () => {
-            NetworkManager.Singleton.StartHost();
-        });
+        SceneLoader.Instance.LoadSceneAsync("LobbyScene");
     }
 }
