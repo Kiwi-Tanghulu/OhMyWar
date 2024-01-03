@@ -3170,10 +3170,10 @@ MonoBehaviour:
   telePortPos:
   - startPos: {x: -8.52, y: -3.54}
     endPos: {x: 28.6, y: 15.6}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
+  - startPos: {x: -8.52, y: -3.54}
+    endPos: {x: 28.6, y: 15.6}
+  - startPos: {x: -8.52, y: -3.54}
+    endPos: {x: 28.6, y: 15.6}
   teleportRange: 8
   teleportDelay: 0.1
   targetLayer:

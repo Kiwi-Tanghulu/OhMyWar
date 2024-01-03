@@ -28,6 +28,8 @@ public class TeleportSkill : SkillBase
     private int currentLineIndex;
     protected override bool ActiveSkill()
     {
+        Debug.Log("TeleportStart");
+
         List<Transform> targetUnits = null;
         units = null;
         unitDistances = null;
@@ -44,22 +46,26 @@ public class TeleportSkill : SkillBase
         }
 
 
-        units = targetUnits.OrderBy(x => Vector2.Distance(player.transform.position, x.transform.position)).ToList();
-
-        foreach(Transform unit in units)
+        if(targetUnits != null)
         {
-            unitDistances.Add(unit.position - player.transform.position);
+            units = targetUnits.OrderBy(x => Vector2.Distance(player.transform.position, x.transform.position)).ToList();
+            foreach (Transform unit in units)
+            {
+                unitDistances.Add(unit.position - player.transform.position);
+            }
         }
 
         int lineIndex = IngameManager.Instance.FocusedLine;
         
         currentLineIndex = player.transform.position.y > maxMidY ? 2 : player.transform.position.y < minMidY ? 0 : 1;
 
-        currentPercent = (player.transform.position - IngameManager.Instance.castle.SpawnPosition.position).magnitude
-            / (telePortPos[lineIndex].endPos - telePortPos[lineIndex].startPos).magnitude;
+        currentPercent = Mathf.Abs(player.transform.position.x - telePortPos[lineIndex].startPos.x)
+            / Mathf.Abs((telePortPos[lineIndex].endPos.x - telePortPos[lineIndex].startPos.x));
+
+        Debug.Log(currentPercent);
 
         playerTeleportPosition = 
-            telePortPos[currentLineIndex].startPos + currentPercent * (telePortPos[currentLineIndex].endPos - telePortPos[currentLineIndex].startPos);
+           telePortPos[currentLineIndex].startPos + currentPercent * (telePortPos[currentLineIndex].endPos - telePortPos[currentLineIndex].startPos);
 
         StartCoroutine(TelePortStart());
         return true;
@@ -73,16 +79,21 @@ public class TeleportSkill : SkillBase
 
     private IEnumerator TelePortStart()
     {
-        foreach (var unit in units)
+        Debug.Log("TeleportEffectCoru");
+        if(units != null)
         {
-            Instantiate(teleportEffect, unit.transform.position, Quaternion.identity);
-            unit.gameObject.SetActive(false);
-            yield return new WaitForSeconds(teleportDelay);
+            foreach (var unit in units)
+            {
+                Instantiate(teleportEffect, unit.transform.position, Quaternion.identity);
+                unit.gameObject.SetActive(false);
+                yield return new WaitForSeconds(teleportDelay);
+            }
         }
         if (IsHost)
         {
+            Debug.Log(playerTeleportPosition);
+            player.GetComponent<PlayerMovement>().MoveImmediately(playerTeleportPosition);
             FinishTeleportClientRPC();
-            player.transform.position = playerTeleportPosition;
         }
     }
 

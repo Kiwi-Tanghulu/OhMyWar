@@ -52,7 +52,7 @@ public class PlayerMovement : PlayerComponent
         moveDirection = targetPosition - (Vector2)transform.position;
         if (moveDirection.sqrMagnitude < 0.1f)
         {
-            if(player.IsOwner)
+            if (player.IsOwner)
                 playerAnimator.AServerRPC(false);
             return;
         }
