@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LobbyManager : NetworkBehaviour
 {
+
     private static LobbyManager instance = null;
     public static LobbyManager Instance {
         get {
@@ -24,10 +25,15 @@ public class LobbyManager : NetworkBehaviour
         Transform lobbyPanelTrm = GameObject.Find("LobbyPanel").transform;
         lobbyPanel = lobbyPanelTrm.GetComponent<LobbyPanel>();
         if (IsHost)
+        {
             lobbyPanel.Init(UserType.Blue, this);
+  
+        }
         else
+        {
             lobbyPanel.Init(UserType.Red, this);
 
+        }
         NetworkManager.Singleton.OnClientConnectedCallback += lobbyPanel.ShowClientPanel;
         NetworkManager.Singleton.OnClientDisconnectCallback += lobbyPanel.HideClientPanel;
     }
@@ -39,12 +45,12 @@ public class LobbyManager : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void ClientDisconnectClientRPC(ulong id)
+    public void ServerDisconnectClientRPC(bool value)
     {
 
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void CharacterButtonPressServerRPC(UserType user, CharacterType character)
     {
         ChangeUIInfoClientRPC(user, character);
@@ -52,6 +58,7 @@ public class LobbyManager : NetworkBehaviour
     [ClientRpc]
     public void ChangeUIInfoClientRPC(UserType user, CharacterType character)
     {
+        Debug.Log($"{user} {character}");
         lobbyPanel.SettingPaenlInfo(user, character);
     }
 
@@ -72,6 +79,29 @@ public class LobbyManager : NetworkBehaviour
         Debug.Log(otherReady);
     }
 
+
+
+    [ServerRpc]
+    public void BlueReadyServerRPC()
+    {
+        BlueReadyClientRPC();
+    }
+    [ServerRpc(RequireOwnership = false)]
+    public void RedReadyServerRPC()
+    {
+        RedReadyClientRPC();
+    }
+    [ClientRpc]
+    public void BlueReadyClientRPC()
+    {
+        lobbyPanel.ChangeBlueUI();
+    }
+    [ClientRpc]
+    public void RedReadyClientRPC()
+    {
+        lobbyPanel.ChangeRedUI();
+    }
+
     private void StartGame()
     {
         NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
@@ -82,4 +112,5 @@ public class LobbyManager : NetworkBehaviour
     {
         IngameManager.Instance.StartGame();
     }
+
 }
