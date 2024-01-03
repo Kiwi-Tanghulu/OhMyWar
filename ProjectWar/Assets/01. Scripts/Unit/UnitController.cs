@@ -22,6 +22,9 @@ public class UnitController : NetworkBehaviour
     public UnitAnimation Anim { get; private set; }
     public UnitStat Stat { get; private set; }
 
+    private Vector2 offset;
+    public Vector2 Offset => offset;
+
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
@@ -66,6 +69,11 @@ public class UnitController : NetworkBehaviour
 
         if (Input.GetKeyUp(KeyCode.Q))
             Health.Stun();
+    }
+
+    public void SetOffset(Vector2 offset)
+    {
+        this.offset = offset;
     }
 
     #region ChangeState
