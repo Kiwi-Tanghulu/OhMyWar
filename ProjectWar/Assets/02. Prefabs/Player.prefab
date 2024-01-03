@@ -2582,6 +2582,7 @@ MonoBehaviour:
   clientProjectile: {fileID: 3127567777973484262, guid: a066c8235f0008b49bf735e95eae845f, type: 3}
   serverProjectile: {fileID: 4513646826079134591, guid: 6903b1ec597993147b2ae57cba799510, type: 3}
   firePosition: {fileID: 1535477088170604050}
+  projectileSpeed: 3
 --- !u!1 &4097874783068788441
 GameObject:
   m_ObjectHideFlags: 0
@@ -5953,7 +5954,7 @@ SpriteMask:
   m_BackSortingLayer: 2
   m_FrontSortingOrder: 100
   m_BackSortingOrder: 0
-  m_IsCustomRangeActive: 1
+  m_IsCustomRangeActive: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8503922988361959463
 GameObject:

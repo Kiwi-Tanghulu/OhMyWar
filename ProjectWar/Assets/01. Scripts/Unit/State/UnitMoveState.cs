@@ -4,11 +4,20 @@ using UnityEngine;
 
 public class UnitMoveState : UnitState
 {
+    private GameObject walkParticle = null;
+
+    protected override void ClientInit()
+    {
+        base.ClientInit();
+        walkParticle = controller.transform.Find("Visual/Shadow/WalkParticle").gameObject;
+    }
+
     protected override void OnServerEnter()
     {
         base.OnServerEnter();
 
         controller.Anim.SetBoolPropretyClientRpc("Move", true);
+        walkParticle.SetActive(true);
     }
 
     protected override void OnServerUpdate()
@@ -26,6 +35,7 @@ public class UnitMoveState : UnitState
         base.OnServerExit();
 
         controller.Anim.SetBoolPropretyClientRpc("Move", false);
+        walkParticle.SetActive(false);
     }
 
     private void IdleHandle()
