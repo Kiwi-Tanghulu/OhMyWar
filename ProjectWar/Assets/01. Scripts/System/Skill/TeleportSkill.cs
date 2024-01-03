@@ -6,14 +6,16 @@ public class TeleportSkill : SkillBase
 {
     [SerializeField] private float teleportRange;
     [SerializeField] private LayerMask targetLayer;
+    [SerializeField] private float teleportDelay;
+
+    [SerializeField] private GameObject teleportEffect;
     protected override bool ActiveSkill()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(player.transform.position, teleportRange, targetLayer);
-        //need line number & line position
-        foreach(var unit in cols)
+        if (player.IsHost)
         {
 
         }
+        
         return true;
     }
 }
