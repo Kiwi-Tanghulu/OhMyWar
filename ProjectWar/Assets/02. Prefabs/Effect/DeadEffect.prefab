@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4340053643190063323}
   - component: {fileID: 2413975066198512057}
   - component: {fileID: 434236107431432803}
+  - component: {fileID: 3911513955352328693}
   m_Layer: 0
   m_Name: DeadEffect
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3911513955352328693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4081589766689769864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d09192775c2d28408a3296e80d2d160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -3314,6 +3314,7 @@ GameObject:
   - component: {fileID: 4056393458933537279}
   - component: {fileID: 1086406249668051940}
   - component: {fileID: 50254778435295228}
+  - component: {fileID: 7427083400967094403}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -3383,6 +3384,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c49815e867d674f9759d4e08e1f9af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7427083400967094403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177048181424473715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!1 &6341579334172641219
 GameObject:
   m_ObjectHideFlags: 0

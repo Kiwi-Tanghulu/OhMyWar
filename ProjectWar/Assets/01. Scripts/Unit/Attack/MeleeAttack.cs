@@ -7,6 +7,9 @@ public class MeleeAttack : UnitAttack
 {
     public override void Attack()
     {
+        if (target == null)
+            return;
+
         if(target.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> attackedObj))
         {
             Debug.Log(1);
