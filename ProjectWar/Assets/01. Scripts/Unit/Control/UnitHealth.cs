@@ -18,6 +18,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     public event Action OnDie;
 
     public GameObject shieldEffect;
+    public GameObject deadEffect;
 
     [SerializeField] private float shieldAmount;
 
