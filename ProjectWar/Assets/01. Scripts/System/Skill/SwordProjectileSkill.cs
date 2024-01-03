@@ -19,11 +19,11 @@ public class SwordProjectileSkill : SkillBase
 
         if(player.IsHost)
         {
-            instance = Instantiate(serverProjectile, firePosition.position, rotation);
+            instance = Instantiate(serverProjectile, position, rotation);
             instance.GetComponent<DealDamageOnContact>()?.Init(player);
         }
         else
-            instance = Instantiate(clientProjectile, firePosition.position, rotation);
+            instance = Instantiate(clientProjectile, position, rotation);
 
         instance.GetComponent<Rigidbody2D>().velocity = dir * projectileSpeed;
 
