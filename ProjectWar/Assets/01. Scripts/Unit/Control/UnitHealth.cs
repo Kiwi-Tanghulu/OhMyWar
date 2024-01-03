@@ -10,16 +10,17 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool isDie;
     private NetworkVariable<float> currentHealth;
+    private HealthBar healthBar;
     public float MaxHealth => maxHealth;
     public float CurrentHealth => currentHealth.Value;
     public bool IsDie => isDie;
-
     public event Action OnHeal;
     public event Action OnDie;
 
     private void Awake()
     {
         currentHealth = new NetworkVariable<float>();
+        healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
     public override void InitCompo(UnitController _controller)
@@ -47,6 +48,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         if (IsServer)
         {
             currentHealth.Value = Mathf.Clamp(currentHealth.Value + value, 0, maxHealth);
+            healthBar.SetHealthBar(currentHealth.Value / maxHealth);
         }
     }
 
@@ -81,7 +83,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     {
         SetHealth(-damage);
 
-        if (currentHealth.Value <= 0) 
+        if (currentHealth.Value <= 0)
         {
             Die();
         }
@@ -89,7 +91,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 
     public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        if(IsServer)
+        if (IsServer)
             OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
 
@@ -98,5 +100,9 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         controller.ChangeState(UnitStateType.Stun);
     }
 
-    private void MaxHealthValueChange(int value) => maxHealth = value;
+    private void MaxHealthValueChange(int value) 
+    {
+        maxHealth = value;
+        healthBar.SetHealthBar(currentHealth.Value / maxHealth);
+    }
 }

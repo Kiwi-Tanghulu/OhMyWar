@@ -65,7 +65,6 @@ public class UnitMovement : UnitComponent
 
         if(Vector2.Distance(transform.position, targetPosition) <= stopDistance)
         {
-            Debug.Log("arrive");
             if (gameObject.tag == UnitManager.Instance.BlueUnitTag)
                 SetTargetPosition(IngameManager.Instance.RedCastle.SpawnPosition.position);
             else

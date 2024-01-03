@@ -18,7 +18,7 @@ MonoBehaviour:
   moveSpeed: 10
   stopDistance: 1
   maxHealth: 20
-  attackDamage: 50
+  attackDamage: 5
   attackDistance: 1
   attackDelay: 2
   serchDelay: 0

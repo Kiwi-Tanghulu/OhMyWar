@@ -13,6 +13,13 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
     protected bool isDestroyed = false;
 
+    private HealthBar healthBar;
+
+    private void Start()
+    {
+        healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+    }
+
     // 실질적으로 데미지를 넣는 함수
     public virtual void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
@@ -20,6 +27,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
             return;
         
         currentHP -= damage;
+        healthBar?.SetHealthBar(currentHP / maxHP);
         OnDamagedEvent?.Invoke(performer, point, damage);
 
         if(currentHP <= 0)
@@ -65,5 +73,6 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         currentHP += value;
         currentHP = Mathf.Clamp(currentHP, 0, maxHP);
+        healthBar?.SetHealthBar(currentHP / maxHP);
     }
 }
