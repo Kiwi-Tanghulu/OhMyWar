@@ -10,10 +10,8 @@ public class PlayerSkillHandler : NetworkBehaviour
 
     private Player player = null;
 
-    public override void OnNetworkSpawn()
+    public void Init()
     {
-        base.OnNetworkSpawn();
-
         player = GetComponent<Player>();
 
         if(IsOwner == false)

@@ -73,4 +73,9 @@ public class LobbyPanel : FixedUI
             redLastSkillIcon.SetActive(false);
         }
     }
+
+    public void Ready()
+    {
+        LobbyManager.Instance.ReadyGame();
+    }
 }

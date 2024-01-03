@@ -12,25 +12,22 @@ public class Player : NetworkBehaviour
 
     private List<PlayerComponent> components;
 
-    private void Start()
-    {
-        if(IsHost && IsOwner)
-            IngameManager.Instance.RegisterPlayer(this, true);
-        else
-            IngameManager.Instance.RegisterPlayer(this, false);
-
-        IngameManager.Instance.ToggleCurrentSpawner(this, 1);
-    }
-
     public override void OnNetworkSpawn()
     {
+        IsBlue = (OwnerClientId == GameManager.Instance.HostID.Value);
+        IngameManager.Instance.RegisterPlayer(this);
+
+        if(IsOwner)
+            IngameManager.Instance.ToggleCurrentSpawner(this, 1);
+
         components = new List<PlayerComponent>();
         GetComponents<PlayerComponent>(components);
         components.ForEach(component => component?.Init(this));
 
+        GetComponent<PlayerSkillHandler>().Init();
+
         if (IsOwner)
             IngameManager.Instance.OwnerPlayer = transform;
-            //CameraManager.Instance.MainVCam.Follow = transform;
     }
 
     private void Update()

@@ -26,11 +26,16 @@ public class PlayerMovement : PlayerComponent
         base.Init(player);
     
         visual = transform.Find("Visual");
+        playerAnimator = visual.GetComponent<PlayerAnimator>();
 
         if(player.IsOwner)
-            inputReader.OnRightClicked += HandleRightClicked;
+        {
+            IngameManager manager = IngameManager.Instance;
+            Vector3 position = player.IsBlue ? manager.BlueCastle.SpawnPosition.position : manager.RedCastle.SpawnPosition.position;
+            MoveImmediately(position);
 
-        playerAnimator = visual.GetComponent<PlayerAnimator>();
+            inputReader.OnRightClicked += HandleRightClicked;
+        }
     }
 
     private void Update()
@@ -90,7 +95,7 @@ public class PlayerMovement : PlayerComponent
     {
         targetPosition = position;
         if(player.IsOwner)
-                playerAnimator.AServerRPC(true);
+            playerAnimator.AServerRPC(true);
     }
 
 
