@@ -9,6 +9,7 @@ public class MeleeAttack : UnitAttack
     {
         if(target.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> attackedObj))
         {
+            Debug.Log(1);
             attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
             PlayEffect();
         }

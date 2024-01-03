@@ -39,9 +39,6 @@ public abstract class UnitAttack : UnitComponent
         serchWfs = new WaitForSeconds(serchDelay);
         canAttack = true;
 
-        var main = attackEffect.main;
-        main.loop = false;
-
         if (IsServer)
             StartCoroutine(SerchDelayCo());
 
@@ -82,11 +79,11 @@ public abstract class UnitAttack : UnitComponent
             return;
 
         attackEffect.transform.position = target.transform.position;
-        //attackEffect.Play();
+        attackEffect.Play();
     }
 
 
-    private void SerchTarget()
+    private bool SerchTarget()
     {
         Collider2D col = Physics2D.OverlapCircle(transform.position, AttackDistance, targetLayer);
 
@@ -95,6 +92,8 @@ public abstract class UnitAttack : UnitComponent
             target = col.gameObject;
             shouldAttack = true;
         }
+
+        return col;
     }
 
     protected IEnumerator AttackDelayCo()
@@ -110,8 +109,15 @@ public abstract class UnitAttack : UnitComponent
         {
             yield return serchWfs;
 
-            if (!shouldAttack)
-                SerchTarget();
+            if(target == null)
+            {
+                shouldAttack = SerchTarget();
+            }
+            else
+            {
+                if(target.layer == gameObject.layer)
+                    shouldAttack = SerchTarget();
+            }
         }
     }
 

@@ -30,7 +30,11 @@ public class Player : NetworkBehaviour
 
         if (IsOwner)
             IngameManager.Instance.OwnerPlayer = transform;
-            //CameraManager.Instance.MainVCam.Follow = transform;
+        //CameraManager.Instance.MainVCam.Follow = transform;
+
+        gameObject.layer = IsServer ? (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2)
+            : (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
+
     }
 
     private void Update()

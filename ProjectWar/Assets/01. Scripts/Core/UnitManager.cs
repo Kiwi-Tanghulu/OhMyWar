@@ -15,10 +15,6 @@ public class UnitManager : NetworkBehaviour
     public string RedUnitTag { get; private set; } = "RedUnit";
     [field: SerializeField]
     public string BlueUnitTag { get; private set; } = "BlueUnit";
-    [field: SerializeField]
-    public LayerMask RedUnitLayer { get; private set; }
-    [field: SerializeField]
-    public LayerMask BlueUnitLayer { get; private set; }
 
     private void Awake()
     {
