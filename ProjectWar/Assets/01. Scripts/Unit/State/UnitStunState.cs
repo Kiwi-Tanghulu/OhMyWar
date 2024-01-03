@@ -15,12 +15,19 @@ public class UnitStunState : UnitState
         StartCoroutine(StunCo());
     }
 
-    protected override void ClientExit()
+    protected override void OnServerExit()
     {
-        base.ClientExit();
+        base.OnServerExit();
 
         controller.Anim.AnimStartEvent -= StartStun;
     }
+
+    //protected override void OnServerExit()
+    //{
+    //    base.ClientExit();
+
+    //    controller.Anim.AnimStartEvent -= StartStun;
+    //}
 
     private IEnumerator StunCo()
     {

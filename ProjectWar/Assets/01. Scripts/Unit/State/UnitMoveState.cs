@@ -16,6 +16,14 @@ public class UnitMoveState : UnitState
     {
         base.OnServerEnter();
 
+        //controller.Anim.SetBoolPropretyClientRpc("Move", true);
+        //walkParticle.SetActive(true);
+    }
+
+    protected override void ClientEnter()
+    {
+        base.ClientEnter();
+
         controller.Anim.SetBoolPropretyClientRpc("Move", true);
         walkParticle.SetActive(true);
     }
@@ -33,6 +41,14 @@ public class UnitMoveState : UnitState
     protected override void OnServerExit()
     {
         base.OnServerExit();
+
+        //controller.Anim.SetBoolPropretyClientRpc("Move", false);
+        //walkParticle.SetActive(false);
+    }
+
+    protected override void ClientExit()
+    {
+        base.ClientExit();
 
         controller.Anim.SetBoolPropretyClientRpc("Move", false);
         walkParticle.SetActive(false);

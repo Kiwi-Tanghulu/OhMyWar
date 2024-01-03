@@ -31,7 +31,7 @@ public class Player : NetworkBehaviour
         if (IsOwner)
             IngameManager.Instance.OwnerPlayer = transform;
 
-        if(IsServer)
+        if(IsServer && IsOwner)
         {
             gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
             team = TeamType.Blue;
