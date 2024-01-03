@@ -13,17 +13,34 @@ public class UnitController : NetworkBehaviour
     [SerializeField] private UnitInfoSO info;
     public UnitInfoSO Info => info;
     private Dictionary<UnitStateType, UnitState> states;
+
     [field: SerializeField]
     public UnitStateType CurrentState { get; private set; }
-
     public UnitMovement Movement { get; private set; }
     public UnitHealth Health { get; private set; }
     public UnitAttack Attack { get; private set; }
     public UnitAnimation Anim { get; private set; }
     public UnitStat Stat { get; private set; }
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
+
+        UnitManager unitManager = UnitManager.Instance;
+
+        if(IsServer && IsOwner)
+        {
+            gameObject.tag = unitManager.BlueUnitTag;
+            gameObject.layer = (int)Mathf.Log(unitManager.BlueUnitLayer.value, 2);
+        }
+        else
+        {
+            gameObject.tag = unitManager.RedUnitTag;
+            gameObject.layer = (int)Mathf.Log(unitManager.RedUnitLayer.value, 2);
+        }
+
+        gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");
+
         Movement = GetComponent<UnitMovement>();
         Health = GetComponent<UnitHealth>();
         Attack = GetComponent<UnitAttack>();
@@ -41,19 +58,10 @@ public class UnitController : NetworkBehaviour
 
     private void Update()
     {
+        if (!IsSpawned)
+            return;
+
         states[CurrentState].UpdateState();
-    }
-
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-
-        if (IsOwner)
-            gameObject.layer = 6;
-        else 
-            gameObject.layer = 7;
-
-        ChangeState(UnitStateType.Idle);
     }
 
     #region ChangeState
@@ -107,5 +115,7 @@ public class UnitController : NetworkBehaviour
             state.InitState(this, type);
             states.Add(type, state);
         }
+
+        ChangeState(UnitStateType.Idle);
     }
 }

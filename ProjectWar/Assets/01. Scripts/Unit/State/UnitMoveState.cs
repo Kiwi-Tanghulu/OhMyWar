@@ -32,12 +32,16 @@ public class UnitMoveState : UnitState
     private void IdleHandle()
     {
         if (controller.Movement.IsArrived)
+        {
             controller.ChangeState(UnitStateType.Idle);
+        }
     }
 
     private void AttackHandle()
     {
         if (controller.Attack.ShouldAttack)
+        {
             controller.ChangeState(UnitStateType.Attack);
+        }
     }
 }

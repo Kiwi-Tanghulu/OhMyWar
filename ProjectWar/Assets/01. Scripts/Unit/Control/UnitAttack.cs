@@ -8,9 +8,9 @@ public abstract class UnitAttack : UnitComponent
     [SerializeField] protected float attackDistance;
     [SerializeField] protected float attackDelay;
     [SerializeField] protected float serchDelay;
-    [SerializeField] protected bool canAttack = false;
+    [SerializeField] protected bool canAttack = true;
     [SerializeField] protected bool shouldAttack = false;
-    [SerializeField] protected LayerMask layer;
+    [SerializeField] protected LayerMask targetLayer;
     [SerializeField] protected GameObject target;
     [SerializeField] protected ParticleSystem attackEffect;
 
@@ -28,15 +28,16 @@ public abstract class UnitAttack : UnitComponent
     {
         base.InitCompo(_controller);
 
-        attackWfs = new WaitForSeconds(attackDelay);
-        serchWfs = new WaitForSeconds(serchDelay);
-
         this.attackDamage = controller.Info.attackDamage;
         this.attackDistance = controller.Info.attackDistance;
         this.attackDelay = controller.Info.attackDelay;
         this.serchDelay = controller.Info.serchDelay;
-        this.layer = controller.Info.targetLayer;
+        this.targetLayer = controller.Info.targetLayer ^ (1 << gameObject.layer);
         this.attackEffect = Instantiate(controller.Info.attackEffect, transform);
+
+        attackWfs = new WaitForSeconds(attackDelay);
+        serchWfs = new WaitForSeconds(serchDelay);
+        canAttack = true;
 
         var main = attackEffect.main;
         main.loop = false;
@@ -45,7 +46,7 @@ public abstract class UnitAttack : UnitComponent
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-
+        
         if(IsServer)
             StartCoroutine(SerchDelayCo());
     }
@@ -54,10 +55,10 @@ public abstract class UnitAttack : UnitComponent
     {
         if (!IsServer)
             return false;
-
+        
         if (!canAttack)
             return false;
-
+        
         canAttack = false;
 
         StartCoroutine(AttackDelayCo());
@@ -79,11 +80,11 @@ public abstract class UnitAttack : UnitComponent
 
     private void SerchTarget()
     {
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, AttackDistance, layer, -1, 1);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, AttackDistance, targetLayer);
 
-        if(cols.Length > 0)
+        if(col != null)
         {
-            target = cols[0].gameObject;
+            target = col.gameObject;
             shouldAttack = true;
         }
     }
