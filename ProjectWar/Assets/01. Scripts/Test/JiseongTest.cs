@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class JiseongTest : MonoBehaviour
 {
-
+    private void Start()
+    {
+        Debug.Log($"{UserType.Blue}");
+    }
 }
