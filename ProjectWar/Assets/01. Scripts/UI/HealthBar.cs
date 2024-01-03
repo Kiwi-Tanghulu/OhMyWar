@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField] private Transform owner;
     private Transform bar;
 
     private Vector2 originBarSize;
@@ -12,10 +11,10 @@ public class HealthBar : MonoBehaviour
 
     private void Start()
     {
+        bar = transform.Find("Bar");
+
         originBarPos = bar.localPosition;
         originBarSize = bar.localScale;
-        
-        bar = transform.Find("Bar");
     }
 
     public void SetHealthBar(float percent)
