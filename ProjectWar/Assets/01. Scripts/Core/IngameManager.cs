@@ -20,13 +20,13 @@ public class IngameManager : NetworkBehaviour
     [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
     public Transform OwnerPlayer;
-
     public Player BluePlayer {get; private set;} = null;
     public Player RedPlayer {get; private set;} = null;
 
     public IUnitSpawner CurrentSpawner { get; private set; } = null;
     public int FocusedLine { get; private set; } = 0;
 
+    public Castle castle { get; private set; } = null;
     public void RegisterPlayer(Player player, bool isBluePlayer)
     {
         if(isBluePlayer)
@@ -34,13 +34,19 @@ public class IngameManager : NetworkBehaviour
             BluePlayer = player;
             player.IsBlue = true;
             player.GetComponent<PlayerMovement>().MoveImmediately(BlueCastle.SpawnPosition.position);
+            castle = BlueCastle;
         }
         else
         {
             RedPlayer = player;
             player.IsBlue = true;
             player.GetComponent<PlayerMovement>().MoveImmediately(RedCastle.SpawnPosition.position);
+            castle = RedCastle;
         }
+        if (IsServer)
+            castle = BlueCastle;
+        else
+            castle = RedCastle;
     }
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)
