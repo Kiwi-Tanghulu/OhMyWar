@@ -10,6 +10,9 @@ public class HealAttack : UnitAttack
 
     public override void Attack()
     {
+        if (target == null)
+            return;
+
         if (target.TryGetComponent<UnitHealth>(out UnitHealth attackedObj))
         {
             if (target.layer == 6)

@@ -15,7 +15,7 @@ public class UnitDieState : UnitState
     {
         base.ClientEnter();
         controller.Visual.gameObject.SetActive(false);
-        Instantiate(controller.Health.deadEffect, transform.position, Quaternion.identity);
+        Instantiate(controller.Health.deadEffect, transform.position, Quaternion.identity, controller.transform);
         Debug.Log("die");
     }
 }
