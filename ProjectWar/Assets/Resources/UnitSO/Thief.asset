@@ -16,14 +16,14 @@ MonoBehaviour:
   cost: 20
   image: {fileID: 21300000, guid: fb6edfe3d1347b34b9fea66f2cb48ca2, type: 3}
   moveSpeed: 6
-  stopDistance: 0.1
+  stopDistance: 0
   maxHealth: 20
   attackDamage: 10
-  attackDistance: 1.5
-  attackDelay: 1.2
-  serchDelay: 0.1
+  attackDistance: 1
+  attackDelay: 1
+  serchDelay: 0
   projectile: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   attackEffect: {fileID: 3091189913356674385, guid: b40697953ea6ed34595798684ce73ccb, type: 3}
