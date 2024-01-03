@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using Unity.Netcode;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +26,15 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         SceneLoader.Instance = new SceneLoader();
+
+
+        NetworkManager.Singleton.ConnectionApprovalCallback += HandleConnectionApproval;
+    }
+
+    private void HandleConnectionApproval(NetworkManager.ConnectionApprovalRequest request, NetworkManager.ConnectionApprovalResponse response)
+    {
+        response.Approved = true;
+        response.CreatePlayerObject = false;
     }
 
     private async void Start()
