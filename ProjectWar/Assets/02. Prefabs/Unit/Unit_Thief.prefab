@@ -1608,6 +1608,7 @@ MonoBehaviour:
   maxHealth: 100
   isDie: 0
   shieldEffect: {fileID: 0}
+  deadEffect: {fileID: 4081589766689769864, guid: 99cf0acd671bbe2448a4bd7f7ea55d56, type: 3}
   shieldAmount: 0
 --- !u!114 &9058637996085051682
 MonoBehaviour:

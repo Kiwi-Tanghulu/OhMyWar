@@ -21,6 +21,7 @@ public class UnitController : NetworkBehaviour
     public UnitAttack Attack { get; private set; }
     public UnitAnimation Anim { get; private set; }
     public UnitStat Stat { get; private set; }
+    public Transform Visual { get; private set; }
 
     private Vector2 offset;
     public Vector2 Offset => offset;
@@ -45,11 +46,12 @@ public class UnitController : NetworkBehaviour
 
         gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");
 
+        Visual = transform.Find("Visual");
         Stat = GetComponent<UnitStat>();
         Movement = GetComponent<UnitMovement>();
         Health = GetComponent<UnitHealth>();
         Attack = GetComponent<UnitAttack>();
-        Anim = transform.Find("Visual").GetComponent<UnitAnimation>();
+        Anim = Visual.GetComponent<UnitAnimation>();
 
         Stat.InitCompo(this);
         Movement.InitCompo(this);
