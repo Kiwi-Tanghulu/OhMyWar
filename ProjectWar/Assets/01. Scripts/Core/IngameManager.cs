@@ -22,7 +22,7 @@ public class IngameManager : NetworkBehaviour
 
     [SerializeField] Player playerPrefab;
 
-    public Transform OwnerPlayer;
+    public Player OwnerPlayer;
 
     public Player BluePlayer {get; private set;} = null;
     public Player RedPlayer {get; private set;} = null;
@@ -31,6 +31,9 @@ public class IngameManager : NetworkBehaviour
     public int FocusedLine { get; private set; } = 0;
 
     public Castle castle { get; private set; } = null;
+
+    private NetworkVariable<float> startedTime = new NetworkVariable<float>();
+
     public void RegisterPlayer(Player player)
     {
         if(player.IsBlue)
@@ -79,10 +82,36 @@ public class IngameManager : NetworkBehaviour
     // 서버만 호출하는 함수
     public void StartGame()
     {
+        startedTime.Value = Time.time;
+
         BluePlayer = Instantiate(playerPrefab);
         BluePlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.HostID.Value);
         
         RedPlayer = Instantiate(playerPrefab);
         RedPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.GuestID.Value);
+    }
+
+    public void CloseGame(ulong winnerID)
+    {
+        EndGameServerRPC(winnerID);
+    }
+
+    private void EndGame(bool isWin)
+    {
+        float gameTime = Time.time - startedTime.Value;
+        int earnedGold = OwnerPlayer.TotalGold;
+    }
+
+    [ServerRpc]
+    private void EndGameServerRPC(ulong winnerID)
+    {
+        EndGameClientRPC(winnerID);
+    }
+
+    [ClientRpc]
+    private void EndGameClientRPC(ulong winnerID)
+    {
+        bool isWin = NetworkManager.Singleton.LocalClientId == winnerID;
+        EndGame(isWin);
     }
 }
