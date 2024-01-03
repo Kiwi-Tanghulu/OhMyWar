@@ -192,6 +192,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7638201271079295586}
+  - {fileID: 5636698401179580979}
   m_Father: {fileID: 4108766742153929055}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &238362525310506713
@@ -2582,6 +2583,7 @@ MonoBehaviour:
   clientProjectile: {fileID: 3127567777973484262, guid: a066c8235f0008b49bf735e95eae845f, type: 3}
   serverProjectile: {fileID: 4513646826079134591, guid: 6903b1ec597993147b2ae57cba799510, type: 3}
   firePosition: {fileID: 1535477088170604050}
+  projectileSpeed: 3
 --- !u!1 &4097874783068788441
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3117,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24da804d42ffc8b4f8442dbba1f3cfd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4801373553284508838
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5636698401179580979}
+  - component: {fileID: 262687737496677649}
+  m_Layer: 0
+  m_Name: TeleportSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5636698401179580979
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801373553284508838}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 765076036646257520}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262687737496677649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801373553284508838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ae1ed839ae6564f9770630f3d9a4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 500
+  OnSkillActivedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  maxMidY: -6
+  minMidY: -13
+  telePortPos:
+  - startPos: {x: -8.52, y: -3.54}
+    endPos: {x: 28.6, y: 15.6}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  teleportRange: 8
+  teleportDelay: 0.1
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  teleportEffect: {fileID: 6952753609456024197, guid: 6e2a2571a7180124e9ed5ebaec71f19e, type: 3}
 --- !u!1 &4813432924912359082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3234,6 +3299,7 @@ MonoBehaviour:
   inputReader: {fileID: 11400000, guid: 79774e5d7160f5f4d979ef13bd94d130, type: 2}
   skills:
   - {fileID: 2464086430068202856}
+  - {fileID: 262687737496677649}
 --- !u!114 &290577149772114522
 MonoBehaviour:
   m_ObjectHideFlags: 0

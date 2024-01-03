@@ -30,12 +30,18 @@ public class IngameManager : NetworkBehaviour
     public IUnitSpawner CurrentSpawner { get; private set; } = null;
     public int FocusedLine { get; private set; } = 0;
 
+    public Castle castle { get; private set; } = null;
     public void RegisterPlayer(Player player)
     {
         if(player.IsBlue)
             BluePlayer = player;
         else
             RedPlayer = player;
+
+        if (IsServer)
+            castle = BlueCastle;
+        else
+            castle = RedCastle;
     }
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)
