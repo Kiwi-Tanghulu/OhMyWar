@@ -57,4 +57,9 @@ public class HostManager
     {
         GameManager.Instance.GuestID.Value = id;
     }
+
+    public void CloseHost()
+    {
+        NetworkManager.Singleton.Shutdown();
+    }
 }

@@ -31,4 +31,10 @@ public class Castle : StructureBase, IUnitSpawner
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
             spawnPositions[lineIndex].position, midNexus[lineIndex].SpawnPosition.position);
     }
+
+    public override void OnDie(NetworkObject performer)
+    {
+        base.OnDie(performer);
+        IngameManager.Instance.CloseGame(performer.OwnerClientId);
+    }
 }
