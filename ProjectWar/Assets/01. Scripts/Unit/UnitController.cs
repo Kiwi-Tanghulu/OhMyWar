@@ -62,6 +62,9 @@ public class UnitController : NetworkBehaviour
             return;
 
         states[CurrentState].UpdateState();
+
+        if (Input.GetKeyUp(KeyCode.Q))
+            Health.Stun();
     }
 
     #region ChangeState
@@ -84,7 +87,7 @@ public class UnitController : NetworkBehaviour
         {
             if (state == null)
             {
-                Debug.LogError($"Unit{type}State����");
+                Debug.LogError($"Unit{type}State");
                 return;
             }
         }
@@ -103,6 +106,7 @@ public class UnitController : NetworkBehaviour
         foreach (UnitStateType type in Enum.GetValues(typeof(UnitStateType)))
         {
             string stateName = $"Unit{type}State";
+            Debug.Log(stateName);
             Transform stateTrm = stateContainer.Find(stateName);
             UnitState state = (UnitState)stateTrm?.GetComponent(stateName);
             

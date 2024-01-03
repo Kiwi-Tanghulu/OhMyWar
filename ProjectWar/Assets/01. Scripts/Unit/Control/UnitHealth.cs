@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
+public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool isDie;
@@ -85,5 +85,10 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
     {
         if(IsServer)
             OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
+    }
+
+    public void Stun()
+    {
+        controller.ChangeState(UnitStateType.Stun);
     }
 }

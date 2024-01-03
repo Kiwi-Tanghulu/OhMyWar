@@ -25,7 +25,6 @@ public class UnitMoveState : UnitState
     {
         base.OnServerExit();
 
-        controller.Movement.Stop();
         controller.Anim.SetBoolPropretyClientRpc("Move", false);
     }
 
