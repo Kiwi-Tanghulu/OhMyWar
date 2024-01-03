@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2383445292e933c4d938ab671432dea4, type: 3}
   m_Name: Archer
   m_EditorClassIdentifier: 
-  unitType: 3
+  unitType: 1
   cost: 10
   image: {fileID: 21300000, guid: a3d67d11f7a241e429b727ddc4c968f0, type: 3}
   moveSpeed: 3
@@ -25,5 +25,5 @@ MonoBehaviour:
   projectile: {fileID: 0}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
   attackEffect: {fileID: 3545812132836457610, guid: 17dd36be257b124419f3e61cf012d025, type: 3}

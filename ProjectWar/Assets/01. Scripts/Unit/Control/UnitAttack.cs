@@ -39,9 +39,6 @@ public abstract class UnitAttack : UnitComponent
         serchWfs = new WaitForSeconds(serchDelay);
         canAttack = true;
 
-        var main = attackEffect.main;
-        main.loop = false;
-
         if (IsServer)
             StartCoroutine(SerchDelayCo());
 
@@ -82,7 +79,7 @@ public abstract class UnitAttack : UnitComponent
             return;
 
         attackEffect.transform.position = target.transform.position;
-        //attackEffect.Play();
+        attackEffect.Play();
     }
 
 
