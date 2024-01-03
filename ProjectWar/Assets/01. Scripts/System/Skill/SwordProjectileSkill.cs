@@ -12,8 +12,10 @@ public class SwordProjectileSkill : SkillBase
     {
         GameObject instance = null;
         Vector3 position = firePosition.position;
-        Vector3 dir = Vector3.right * player.GetComponent<PlayerMovement>().FacingDirection;
-        Quaternion rotation = Quaternion.Euler(0, ((dir.x == -1) ? 180f : 0f), 0);
+
+        int facingDirection = player.GetComponent<PlayerMovement>().FacingDirection;
+        Vector3 dir = Vector3.right * facingDirection;
+        Quaternion rotation = Quaternion.Euler(0, ((facingDirection == -1) ? 180f : 0f), 0);
 
         if(player.IsHost)
         {

@@ -3,29 +3,33 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerSkillHandler : PlayerComponent
+public class PlayerSkillHandler : NetworkBehaviour
 {
     [SerializeField] InputReader inputReader;
     [SerializeField] List<SkillBase> skills;
 
-    public override void Init(Player player)
-    {
-        base.Init(player);
+    private Player player = null;
 
-        if(player.IsOwner == false)
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        player = GetComponent<Player>();
+
+        if(IsOwner == false)
             return;
-        
+
         inputReader.OnSkill1Pressed += HandleSkill1;
         inputReader.OnSkill2Pressed += HandleSkill2;
     }
 
-    public override void Release()
+    public override void OnNetworkDespawn()
     {
-        if(player.IsOwner == false)
+        if (IsOwner == false)
             return;
-        
+
         inputReader.OnSkill1Pressed -= HandleSkill1;
-        inputReader.OnSkill2Pressed -= HandleSkill2;    
+        inputReader.OnSkill2Pressed -= HandleSkill2;
     }
 
     public void HandleSkill(int index)
@@ -48,6 +52,14 @@ public class PlayerSkillHandler : PlayerComponent
     [ServerRpc]
     private void SkillServerRPC(int index)
     {
+        SkillClientRPC(index);
+        Debug.Log(123);
+    }
+
+    [ClientRpc]
+    private void SkillClientRPC(int index)
+    {
+        Debug.Log(index);
         skills[index]?.Operate(player);
     }
 
