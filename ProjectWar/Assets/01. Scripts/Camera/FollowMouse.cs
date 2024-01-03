@@ -38,7 +38,10 @@ public class FollowMouse : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!allowFollow || isFollowPlayer)
+        if(IngameManager.Instance == null || IngameManager.Instance.OwnerPlayer == null)
+            return;
+
+        if (allowFollow || isFollowPlayer)
         {
             transform.position = new Vector3(IngameManager.Instance.OwnerPlayer.position.x, IngameManager.Instance.OwnerPlayer.position.y, -10);
             return;

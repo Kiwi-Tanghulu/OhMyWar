@@ -17,6 +17,10 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     public event Action OnHeal;
     public event Action OnDie;
 
+    public GameObject shieldEffect;
+
+    [SerializeField] private float shieldAmount;
+
     private void Awake()
     {
         currentHealth = new NetworkVariable<float>();
@@ -81,7 +85,24 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 
     public void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
-        SetHealth(-damage);
+        float dmg = damage;
+
+        if(shieldAmount != 0)
+        {
+            dmg = damage - shieldAmount;
+            shieldAmount -= damage;
+
+            if(shieldAmount <= 0)
+            {
+                shieldAmount = Mathf.Max(shieldAmount, 0);
+                //something
+            }
+        }
+
+        if (dmg <= 0)
+            return;
+
+        SetHealth(-dmg);
 
         if (currentHealth.Value <= 0)
         {
@@ -104,5 +125,12 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     {
         maxHealth = value;
         healthBar.SetHealthBar(currentHealth.Value / maxHealth);
+    }
+
+    public void SetShield(float value)
+    {
+        shieldAmount += value;
+
+        //actove shield effect;
     }
 }

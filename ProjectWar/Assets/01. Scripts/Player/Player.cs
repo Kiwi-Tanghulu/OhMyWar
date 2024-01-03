@@ -12,29 +12,35 @@ public class Player : NetworkBehaviour
 
     private List<PlayerComponent> components;
 
-    private void Start()
-    {
-        if(IsHost && IsOwner)
-            IngameManager.Instance.RegisterPlayer(this, true);
-        else
-            IngameManager.Instance.RegisterPlayer(this, false);
-
-        IngameManager.Instance.ToggleCurrentSpawner(this, 1);
-    }
+    public TeamType team { get; private set; }
 
     public override void OnNetworkSpawn()
     {
+        IsBlue = (OwnerClientId == GameManager.Instance.HostID.Value);
+        IngameManager.Instance.RegisterPlayer(this);
+
+        if(IsOwner)
+            IngameManager.Instance.ToggleCurrentSpawner(this, 1);
+
         components = new List<PlayerComponent>();
         GetComponents<PlayerComponent>(components);
         components.ForEach(component => component?.Init(this));
 
+        GetComponent<PlayerSkillHandler>().Init();
+
         if (IsOwner)
             IngameManager.Instance.OwnerPlayer = transform;
-        //CameraManager.Instance.MainVCam.Follow = transform;
 
-        gameObject.layer = IsServer ? (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2)
-            : (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
-
+        if(IsServer)
+        {
+            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
+            team = TeamType.Blue;
+        }
+        else
+        {
+            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
+            team = TeamType.Red;
+        }
     }
 
     private void Update()

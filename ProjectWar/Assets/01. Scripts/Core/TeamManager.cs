@@ -25,4 +25,11 @@ public class TeamManager : MonoBehaviour
     {
         changeedObj.layer = changingObj.layer;
     }
+
+    public LayerMask GetEnemyLayer(int layer)
+    {
+        LayerMask myLayer = 1 << (layer - 1);
+
+        return myLayer == BlueLayer ? RedLayer : BlueLayer;
+    }
 }

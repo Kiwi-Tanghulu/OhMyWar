@@ -16,7 +16,7 @@ public class HostManager
     private Allocation allocation;
     private string joinCode;
 
-    private const int MaxConnection = 8;
+    private const int MaxConnection = 2;
     
     public async Task CreateRoomAsync()
     {
@@ -47,6 +47,14 @@ public class HostManager
         transport.SetRelayServerData(relayServerData);
 
         NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
+        GameManager.Instance.HostID.Value = NetworkManager.Singleton.LocalClientId;
+
         OnRoomCreatedEvent?.Invoke();
+    }
+
+    private void HandleClientConnected(ulong id)
+    {
+        GameManager.Instance.GuestID.Value = id;
     }
 }

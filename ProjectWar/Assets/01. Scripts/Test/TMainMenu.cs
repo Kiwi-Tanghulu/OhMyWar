@@ -28,6 +28,7 @@ public class TMainMenu : MonoBehaviour
 
     private void HandleRoomCreated()
     {
-        SceneLoader.Instance.LoadSceneAsync("LobbyScene");
+        // SceneLoader.Instance.LoadSceneAsync("LobbyScene");
+        NetworkManager.Singleton.SceneManager.LoadScene("LobbyScene", UnityEngine.SceneManagement.LoadSceneMode.Single);
     }
 }
