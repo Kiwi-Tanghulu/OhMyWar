@@ -33,7 +33,7 @@ public class LineSelectUI : PanelUI
         if(currentLine < 0)
             currentLine = 2;
 
-        //IngameManager.Instance.ToggleCurrentSpawner(Player, currentLine);
+        IngameManager.Instance.ToggleCurrentSpawner(Player, currentLine);
     }
 
     private void OnArrowKeyPressedHandle(float value)

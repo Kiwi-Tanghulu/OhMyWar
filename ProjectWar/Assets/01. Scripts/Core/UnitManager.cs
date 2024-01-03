@@ -34,7 +34,7 @@ public class UnitManager : NetworkBehaviour
 
     public void SpawnUnit(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition)
     {
-        Vector2 offset = new Vector2(0, Random.Range(-3f, 3f));
+        Vector2 offset = new Vector2(0, Random.Range(-2f, 2f));
         SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
     }
 
