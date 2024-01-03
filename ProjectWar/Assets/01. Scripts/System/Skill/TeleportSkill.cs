@@ -30,9 +30,9 @@ public class TeleportSkill : SkillBase
     {
         Debug.Log("TeleportStart");
 
-        List<Transform> targetUnits = null;
+        List<Transform> targetUnits = new List<Transform>();
         units = null;
-        unitDistances = null;
+        unitDistances = new List<Vector2>();
         currentPercent = 0f;
         string target = player.IsBlue ? "BlueUnit" : "RedUnit";
         Collider2D[] cols = Physics2D.OverlapCircleAll(player.transform.position, teleportRange);
@@ -41,10 +41,10 @@ public class TeleportSkill : SkillBase
         {
             if (col.CompareTag(target) == true)
             {
+                Debug.Log(col.name);
                 targetUnits.Add(col.transform);
             }
         }
-
 
         if(targetUnits != null)
         {
@@ -54,6 +54,8 @@ public class TeleportSkill : SkillBase
                 unitDistances.Add(unit.position - player.transform.position);
             }
         }
+
+        Debug.Log($"{units.Count}");
 
         int lineIndex = IngameManager.Instance.FocusedLine;
         
