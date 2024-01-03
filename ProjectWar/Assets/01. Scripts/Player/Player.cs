@@ -12,6 +12,8 @@ public class Player : NetworkBehaviour
 
     private List<PlayerComponent> components;
 
+    public TeamType team { get; private set; }
+
     private void Start()
     {
         if(IsHost && IsOwner)
@@ -32,9 +34,16 @@ public class Player : NetworkBehaviour
             IngameManager.Instance.OwnerPlayer = transform;
         //CameraManager.Instance.MainVCam.Follow = transform;
 
-        gameObject.layer = IsServer ? (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2)
-            : (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
-
+        if(IsServer)
+        {
+            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
+            team = TeamType.Blue;
+        }
+        else
+        {
+            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
+            team = TeamType.Red;
+        }
     }
 
     private void Update()
