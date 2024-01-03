@@ -8,7 +8,7 @@ public class UnitIdleState : UnitState
     {
         base.OnServerEnter();
 
-        controller.Movement.Stop();
+        //controller.Movement.Stop();
         controller.Anim.SetBoolPropretyClientRpc("Move", false);
     }
 

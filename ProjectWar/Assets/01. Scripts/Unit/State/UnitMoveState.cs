@@ -25,19 +25,22 @@ public class UnitMoveState : UnitState
     {
         base.OnServerExit();
 
-        controller.Movement.Stop();
         controller.Anim.SetBoolPropretyClientRpc("Move", false);
     }
 
     private void IdleHandle()
     {
         if (controller.Movement.IsArrived)
+        {
             controller.ChangeState(UnitStateType.Idle);
+        }
     }
 
     private void AttackHandle()
     {
         if (controller.Attack.ShouldAttack)
+        {
             controller.ChangeState(UnitStateType.Attack);
+        }
     }
 }

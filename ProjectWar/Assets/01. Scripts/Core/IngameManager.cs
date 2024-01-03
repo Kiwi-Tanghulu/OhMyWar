@@ -32,11 +32,13 @@ public class IngameManager : NetworkBehaviour
         if(isBluePlayer)
         {
             BluePlayer = player;
+            player.IsBlue = true;
             player.GetComponent<PlayerMovement>().MoveImmediately(BlueCastle.SpawnPosition.position);
         }
         else
         {
             RedPlayer = player;
+            player.IsBlue = true;
             player.GetComponent<PlayerMovement>().MoveImmediately(RedCastle.SpawnPosition.position);
         }
     }

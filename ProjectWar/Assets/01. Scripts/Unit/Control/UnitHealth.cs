@@ -5,7 +5,7 @@ using Unity.Netcode;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
+public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 {
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private bool isDie;
@@ -17,27 +17,37 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
     public event Action OnHeal;
     public event Action OnDie;
 
+    private void Awake()
+    {
+        currentHealth = new NetworkVariable<float>();
+    }
+
     public override void InitCompo(UnitController _controller)
     {
         base.InitCompo(_controller);
-        currentHealth = new NetworkVariable<float>();
         this.maxHealth = controller.Info.maxHealth;
-    }
 
-    public override void OnNetworkSpawn()
-    {
-        base.OnNetworkSpawn();
-
-        if(IsServer)
+        if (IsServer)
         {
             currentHealth.Value = maxHealth;
         }
+
+        controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent += MaxHealthValueChange;
+    }
+
+    public override void OnNetworkDespawn()
+    {
+        base.OnNetworkDespawn();
+
+        controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent -= MaxHealthValueChange;
     }
 
     private void SetHealth(float value)
     {
         if (IsServer)
-            currentHealth.Value += value;
+        {
+            currentHealth.Value = Mathf.Clamp(currentHealth.Value + value, 0, maxHealth);
+        }
     }
 
     public void Heal(float value)
@@ -69,10 +79,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
 
     public void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
-        if (!IsServer)
-            return;
-
-        SetHealth(damage);
+        SetHealth(-damage);
 
         if (currentHealth.Value <= 0) 
         {
@@ -82,6 +89,14 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>
 
     public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
+        if(IsServer)
+            OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
+
+    public void Stun()
+    {
+        controller.ChangeState(UnitStateType.Stun);
+    }
+
+    private void MaxHealthValueChange(int value) => maxHealth = value;
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Castle : StructureBase, IUnitSpawner
 {
 	[SerializeField] List<Transform> spawnPositions = null;
+	[SerializeField] List<Nexus> midNexus = null;
     [SerializeField] Transform spawnPosition = null;
     public Transform SpawnPosition => spawnPosition;
 
@@ -25,8 +26,8 @@ public class Castle : StructureBase, IUnitSpawner
         if (unitIndex >= unitPrefabs.PrefabList.Count)
             return;
 
-        Debug.Log(spawnPositions[lineIndex].position);
+        Debug.Log(midNexus[lineIndex].SpawnPosition.position);
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
-            spawnPositions[lineIndex].position, spawnPositions[lineIndex].position);
+            spawnPositions[lineIndex].position, midNexus[lineIndex].SpawnPosition.position);
     }
 }
