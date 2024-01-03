@@ -8,6 +8,8 @@ public class Player : NetworkBehaviour
     private int gold = 0;
     public int Gold => gold;
 
+    public bool IsBlue = false;
+
     private List<PlayerComponent> components;
 
     private void Start()

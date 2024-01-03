@@ -1,20 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+
 public class DealDamageOnContact : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private GameObject effect;
 
-    private ulong ownerClientId;
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.attachedRigidbody == null) { return; }
+    private Player performer = null;
 
-        if(collision.attachedRigidbody.TryGetComponent<NetworkObject>(out NetworkObject netObj))
-        {
-            if(ownerClientId == netObj.OwnerClientId) { return; }
-        }
+    public void Init(Player performer)
+    {
+        this.performer = performer;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        string target = performer.IsBlue ? "RedUnit" : "BlueUnit";
+        if(other.CompareTag(target) == false)
+            return;
+
+        if(other.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> id))
+            id?.TakeDamage(damage, performer.OwnerClientId);
     }
 }
