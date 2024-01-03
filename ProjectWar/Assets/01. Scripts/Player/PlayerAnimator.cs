@@ -17,9 +17,9 @@ public class PlayerAnimator : NetworkBehaviour
         animator.SetBool("Move", value);
     }
 
-    public void PlayAttackAnimation()
+    public void PlaySkillkAnimation()
     {
-        animator.SetTrigger("Attack");
+        animator.SetTrigger("Skill");
     }
 
     [ServerRpc]

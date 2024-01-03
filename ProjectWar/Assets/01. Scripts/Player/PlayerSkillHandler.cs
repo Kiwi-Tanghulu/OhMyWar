@@ -9,10 +9,12 @@ public class PlayerSkillHandler : NetworkBehaviour
     [SerializeField] List<SkillBase> skills;
 
     private Player player = null;
+    private PlayerAnimator anim;
 
     public void Init()
     {
         player = GetComponent<Player>();
+        anim = player.transform.Find("Visual").GetComponent<PlayerAnimator>();
 
         if(IsOwner == false)
             return;
@@ -58,6 +60,7 @@ public class PlayerSkillHandler : NetworkBehaviour
     private void SkillClientRPC(int index)
     {
         Debug.Log(index);
+        anim.PlaySkillkAnimation();
         skills[index]?.Operate(player);
     }
 
