@@ -16,9 +16,9 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     // 실질적으로 데미지를 넣는 함수
     public virtual void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
-        if(isDestroyed)
+        if (isDestroyed)
             return;
-
+        
         currentHP -= damage;
         OnDamagedEvent?.Invoke(performer, point, damage);
 
@@ -26,23 +26,26 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         {
             isDestroyed = true;
             OnDie(performer);
+            TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
         }
     }
     
     public virtual void OnDie(NetworkObject performer)
     {
         OnDestroyedEvent?.Invoke(performer);
+        TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
     }
 
     // 데미지를 넣기 위해 호출하는 함수
-    public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
+    public void TakeDamage(int damage = 0, ulong performerID = ulong.MaxValue, Vector3 point = default)
     {
         // 호스트가 때렸으면 그냥 때리기
         // 게스트가 때렸으면 호스트한테 때렸다고 알리기
         // 그럼 호스트는 때리는 거 적용 시키고 클라한테 때리라고 말하기
-        if(performerID == 0)
+        
+        if (performerID == ulong.MaxValue)
             return;
-
+        
         TakeDamageServerRPC(damage, performerID, point);
     }
 

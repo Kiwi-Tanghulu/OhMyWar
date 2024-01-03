@@ -83,7 +83,7 @@ public abstract class UnitAttack : UnitComponent
     }
 
 
-    private void SerchTarget()
+    private bool SerchTarget()
     {
         Collider2D col = Physics2D.OverlapCircle(transform.position, AttackDistance, targetLayer);
 
@@ -92,6 +92,8 @@ public abstract class UnitAttack : UnitComponent
             target = col.gameObject;
             shouldAttack = true;
         }
+
+        return col;
     }
 
     protected IEnumerator AttackDelayCo()
@@ -107,8 +109,15 @@ public abstract class UnitAttack : UnitComponent
         {
             yield return serchWfs;
 
-            if (!shouldAttack)
-                SerchTarget();
+            if(target == null)
+            {
+                shouldAttack = SerchTarget();
+            }
+            else
+            {
+                if(target.layer == gameObject.layer)
+                    shouldAttack = SerchTarget();
+            }
         }
     }
 

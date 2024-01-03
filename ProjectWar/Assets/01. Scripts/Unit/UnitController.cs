@@ -27,16 +27,17 @@ public class UnitController : NetworkBehaviour
         base.OnNetworkSpawn();
 
         UnitManager unitManager = UnitManager.Instance;
+        TeamManager teamManager = TeamManager.Instance;
 
         if(IsServer && IsOwner)
         {
             gameObject.tag = unitManager.BlueUnitTag;
-            gameObject.layer = (int)Mathf.Log(unitManager.BlueUnitLayer.value, 2);
+            gameObject.layer = (int)Mathf.Log(teamManager.BlueLayer.value, 2);
         }
         else
         {
             gameObject.tag = unitManager.RedUnitTag;
-            gameObject.layer = (int)Mathf.Log(unitManager.RedUnitLayer.value, 2);
+            gameObject.layer = (int)Mathf.Log(teamManager.RedLayer.value, 2);
         }
 
         gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");

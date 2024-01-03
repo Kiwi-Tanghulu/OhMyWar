@@ -56,6 +56,7 @@ public class Nexus : StructureBase, IUnitSpawner
                 {
                     isDestroyed = true;
                     OnDestroyedEvent?.Invoke(performer);
+                    TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
                 }
             }
         }
