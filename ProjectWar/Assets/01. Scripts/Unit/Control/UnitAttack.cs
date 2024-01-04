@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -71,9 +72,16 @@ public abstract class UnitAttack : UnitComponent
         
         canAttack = false;
 
+        StartAttackClientRpc();
         StartCoroutine(AttackDelayCo());
 
         return true;
+    }
+
+    [ClientRpc]
+    private void StartAttackClientRpc()
+    {
+        OnAttackStartEvetn?.Invoke();
     }
 
     public abstract void Attack();
