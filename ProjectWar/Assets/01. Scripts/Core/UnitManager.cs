@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class UnitManager : NetworkBehaviour
 {
@@ -19,6 +20,8 @@ public class UnitManager : NetworkBehaviour
     public string BlueUnitTag { get; private set; } = "BlueUnit";
 
     public event Action UnitSpawnEvent;
+
+    public UnitDeadEffect deadObject;
 
     private void Awake()
     {
@@ -45,7 +48,11 @@ public class UnitManager : NetworkBehaviour
 
     public void DespawnUnit(UnitController unit)
     {
-        unit.GetComponent<NetworkObject>().Despawn();
+        MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
+        MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
+
+        if(IsServer)
+            Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
     }
 
     [ServerRpc(RequireOwnership = false)]

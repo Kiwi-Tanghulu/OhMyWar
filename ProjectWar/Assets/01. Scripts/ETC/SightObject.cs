@@ -13,17 +13,15 @@ public class SightObject : NetworkBehaviour
     private SpriteRenderer render;
     private bool isSight;
 
-    public override void OnNetworkSpawn()
+    public void Init(TeamType team)
     {
-        base.OnNetworkSpawn();
-
         isSight = false;
         SetSight(false);
         render = minimapPoint.GetComponent<SpriteRenderer>();
-        Debug.Log(render);
+
         MinimapManager.Instance.RegistSightObject(this);
 
-        if (IsHost)
+        if (team == TeamType.Blue)
         {
             render.sprite = blueIcon;
             render.color = blueColor;
