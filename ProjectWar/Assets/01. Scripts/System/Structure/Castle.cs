@@ -13,8 +13,16 @@ public class Castle : StructureBase, IUnitSpawner
     [Space(10f)]
     [SerializeField] NetworkPrefabsList unitPrefabs = null; 
 
+    private GameObject sightMask = null;
+
     private ulong ownerID = 0;
     public ulong OwnerID => ownerID;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        sightMask = transform.Find("CastleSightMask").gameObject;
+    }
 
     public void Init(ulong ownerID)
     {
@@ -34,5 +42,10 @@ public class Castle : StructureBase, IUnitSpawner
     {
         base.OnDie(performer);
         IngameManager.Instance.CloseGame(performer.OwnerClientId);
+    }
+
+    public void SetSightMask(bool value)
+    {
+        sightMask.SetActive(value);
     }
 }

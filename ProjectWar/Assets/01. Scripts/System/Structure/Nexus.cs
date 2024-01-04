@@ -11,6 +11,7 @@ public class Nexus : StructureBase, IUnitSpawner
     [SerializeField] Sprite redSprite = null;
 
     private SpriteRenderer spRenderer = null;
+    private GameObject sightMask = null;
 
     private ulong ownerID = ulong.MaxValue;
     public ulong OwnerID => ownerID;
@@ -23,6 +24,7 @@ public class Nexus : StructureBase, IUnitSpawner
     {
         base.Awake();
         spRenderer = GetComponent<SpriteRenderer>();
+        sightMask = transform.Find("NexusSightMask").gameObject;
     }
 	
     public void SpawnUnit(int unitIndex, int lineIndex)
@@ -76,11 +78,18 @@ public class Nexus : StructureBase, IUnitSpawner
     private void ChangerTeamClientRpc(int value)
     {
         gameObject.layer = value;
+        sightMask.SetActive(false);
 
         if(1 << (gameObject.layer) == TeamManager.Instance.BlueLayer)
+        {
             spRenderer.sprite = blueSprite;
+            sightMask.SetActive(IsHost);
+        }
         else
+        {
             spRenderer.sprite = redSprite;
+            sightMask.SetActive(!IsHost);
+        }
 
         Debug.Log("chagne owner");
     }

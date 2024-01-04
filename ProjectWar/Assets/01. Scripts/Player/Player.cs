@@ -16,6 +16,9 @@ public class Player : NetworkBehaviour
 
     public TeamType team { get; private set; }
 
+    private GameObject sightMask = null;
+
+
     public override void OnNetworkSpawn()
     {
         IsBlue = (OwnerClientId == GameManager.Instance.HostID.Value);
@@ -43,6 +46,9 @@ public class Player : NetworkBehaviour
             gameObject.layer = (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
             team = TeamType.Red;
         }
+
+        sightMask = transform.Find("PlayerSightMask").gameObject;
+        sightMask.SetActive(IsOwner);
     }
 
     private void Update()
