@@ -114,6 +114,16 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         {
             Die();
         }
+        else
+        {
+            OnDamagedClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void OnDamagedClientRpc()
+    {
+        OnDamagedEvent?.Invoke();
     }
 
     public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)
