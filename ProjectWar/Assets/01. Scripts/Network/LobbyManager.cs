@@ -76,12 +76,10 @@ public class LobbyManager : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void ReadyServerRPC()
     {
-        Debug.Log(otherReady);
         if(otherReady)
             StartGame();
         else
             otherReady = true;
-        Debug.Log(otherReady);
     }
 
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class UnitManager : NetworkBehaviour
 {
@@ -19,6 +20,8 @@ public class UnitManager : NetworkBehaviour
     public string BlueUnitTag { get; private set; } = "BlueUnit";
 
     public event Action UnitSpawnEvent;
+
+    public UnitDeadEffect deadObject;
 
     private void Awake()
     {
@@ -36,30 +39,42 @@ public class UnitManager : NetworkBehaviour
         }
     }
 
-    public void SpawnUnit(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition)
+    public void SpawnUnit(UnitType type, ulong clientId, int lineIndex, int pointIndex)
     {
-        Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-2f, 2f));
+        Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-1.5f, 1.5f));
         UnitSpawnEvent?.Invoke();
-        SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
+        SpawnUnitServerRpc(type, clientId, lineIndex, pointIndex, offset);
     }
 
     public void DespawnUnit(UnitController unit)
     {
-        unit.GetComponent<NetworkObject>().Despawn();
+        MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
+        MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
+        Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void SpawnUnitServerRpc(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition, Vector2 offset)
+    private void SpawnUnitServerRpc(UnitType type, ulong clientId, int lineIndex, int pointIndex, Vector2 offset)
     {
-        UnitController unit = Instantiate(unitDictionary[type], spawnPosition + offset, Quaternion.identity);
+        List<Transform> linePoints = IngameManager.Instance.linePoints[lineIndex].points;
+
+        UnitController unit = Instantiate(unitDictionary[type], linePoints[pointIndex].position, Quaternion.identity);
         NetworkObject unitNetworkObject = unit.GetComponent<NetworkObject>();
         unitNetworkObject.SpawnWithOwnership(clientId, true);
 
         Player player = null;
         if(clientId == GameManager.Instance.HostID.Value)
+        {
             player = IngameManager.Instance.BluePlayer;
+            unit.transform.position = linePoints[0].position;
+            unit.team = TeamType.Blue;
+        }
         else
+        {
             player = IngameManager.Instance.RedPlayer;
+            unit.transform.position = linePoints[linePoints.Count - 1].position;
+            unit.team = TeamType.Red;
+        }
 
         player.Buffs.ForEach(i => unit.Stat.AddModifier(i.type, i.value));
 
@@ -68,6 +83,6 @@ public class UnitManager : NetworkBehaviour
 
         playerUnitContainer[clientId].Add(unit);
         unit.SetOffset(offset);
-        unit.Movement.SetTargetPosition(targetPosition);
+        unit.Movement.SetLine(lineIndex);
     }
 }

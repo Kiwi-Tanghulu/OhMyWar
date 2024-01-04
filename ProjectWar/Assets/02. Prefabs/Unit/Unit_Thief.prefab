@@ -1660,6 +1660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: f331fa41c8becf247a67d8f9fe3799b0, type: 2}
   <CurrentState>k__BackingField: 0
+  team: 0
 --- !u!114 &2176072451144116595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,6 +1775,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapPoint: {fileID: 66360409408849032}
+  redIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  blueIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  redColor: {r: 1, g: 0, b: 0, a: 1}
+  blueColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &6878337634219611995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1786,6 +1791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba196398e5542124ba6444dff0af208c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
   viewDistace: 6.5
 --- !u!1 &2740543452635496098
 GameObject:

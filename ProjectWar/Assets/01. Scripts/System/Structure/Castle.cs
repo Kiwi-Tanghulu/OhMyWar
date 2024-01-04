@@ -45,9 +45,12 @@ public class Castle : StructureBase, IUnitSpawner
     {
         if (unitIndex >= unitPrefabs.PrefabList.Count)
             return;
+        int pointIndex = 0;
+        if (1 << gameObject.layer == TeamManager.Instance.RedLayer)
+            pointIndex = 2;
 
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
-            spawnPositions[lineIndex].position, midNexus[lineIndex].SpawnPosition.position);
+            lineIndex, pointIndex);
     }
 
     public override void OnDie(NetworkObject performer)

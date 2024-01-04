@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[Serializable]
+public class LinePoint
+{
+    public List<Transform> points = new List<Transform>();
+}
+
+
 public class IngameManager : NetworkBehaviour
 {
     private static IngameManager instance;
@@ -38,6 +45,23 @@ public class IngameManager : NetworkBehaviour
     public List<Transform> BluePoint;
     public List<Transform> NexusPoint;
     public List<Transform> RedPoint;
+    public List<LinePoint> linePoints;
+    public int MaxLinePointIndex = 2;
+
+    public event Action<bool, int, float> OnGameFinishedEvent;
+
+    public bool OnGaming = false;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        OnGaming = true;
+    }
+
+    public Transform GetLinePoint(int lineIndex, int pointIndex)
+    {
+        return linePoints[lineIndex].points[pointIndex];
+    }
 
     public void RegisterPlayer(Player player)
     {
@@ -67,7 +91,6 @@ public class IngameManager : NetworkBehaviour
 
         bool isBlue = player.IsBlue;
         CurrentSpawner = isBlue ? BlueCastle : RedCastle;
-        Debug.Log($"IsBlue : {isBlue} / Spawner : {(isBlue ? BlueCastle : RedCastle).name}");
 
         // if(IsServer)
         //     CurrentSpawner = BlueCastle;
@@ -110,22 +133,27 @@ public class IngameManager : NetworkBehaviour
         EndGameServerRPC(winnerID);
     }
 
-    private void EndGame(bool isWin)
+    private void EndGame(bool isWin, float endTime)
     {
-        float gameTime = Time.time - startedTime.Value;
+        OnGaming = false;
+
+        float gameTime = endTime - startedTime.Value;
         int earnedGold = OwnerPlayer.TotalGold;
+
+        Debug.Log($"GameTime : {TimeSpan.FromSeconds(gameTime).ToString("hh':'mm':'ss")} / IsWin {isWin}");
+        OnGameFinishedEvent?.Invoke(isWin, earnedGold, gameTime);
     }
 
     [ServerRpc]
     private void EndGameServerRPC(ulong winnerID)
     {
-        EndGameClientRPC(winnerID);
+        EndGameClientRPC(winnerID, Time.time);
     }
 
     [ClientRpc]
-    private void EndGameClientRPC(ulong winnerID)
+    private void EndGameClientRPC(ulong winnerID, float endTime)
     {
         bool isWin = NetworkManager.Singleton.LocalClientId == winnerID;
-        EndGame(isWin);
+        EndGame(isWin, endTime);
     }
 }

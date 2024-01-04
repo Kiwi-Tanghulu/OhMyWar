@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Unity.Netcode;
 public class LobbyPanel : FixedUI
 {
     [SerializeField] private TextMeshProUGUI roomCodeText;
@@ -103,11 +104,11 @@ public class LobbyPanel : FixedUI
     {
         if (user == UserType.Blue)
         {
-            if(blueLastSkillIcon != null)
+            if (blueLastSkillIcon != null)
                 blueLastSkillIcon.SetActive(false);
             blueUnitTexture.texture = characterTexture[(int)character];
 
-            if(blueLastClickCharacterBtn != null)
+            if (blueLastClickCharacterBtn != null)
                 blueLastClickCharacterBtn.image.color = btnDefualtColor;
             blueCharacterBtn[(int)character].image.color = btnSelectedColor;
             blueLastClickCharacterBtn = blueCharacterBtn[(int)character];
@@ -117,11 +118,11 @@ public class LobbyPanel : FixedUI
         }
         else
         {
-            if(redLastSkillIcon != null)
+            if (redLastSkillIcon != null)
                 redLastSkillIcon.SetActive(false);
             redUnitTexture.texture = characterTexture[(int)character];
 
-            if(redLastClickCharacterBtn != null)
+            if (redLastClickCharacterBtn != null)
                 redLastClickCharacterBtn.image.color = btnDefualtColor;
             redCharacterBtn[(int)character].image.color = btnSelectedColor;
             redLastClickCharacterBtn = redCharacterBtn[(int)character];
@@ -136,4 +137,9 @@ public class LobbyPanel : FixedUI
         LobbyManager.Instance.ReadyGame();
     }
 
+    public void Exit()
+    {
+        NetworkManager.Singleton.Shutdown();
+        SceneLoader.Instance.LoadSceneAsync("MenuScene");
+    }
 }
