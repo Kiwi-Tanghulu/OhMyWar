@@ -13,10 +13,8 @@ public class PlayerWallet : PlayerComponent
     {
         base.Init(player);
 
-        if(player.IsOwner == false)
-            Destroy(this);
-
-        GameObject.Find("Canvas").transform.Find("InGameUI/WalletPanel").GetComponent<WalletPanel>().Init(this);
+        if(player.IsOwner)
+            GameObject.Find("Canvas").transform.Find("InGameUI/WalletPanel").GetComponent<WalletPanel>().Init(this);
     }
 
     private void Update()
