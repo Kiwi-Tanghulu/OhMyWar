@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class UnitAttack : UnitComponent
 {
@@ -26,7 +27,7 @@ public abstract class UnitAttack : UnitComponent
     public float AttackDelay => attackDelay;
     public bool CanAttack => canAttack;
 
-    public Action OnAttackStartEvetn;
+    public UnityEvent OnAttackStartEvetn;
 
     public override void InitCompo(UnitController _controller)
     {

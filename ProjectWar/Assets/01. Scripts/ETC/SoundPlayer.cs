@@ -1,22 +1,36 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class SoundPlayer : MonoBehaviour
 {
+    public string[] soundNames;
     public string soundName;
     public bool onShot;
+    public float delay;
 
-    private AudioSource aud;
+    [SerializeField] AudioSource aud;
 
     private void Awake()
     {
-        aud = GetComponent<AudioSource>();
+        if(aud == null)
+            aud = GetComponent<AudioSource>();
     }
 
     public void Play()
     {
-        AudioManager.Instance.PlayAudio(soundName, aud, onShot);
+        if(string.IsNullOrEmpty(soundName))
+            soundName = soundNames.PickRandom();
+
+        if(delay == 0f)
+            AudioManager.Instance.PlayAudio(soundName, aud, onShot);
+        else
+            StartCoroutine(DelayCoroutine(delay, () => AudioManager.Instance.PlayAudio(soundName, aud, onShot)));
+    }
+
+    private IEnumerator DelayCoroutine(float delay, Action callback)
+    {
+        yield return new WaitForSeconds(delay);
+        callback?.Invoke();
     }
 }

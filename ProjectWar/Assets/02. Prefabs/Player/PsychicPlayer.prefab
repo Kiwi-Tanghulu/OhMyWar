@@ -545,6 +545,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2776893758140172978}
   - component: {fileID: 8036258563435022134}
+  - component: {fileID: 6719518787854599153}
   m_Layer: 0
   m_Name: TeleportSkill
   m_TagString: Untagged
@@ -582,7 +583,19 @@ MonoBehaviour:
   cost: 500
   OnSkillActivedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6719518787854599153}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   magicCircleTime: 3
   maxMidY: -6
   minMidY: -13
@@ -607,6 +620,22 @@ MonoBehaviour:
     m_Bits: 64
   teleportEffect: {fileID: 6952753609456024197, guid: 6e2a2571a7180124e9ed5ebaec71f19e, type: 3}
   magicCircleEffect: {fileID: 94929810931407428, guid: 9305ff2ca93449849b979d5c8377cf54, type: 3}
+--- !u!114 &6719518787854599153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 468162155164474814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71a21551ea931549961f11a2e4e5e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundNames: []
+  soundName: TeleportSound2
+  onShot: 1
+  aud: {fileID: 3234085081246459823}
 --- !u!1 &565613087023247946
 GameObject:
   m_ObjectHideFlags: 0
@@ -701,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4976773533061181023}
   - component: {fileID: 6609872925420757079}
+  - component: {fileID: 1027413978426285973}
   m_Layer: 0
   m_Name: FreezeSkill
   m_TagString: Untagged
@@ -738,12 +768,40 @@ MonoBehaviour:
   cost: 500
   OnSkillActivedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1027413978426285973}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   targetLayer:
     serializedVersion: 2
     m_Bits: 0
   radius: 5
   offset: {x: 0, y: 0}
+--- !u!114 &1027413978426285973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 586144398128615085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71a21551ea931549961f11a2e4e5e27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundNames: []
+  soundName: EarthquakeSound
+  onShot: 1
+  aud: {fileID: 3234085081246459823}
 --- !u!1 &653993270855399172
 GameObject:
   m_ObjectHideFlags: 0
@@ -5277,6 +5335,7 @@ GameObject:
   - component: {fileID: 4520669644088886677}
   - component: {fileID: -4793023699179996434}
   - component: {fileID: -2121223825311075287}
+  - component: {fileID: 3234085081246459823}
   m_Layer: 0
   m_Name: PsychicPlayer
   m_TagString: Untagged
@@ -5538,6 +5597,102 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1}
   viewDistace: 5.5
+--- !u!82 &3234085081246459823
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7942373800574777997}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1987908564464993758, guid: 988a75b5ad3c95b49aa6052b48e2fb46, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8216392507775487758
 GameObject:
   m_ObjectHideFlags: 0
