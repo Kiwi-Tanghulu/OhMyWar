@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitManager : NetworkBehaviour
@@ -40,6 +41,11 @@ public class UnitManager : NetworkBehaviour
         Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-2f, 2f));
         UnitSpawnEvent?.Invoke();
         SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
+    }
+
+    public void DespawnUnit(UnitController unit)
+    {
+        unit.GetComponent<NetworkObject>().Despawn();
     }
 
     [ServerRpc(RequireOwnership = false)]
