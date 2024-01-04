@@ -29,4 +29,12 @@ public class FreezeSkill : SkillBase
 
         return true;
     }
+
+    #if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    #endif
 }
