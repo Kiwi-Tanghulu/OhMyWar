@@ -585,15 +585,22 @@ MonoBehaviour:
       m_Calls: []
   maxMidY: -6
   minMidY: -13
-  telePortPos:
-  - startPos: {x: -8.52, y: -3.54}
-    endPos: {x: 28.6, y: 15.6}
-  - startPos: {x: -8.52, y: -3.54}
-    endPos: {x: 28.6, y: 15.6}
-  - startPos: {x: -8.52, y: -3.54}
-    endPos: {x: 28.6, y: 15.6}
+  blueTelePortPos:
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  redTelePortPos:
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
+  - startPos: {x: 0, y: 0}
+    endPos: {x: 0, y: 0}
   teleportRange: 8
-  teleportDelay: 0.1
+  teleportDelay: 0.3
   targetLayer:
     serializedVersion: 2
     m_Bits: 64

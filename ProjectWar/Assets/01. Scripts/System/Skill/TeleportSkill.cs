@@ -29,19 +29,30 @@ public class TeleportSkill : SkillBase
     private int currentLineIndex;
 
     private TelePortPos[] currentTeleportPos;
+
     protected override bool ActiveSkill()
     {
         Debug.Log("TeleportStart");
-
 
         List<Transform> targetUnits = new List<Transform>();
         units = new List<Transform>();
         unitDistances = new List<Vector2>();
         currentPercent = 0f;
         string target = player.IsBlue ? "BlueUnit" : "RedUnit";
-        currentTeleportPos = player.IsBlue ? blueTelePortPos : redTelePortPos;
         Collider2D[] cols = Physics2D.OverlapCircleAll(player.transform.position, teleportRange);
 
+        for (int i = 0; i < 3; i++)
+        {
+            blueTelePortPos[i].startPos = IngameManager.Instance.BluePoint[i].position;
+            blueTelePortPos[i].endPos = IngameManager.Instance.NexusPoint[i].position;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            redTelePortPos[i].startPos = IngameManager.Instance.RedPoint[i].position;
+            redTelePortPos[i].endPos = IngameManager.Instance.NexusPoint[i].position;
+        }
+        currentTeleportPos = player.IsBlue ? blueTelePortPos : redTelePortPos;
         foreach (Collider2D col in cols)
         {
             if (col.CompareTag(target) == true)
@@ -61,18 +72,20 @@ public class TeleportSkill : SkillBase
         }
 
         int lineIndex = IngameManager.Instance.FocusedLine;
+
+        Debug.Log(lineIndex);
         
         currentLineIndex = player.transform.position.y > maxMidY ? 2 : player.transform.position.y < minMidY ? 0 : 1;
 
-        currentPercent = Mathf.Abs(player.transform.position.x - currentTeleportPos[lineIndex].startPos.x)
-            / Mathf.Abs((currentTeleportPos[lineIndex].endPos.x - currentTeleportPos[lineIndex].startPos.x));
+        currentPercent = Mathf.Abs(player.transform.position.x - currentTeleportPos[currentLineIndex].startPos.x)
+            / Mathf.Abs((currentTeleportPos[currentLineIndex].endPos.x - currentTeleportPos[currentLineIndex].startPos.x));
 
         currentPercent = Mathf.Clamp(currentPercent, 0f, 1f);
         
         Debug.Log(currentPercent);
 
-        playerTeleportPosition = 
-           currentTeleportPos[currentLineIndex].startPos + currentPercent * (currentTeleportPos[currentLineIndex].endPos - currentTeleportPos[currentLineIndex].startPos);
+        playerTeleportPosition =
+           currentTeleportPos[lineIndex].startPos + currentPercent * (currentTeleportPos[lineIndex].endPos - currentTeleportPos[lineIndex].startPos);
 
         StartCoroutine(TelePortStart());
         
@@ -100,9 +113,10 @@ public class TeleportSkill : SkillBase
             }
         }
 
+        Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
+        player.transform.Find("Visual").gameObject.SetActive(false);
         if (IsHost)
         {
-            Debug.Log(playerTeleportPosition);
             player.GetComponent<PlayerMovement>().MoveImmediately(playerTeleportPosition);
             FinishTeleportClientRPC();
         }
@@ -110,7 +124,14 @@ public class TeleportSkill : SkillBase
 
     private IEnumerator TelePortEnd()
     {
-        for(int i = 0; i < unitDistances.Count; i++)
+        yield return new WaitForSeconds(1f);
+
+        Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
+        player.transform.Find("Visual").gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(teleportDelay);
+
+        for (int i = 0; i < unitDistances.Count; i++)
         {
             if (IsHost)
             {
