@@ -635,6 +635,7 @@ MonoBehaviour:
   soundNames: []
   soundName: TeleportSound2
   onShot: 1
+  delay: 0
   aud: {fileID: 3234085081246459823}
 --- !u!1 &565613087023247946
 GameObject:
@@ -801,6 +802,7 @@ MonoBehaviour:
   soundNames: []
   soundName: EarthquakeSound
   onShot: 1
+  delay: 0
   aud: {fileID: 3234085081246459823}
 --- !u!1 &653993270855399172
 GameObject:
@@ -5338,7 +5340,7 @@ GameObject:
   - component: {fileID: 3234085081246459823}
   m_Layer: 0
   m_Name: PsychicPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5374,7 +5376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2544629231
+  GlobalObjectIdHash: 3239786566
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -5396,6 +5398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalGold: 0
   IsBlue: 0
+  characterType:
+    m_InternalValue: 0
   Buffs: []
 --- !u!114 &8557040919050872281
 MonoBehaviour:
