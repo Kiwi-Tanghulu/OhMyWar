@@ -48,6 +48,7 @@ public class Player : NetworkBehaviour
             team = TeamType.Red;
         }
 
+        GetComponent<SightObject>().Init(team);
         sightMask = transform.Find("PlayerSightMask").gameObject;
         sightMask.SetActive(IsOwner);
         

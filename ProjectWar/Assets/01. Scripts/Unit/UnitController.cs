@@ -25,6 +25,7 @@ public class UnitController : NetworkBehaviour
 
     private Vector2 offset;
     public Vector2 Offset => offset;
+    public TeamType team;
 
     public override void OnNetworkSpawn()
     {
@@ -37,12 +38,14 @@ public class UnitController : NetworkBehaviour
         {
             gameObject.tag = unitManager.BlueUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.BlueLayer.value, 2);
+            team = TeamType.Blue;
             transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.green;
         }
         else
         {
             gameObject.tag = unitManager.RedUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.RedLayer.value, 2);
+            team = TeamType.Red;
             transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
 
@@ -66,6 +69,8 @@ public class UnitController : NetworkBehaviour
             transform.Find("UnitSightMask").gameObject.SetActive(true);
             MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
         }
+
+        GetComponent<SightObject>().Init(team);
 
         InitState();
     }
