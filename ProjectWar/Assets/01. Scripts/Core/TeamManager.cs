@@ -38,8 +38,8 @@ public class TeamManager : NetworkBehaviour
     public bool IsFriendly(GameObject obj)
     {
         if (IsServer)
-            return 1 << gameObject.layer == BlueLayer;
+            return 1 << obj.layer == BlueLayer.value;
         else
-            return 1 << gameObject.layer == RedLayer;
+            return 1 << obj.layer == RedLayer.value;
     }
 }

@@ -48,9 +48,19 @@ public class HostManager
 
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
+        NetworkManager.Singleton.OnClientDisconnectCallback += HandleClientDisconnected;
         GameManager.Instance.HostID.Value = NetworkManager.Singleton.LocalClientId;
 
         OnRoomCreatedEvent?.Invoke();
+    }
+
+    private void HandleClientDisconnected(ulong id)
+    {
+        if(IngameManager.Instance != null && IngameManager.Instance.OnGaming)
+        {
+            CloseHost();
+            SceneLoader.Instance.LoadSceneAsync("MenuScene");
+        }
     }
 
     private void HandleClientConnected(ulong id)

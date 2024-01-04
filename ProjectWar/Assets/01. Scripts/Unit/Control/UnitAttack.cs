@@ -92,9 +92,10 @@ public abstract class UnitAttack : UnitComponent
         {
             target = col.gameObject;
             shouldAttack = true;
+            return true;
         }
 
-        return col;
+        return false;
     }
 
     protected IEnumerator AttackDelayCo()

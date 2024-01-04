@@ -37,6 +37,18 @@ public class ClientManager
         RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
         transport.SetRelayServerData(relayServerData);
 
+        // NetworkManager.Singleton.OnServerStopped += HandleServerStopped;
+        NetworkManager.Singleton.OnClientStopped += HandleClientStopped;
+
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void HandleClientStopped(bool isHosted)
+    {
+        if(isHosted == false)
+            return;
+
+        if(IngameManager.Instance != null && IngameManager.Instance.OnGaming)
+            SceneLoader.Instance.LoadSceneAsync("MenuScene");
     }
 }

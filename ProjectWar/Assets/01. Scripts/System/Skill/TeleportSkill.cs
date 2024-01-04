@@ -4,6 +4,8 @@ using Unity.Netcode;
 using UnityEngine;
 using System.Linq;
 using DG.Tweening;
+using Unity.Netcode.Components;
+
 [System.Serializable]
 public class TelePortPos
 {
@@ -37,9 +39,10 @@ public class TeleportSkill : SkillBase
         if (playerMovement == null)
             playerMovement = player.GetComponent<PlayerMovement>();
 
-        playerMovement.SetIsTeleport(true);
-        if (playerMovement.IsTeleport == true)
+        if (playerMovement.IsTeleport)
             return false;
+
+        playerMovement.SetIsTeleport(true);
 
         Debug.Log("TeleportStart");
 
@@ -70,7 +73,7 @@ public class TeleportSkill : SkillBase
             }
         }
 
-        if(targetUnits != null)
+        if (targetUnits != null)
         {
             Debug.Log("target unit count : " + targetUnits.Count);
             units = targetUnits.OrderBy(x => Vector2.Distance(player.transform.position, x.transform.position)).ToList();
@@ -80,24 +83,30 @@ public class TeleportSkill : SkillBase
             }
         }
 
-        int lineIndex = IngameManager.Instance.FocusedLine;
-
+        currentLineIndex = player.transform.position.y > maxMidY ? 0 : player.transform.position.y < minMidY ? 2 : 1;
+        Debug.Log(currentLineIndex);
+        int lineIndex = 0;
+        if (currentLineIndex == 2)
+            lineIndex = 1;
+        else if (currentLineIndex == 1)
+            lineIndex = 0;
+        else
+            lineIndex = 2;
         Debug.Log(lineIndex);
-        
-        currentLineIndex = player.transform.position.y > maxMidY ? 2 : player.transform.position.y < minMidY ? 0 : 1;
-
         currentPercent = Mathf.Abs(player.transform.position.x - currentTeleportPos[currentLineIndex].startPos.x)
             / Mathf.Abs((currentTeleportPos[currentLineIndex].endPos.x - currentTeleportPos[currentLineIndex].startPos.x));
 
         currentPercent = Mathf.Clamp(currentPercent, 0f, 1f);
-        
+
         Debug.Log(currentPercent);
 
         playerTeleportPosition =
            currentTeleportPos[lineIndex].startPos + currentPercent * (currentTeleportPos[lineIndex].endPos - currentTeleportPos[lineIndex].startPos);
 
+        Debug.Log($"Target Start Pos : {currentTeleportPos[lineIndex].startPos} Target End Pos : {currentTeleportPos[lineIndex].endPos} Player Teleport Pos : {playerTeleportPosition}");
+
         StartCoroutine(TelePortStart());
-        
+
         return true;
     }
 
@@ -105,40 +114,51 @@ public class TeleportSkill : SkillBase
     public void FinishTeleportClientRPC()
     {
         StartCoroutine(TelePortEnd());
+        Debug.Log("È£½ºÆ®µµ ½ò ¼ö ÀÖ¾î!");
     }
 
     private IEnumerator TelePortStart()
     {
+        
+
         Debug.Log("TeleportEffectCoru");
 
-        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f,0f,90f));
+        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f, 0f, 90f));
 
 
         if (units != null)
         {
-            Debug.Log("10");
             foreach (var unit in units)
             {
                 Instantiate(teleportEffect, unit.transform.position, Quaternion.identity);
                 unit.gameObject.SetActive(false);
                 yield return new WaitForSeconds(teleportDelay);
-                Debug.Log("11");
+            }
+        }
+        if(units.Count <= 0)
+        {
+            yield return new WaitForSeconds(0.7f);
+        }
+        Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
+        player.transform.Find("Visual").gameObject.SetActive(false);
+        player.GetComponent<PlayerMovement>().MoveImmediately(playerTeleportPosition);
+        
+        for(int i = 0; i < unitDistances.Count; i++)
+        {
+            if (IsHost)
+            {
+                units[i].GetComponent<NetworkTransform>().Teleport(player.transform.position + (Vector3)unitDistances[i],Quaternion.identity,new Vector3(1f,1f,1f));
+                Debug.Log("¿Å±è");
             }
         }
 
-        Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
-        player.transform.Find("Visual").gameObject.SetActive(false);
-        if (IsHost)
-        {
-            player.GetComponent<PlayerMovement>().MoveImmediately(playerTeleportPosition);
-            FinishTeleportClientRPC();
-        }
+        FinishTeleportClientRPC();
     }
 
     private IEnumerator TelePortEnd()
     {
-        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f,0f,90f));
-
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f, 0f, 90f));
         yield return new WaitForSeconds(1f);
 
         Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
@@ -148,14 +168,16 @@ public class TeleportSkill : SkillBase
 
         for (int i = 0; i < unitDistances.Count; i++)
         {
-            if (IsHost)
-            {
-                units[i].position = player.transform.position + (Vector3)unitDistances[i];
-            }
+            //if (IsHost)
+            //{
+            //    units[i].position = player.transform.position + (Vector3)unitDistances[i];
+            //}
             Instantiate(teleportEffect, units[i].transform.position, Quaternion.identity);
             units[i].gameObject.SetActive(true);
+            Debug.Log("´Ù½Ãº¸¿©ÁÜ");
             yield return new WaitForSeconds(teleportDelay);
         }
         playerMovement.SetIsTeleport(false);
+        playerMovement.SetMoveable(true);
     }
 }

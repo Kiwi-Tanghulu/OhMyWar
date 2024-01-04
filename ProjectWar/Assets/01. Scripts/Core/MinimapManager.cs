@@ -56,7 +56,7 @@ public class MinimapManager : NetworkBehaviour
 
                 for(int j = 0; j < viewObjects.Count; j++)
                 {
-                    if (Vector2.Distance(sightObjects[i].transform.position, viewObjects[i].transform.position) >= viewObjects[i].viewDistace)
+                    if (Vector2.Distance(sightObjects[i].transform.position, viewObjects[j].transform.position) <= viewObjects[j].viewDistace)
                     {
                         isSight = true;
                         break;

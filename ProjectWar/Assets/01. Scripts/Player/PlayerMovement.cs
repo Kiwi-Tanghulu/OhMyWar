@@ -28,11 +28,11 @@ public class PlayerMovement : PlayerComponent
     public override void Init(Player player)
     {
         base.Init(player);
-    
+
         visual = transform.Find("Visual");
         playerAnimator = visual.GetComponent<PlayerAnimator>();
 
-        if(player.IsOwner)
+        if (player.IsOwner)
         {
             IngameManager manager = IngameManager.Instance;
             Vector3 position = player.IsBlue ? manager.BlueCastle.SpawnPosition.position : manager.RedCastle.SpawnPosition.position;
@@ -44,7 +44,7 @@ public class PlayerMovement : PlayerComponent
 
     private void Update()
     {
-        if(isMove)
+        if (isMove)
         {
             Vector2 worldPos = Camera.main.ScreenToWorldPoint(inputReader.MousePosition);
             SetTargetPosition(worldPos);
@@ -53,7 +53,7 @@ public class PlayerMovement : PlayerComponent
 
     private void FixedUpdate()
     {
-        if(Moveable == false || IsTeleport == true)
+        if (Moveable == false || IsTeleport == true)
             return;
 
         moveDirection = targetPosition - (Vector2)transform.position;
@@ -72,7 +72,7 @@ public class PlayerMovement : PlayerComponent
 
     public override void Release()
     {
-        if(player.IsOwner)
+        if (player.IsOwner)
             inputReader.OnRightClicked -= HandleRightClicked;
     }
 
@@ -101,7 +101,7 @@ public class PlayerMovement : PlayerComponent
     public void SetTargetPosition(Vector2 position)
     {
         targetPosition = position;
-        if(player.IsOwner)
+        if (player.IsOwner)
             playerAnimator.AServerRPC(true);
     }
 
@@ -115,8 +115,8 @@ public class PlayerMovement : PlayerComponent
     public void SetMoveable(bool able)
     {
         Moveable = able;
-        if(Moveable == false && player.IsOwner)
-            playerAnimator.AServerRPC(false);        
+        if (Moveable == false && player.IsOwner)
+            playerAnimator.AServerRPC(false);
     }
 
     public void SetIsTeleport(bool value)
