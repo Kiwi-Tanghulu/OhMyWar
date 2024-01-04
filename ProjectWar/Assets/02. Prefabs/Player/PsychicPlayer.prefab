@@ -601,7 +601,7 @@ MonoBehaviour:
   - startPos: {x: 0, y: 0}
     endPos: {x: 0, y: 0}
   teleportRange: 8
-  teleportDelay: 0.2
+  teleportDelay: 0.3
   targetLayer:
     serializedVersion: 2
     m_Bits: 64

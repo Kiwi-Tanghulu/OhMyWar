@@ -34,6 +34,13 @@ public class TeleportSkill : SkillBase
     private PlayerMovement playerMovement = null;
     protected override bool ActiveSkill()
     {
+        if (playerMovement == null)
+            playerMovement = player.GetComponent<PlayerMovement>();
+
+        playerMovement.SetIsTeleport(true);
+        if (playerMovement.IsTeleport == true)
+            return false;
+
         Debug.Log("TeleportStart");
 
         List<Transform> targetUnits = new List<Transform>();
@@ -90,11 +97,6 @@ public class TeleportSkill : SkillBase
            currentTeleportPos[lineIndex].startPos + currentPercent * (currentTeleportPos[lineIndex].endPos - currentTeleportPos[lineIndex].startPos);
 
         StartCoroutine(TelePortStart());
-
-        if(playerMovement == null)
-            playerMovement = player.GetComponent<PlayerMovement>();
-
-        playerMovement.SetIsTeleport(true);
         
         return true;
     }
