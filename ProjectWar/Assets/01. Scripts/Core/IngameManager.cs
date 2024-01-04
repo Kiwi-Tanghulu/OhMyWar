@@ -35,6 +35,10 @@ public class IngameManager : NetworkBehaviour
 
     private NetworkVariable<float> startedTime = new NetworkVariable<float>();
 
+    public List<Transform> BluePoint;
+    public List<Transform> NexusPoint;
+    public List<Transform> RedPoint;
+
     public void RegisterPlayer(Player player)
     {
         if(player.IsBlue)
