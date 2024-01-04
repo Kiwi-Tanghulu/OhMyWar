@@ -50,9 +50,7 @@ public class UnitManager : NetworkBehaviour
     {
         MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
         MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
-
-        if(IsServer)
-            Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
+        Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
     }
 
     [ServerRpc(RequireOwnership = false)]

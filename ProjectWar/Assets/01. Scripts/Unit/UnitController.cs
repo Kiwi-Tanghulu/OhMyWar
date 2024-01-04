@@ -135,7 +135,7 @@ public class UnitController : NetworkBehaviour
         foreach (UnitStateType type in Enum.GetValues(typeof(UnitStateType)))
         {
             string stateName = $"Unit{type}State";
-            Debug.Log(stateName);
+            
             Transform stateTrm = stateContainer.Find(stateName);
             UnitState state = (UnitState)stateTrm?.GetComponent(stateName);
             
