@@ -177,6 +177,7 @@ public class TeleportSkill : SkillBase
             //}
             Instantiate(teleportEffect, units[i].transform.position, Quaternion.identity);
             units[i].Find("Visual").gameObject.SetActive(true);
+            units[i].GetComponent<UnitController>().ChangeState(UnitStateType.Idle);
             Debug.Log("¥ŸΩ√∫∏ø©¡‹");
             yield return new WaitForSeconds(teleportDelay);
         }
