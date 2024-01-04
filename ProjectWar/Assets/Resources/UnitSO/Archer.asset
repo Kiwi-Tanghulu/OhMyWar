@@ -19,7 +19,7 @@ MonoBehaviour:
   stopDistance: 1
   maxHealth: 12
   attackDamage: 6
-  attackDistance: 5
+  attackDistance: 6
   attackDelay: 0.5
   takeDamageDelay: 0
   serchDelay: 0

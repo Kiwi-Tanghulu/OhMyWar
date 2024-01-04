@@ -118,7 +118,7 @@ public abstract class UnitAttack : UnitComponent
     {
         Collider2D col = Physics2D.OverlapCircle(transform.position, AttackDistance, targetLayer);
 
-        if(col != null)
+        if(col != null && col.CompareTag("Player") == false)
         {
             target = col.gameObject;
             shouldAttack = true;

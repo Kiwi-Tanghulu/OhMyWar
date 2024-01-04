@@ -19,7 +19,7 @@ MonoBehaviour:
   stopDistance: 1
   maxHealth: 20
   attackDamage: 4
-  attackDistance: 1
+  attackDistance: 2
   attackDelay: 1
   takeDamageDelay: 0
   serchDelay: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 448
   attackEffect: {fileID: 3827028829588407531, guid: fbe64e34f4a361545ad9d372ec35eaaa, type: 3}
+  selfAttackEffect: {fileID: 0}

@@ -104,6 +104,7 @@ public class Nexus : StructureBase, IUnitSpawner
     [ClientRpc]
     private void ChangerTeamClientRpc(int value)
     {
+        Debug.Log("layer" + value);
         gameObject.layer = value;
         sightMask.SetActive(false);
 
