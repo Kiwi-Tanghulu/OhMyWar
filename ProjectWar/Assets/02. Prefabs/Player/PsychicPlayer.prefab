@@ -511,6 +511,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6258505910636102474}
+  - component: {fileID: 1486074534682568226}
+  - component: {fileID: 6523208615357616382}
   m_Layer: 0
   m_Name: SkillContainer
   m_TagString: Untagged
@@ -531,80 +533,59 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3786629723931637219}
-  - {fileID: 2776893758140172978}
+  - {fileID: 446859717869920497}
+  - {fileID: 8962718966964839270}
   m_Father: {fileID: 1623748900780384996}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &468162155164474814
-GameObject:
+--- !u!58 &1486074534682568226
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2776893758140172978}
-  - component: {fileID: 8036258563435022134}
-  m_Layer: 0
-  m_Name: TeleportSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2776893758140172978
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468162155164474814}
+  m_GameObject: {fileID: 443220208110643842}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6258505910636102474}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8036258563435022134
+  m_Radius: 0.5
+--- !u!114 &6523208615357616382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 468162155164474814}
+  m_GameObject: {fileID: 443220208110643842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5ae1ed839ae6564f9770630f3d9a4e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 84256dbd946d7964bb7d7b041ec4fc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 500
-  OnSkillActivedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  maxMidY: -6
-  minMidY: -13
-  blueTelePortPos:
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  redTelePortPos:
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  - startPos: {x: 0, y: 0}
-    endPos: {x: 0, y: 0}
-  teleportRange: 8
-  teleportDelay: 0.3
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  teleportEffect: {fileID: 6952753609456024197, guid: 6e2a2571a7180124e9ed5ebaec71f19e, type: 3}
+  effectStatType: 0
+  chageAmount: 10
 --- !u!1 &565613087023247946
 GameObject:
   m_ObjectHideFlags: 0
@@ -3734,58 +3715,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &5702449324881508782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3786629723931637219}
-  - component: {fileID: 3517217811101139528}
-  m_Layer: 0
-  m_Name: SwordProjectileSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3786629723931637219
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702449324881508782}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6258505910636102474}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3517217811101139528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5702449324881508782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06979c8e4c354a1469b494812ddd3475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cost: 50
-  OnSkillActivedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  clientProjectile: {fileID: 3127567777973484262, guid: a066c8235f0008b49bf735e95eae845f, type: 3}
-  serverProjectile: {fileID: 4513646826079134591, guid: 6903b1ec597993147b2ae57cba799510, type: 3}
-  firePosition: {fileID: 0}
-  projectileSpeed: 3
 --- !u!1 &5890215595283828582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4706,6 +4635,64 @@ Transform:
   - {fileID: 5658528210244973014}
   m_Father: {fileID: 2958212118079779656}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7138265199337370177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 446859717869920497}
+  - component: {fileID: 6832209285325199556}
+  m_Layer: 0
+  m_Name: TeleportSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &446859717869920497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138265199337370177}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6258505910636102474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6832209285325199556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7138265199337370177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5ae1ed839ae6564f9770630f3d9a4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 500
+  OnSkillActivedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  maxMidY: -6
+  minMidY: -13
+  blueTelePortPos: []
+  redTelePortPos: []
+  teleportRange: 8
+  teleportDelay: 0.3
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  teleportEffect: {fileID: 6952753609456024197, guid: 6e2a2571a7180124e9ed5ebaec71f19e, type: 3}
 --- !u!1 &7265511094535471540
 GameObject:
   m_ObjectHideFlags: 0
@@ -5376,8 +5363,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputReader: {fileID: 11400000, guid: 79774e5d7160f5f4d979ef13bd94d130, type: 2}
   skills:
-  - {fileID: 3517217811101139528}
-  - {fileID: 8036258563435022134}
+  - {fileID: 6832209285325199556}
+  - {fileID: 6756954715619407196}
 --- !u!114 &2690502069657157066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6220,6 +6207,59 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &9013568162491486865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8962718966964839270}
+  - component: {fileID: 6756954715619407196}
+  m_Layer: 0
+  m_Name: FreezeSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8962718966964839270
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013568162491486865}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6258505910636102474}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6756954715619407196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9013568162491486865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ef620ba8254c24dadf16d68c4bf326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 500
+  OnSkillActivedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  radius: 5
+  offset: {x: 0, y: 0}
 --- !u!1 &9109295656693138206
 GameObject:
   m_ObjectHideFlags: 0
