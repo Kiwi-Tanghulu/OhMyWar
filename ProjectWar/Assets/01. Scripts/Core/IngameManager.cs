@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[Serializable]
+public class LinePoint
+{
+    public List<Transform> points = new List<Transform>();
+}
+
+
 public class IngameManager : NetworkBehaviour
 {
     private static IngameManager instance;
@@ -38,6 +45,7 @@ public class IngameManager : NetworkBehaviour
     public List<Transform> BluePoint;
     public List<Transform> NexusPoint;
     public List<Transform> RedPoint;
+    public List<LinePoint> linePoints;
 
     public event Action<bool, int, float> OnGameFinishedEvent;
 
