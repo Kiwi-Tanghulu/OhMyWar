@@ -59,6 +59,9 @@ public class UnitController : NetworkBehaviour
         Attack.InitCompo(this);
         Anim.InitCompo(this);
 
+        if(IsFriendly())
+            transform.Find("UnitSightMask").gameObject.SetActive(true);
+
         InitState();
     }
 

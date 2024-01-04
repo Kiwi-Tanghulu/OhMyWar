@@ -43,9 +43,18 @@ public class IngameManager : NetworkBehaviour
             RedPlayer = player;
 
         if (IsServer)
+        {
             castle = BlueCastle;
+            BlueCastle.SetSightMask(true);
+            RedCastle.SetSightMask(false);
+        }
         else
+        {
             castle = RedCastle;
+            BlueCastle.SetSightMask(false);
+            RedCastle.SetSightMask(true);
+        }
+
     }
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)
