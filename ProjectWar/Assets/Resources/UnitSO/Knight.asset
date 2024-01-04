@@ -15,12 +15,12 @@ MonoBehaviour:
   unitType: 5
   cost: 30
   image: {fileID: 21300000, guid: afc03baea2f00954b9837c5db31c02e5, type: 3}
-  moveSpeed: 2
+  moveSpeed: 5
   stopDistance: 1
-  maxHealth: 50
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 6
   attackDistance: 1
-  attackDelay: 2
+  attackDelay: 0.8
   takeDamageDelay: 0
   serchDelay: 0
   projectile: {fileID: 0}
@@ -28,4 +28,3 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 448
   attackEffect: {fileID: 778403590197639471, guid: 2db545caeb328564fb055967ed888ec8, type: 3}
-  selfAttackEffect: {fileID: 4617414182301508116, guid: 8a2914d70d86f2e4cac25d11fd6a42cb, type: 3}

@@ -15,17 +15,16 @@ MonoBehaviour:
   unitType: 1
   cost: 10
   image: {fileID: 21300000, guid: a3d67d11f7a241e429b727ddc4c968f0, type: 3}
-  moveSpeed: 3
+  moveSpeed: 2
   stopDistance: 1
-  maxHealth: 10
-  attackDamage: 7
-  attackDistance: 6
-  attackDelay: 1
+  maxHealth: 12
+  attackDamage: 6
+  attackDistance: 5
+  attackDelay: 0.5
   takeDamageDelay: 0
   serchDelay: 0
-  projectile: {fileID: 8375000159765025173, guid: 4fda13350931fba4c8d4370c98fec5aa, type: 3}
+  projectile: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 448
   attackEffect: {fileID: 3545812132836457610, guid: 17dd36be257b124419f3e61cf012d025, type: 3}
-  selfAttackEffect: {fileID: 0}
