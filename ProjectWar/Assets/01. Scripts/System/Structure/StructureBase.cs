@@ -23,6 +23,14 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
+    protected virtual void Start()
+    {
+        if(TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        }
+    }
+
     // 실질적으로 데미지를 넣는 함수
     public virtual void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
     {
@@ -71,7 +79,10 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         //OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
         OnDamagedEvent?.Invoke(null, point, damage);
-
+        if (TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        }
     }
 
     public void ModifyHP(int value)

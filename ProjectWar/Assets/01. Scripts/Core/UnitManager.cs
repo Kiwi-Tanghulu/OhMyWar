@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UnitManager : NetworkBehaviour
@@ -42,12 +43,25 @@ public class UnitManager : NetworkBehaviour
         SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
     }
 
+    public void DespawnUnit(UnitController unit)
+    {
+        unit.GetComponent<NetworkObject>().Despawn();
+    }
+
     [ServerRpc(RequireOwnership = false)]
     private void SpawnUnitServerRpc(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition, Vector2 offset)
     {
         UnitController unit = Instantiate(unitDictionary[type], spawnPosition + offset, Quaternion.identity);
         NetworkObject unitNetworkObject = unit.GetComponent<NetworkObject>();
         unitNetworkObject.SpawnWithOwnership(clientId, true);
+
+        Player player = null;
+        if(clientId == GameManager.Instance.HostID.Value)
+            player = IngameManager.Instance.BluePlayer;
+        else
+            player = IngameManager.Instance.RedPlayer;
+
+        player.Buffs.ForEach(i => unit.Stat.AddModifier(i.type, i.value));
 
         if (!playerUnitContainer.ContainsKey(clientId))
             playerUnitContainer.Add(clientId, new());

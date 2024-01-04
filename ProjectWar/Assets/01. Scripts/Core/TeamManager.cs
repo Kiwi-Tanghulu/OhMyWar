@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TeamManager : MonoBehaviour
+public class TeamManager : NetworkBehaviour
 {
     public static TeamManager Instance;
 
@@ -31,5 +33,13 @@ public class TeamManager : MonoBehaviour
         LayerMask myLayer = 1 << (layer - 1);
 
         return myLayer == BlueLayer ? RedLayer : BlueLayer;
+    }
+
+    public bool IsFriendly(GameObject obj)
+    {
+        if (IsServer)
+            return 1 << gameObject.layer == BlueLayer;
+        else
+            return 1 << gameObject.layer == RedLayer;
     }
 }

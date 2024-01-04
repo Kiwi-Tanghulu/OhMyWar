@@ -10,14 +10,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - BG
   - Water
   - UI
   - Blue
   - Red
   - Neutrality
   - 
-  - 
+  - MinimapPoint
   - 
   - 
   - 
@@ -42,6 +42,9 @@ TagManager:
   m_SortingLayers:
   - name: BG
     uniqueID: 3022627213
+    locked: 0
+  - name: MiniMapPoint
+    uniqueID: 2900671921
     locked: 0
   - name: Environment
     uniqueID: 3546258135
