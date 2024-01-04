@@ -38,12 +38,17 @@ public class ClientManager
         transport.SetRelayServerData(relayServerData);
 
         // NetworkManager.Singleton.OnServerStopped += HandleServerStopped;
+        NetworkManager.Singleton.OnClientStopped += HandleClientStopped;
 
         NetworkManager.Singleton.StartClient();
     }
 
-    private void HandleServerStopped(bool value)
+    private void HandleClientStopped(bool isHosted)
     {
-        Debug.Log($"Server Stopped / => {value}");
+        if(isHosted == false)
+            return;
+
+        if(IngameManager.Instance != null && IngameManager.Instance.OnGaming)
+            SceneLoader.Instance.LoadSceneAsync("MenuScene");
     }
 }
