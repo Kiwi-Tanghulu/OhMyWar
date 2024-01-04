@@ -41,7 +41,6 @@ public class TeleportSkill : SkillBase
         {
             if (col.CompareTag(target) == true)
             {
-                Debug.Log(col.name);
                 targetUnits.Add(col.transform);
             }
         }
@@ -55,8 +54,6 @@ public class TeleportSkill : SkillBase
             }
         }
 
-        Debug.Log($"{units.Count}");
-
         int lineIndex = IngameManager.Instance.FocusedLine;
         
         currentLineIndex = player.transform.position.y > maxMidY ? 2 : player.transform.position.y < minMidY ? 0 : 1;
@@ -64,6 +61,8 @@ public class TeleportSkill : SkillBase
         currentPercent = Mathf.Abs(player.transform.position.x - telePortPos[lineIndex].startPos.x)
             / Mathf.Abs((telePortPos[lineIndex].endPos.x - telePortPos[lineIndex].startPos.x));
 
+        currentPercent = Mathf.Clamp(currentPercent, 0f, 1f);
+        
         Debug.Log(currentPercent);
 
         playerTeleportPosition = 
