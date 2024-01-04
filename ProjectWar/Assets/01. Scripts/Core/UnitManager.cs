@@ -58,7 +58,7 @@ public class UnitManager : NetworkBehaviour
     {
         List<Transform> linePoints = IngameManager.Instance.linePoints[lineIndex].points;
 
-        UnitController unit = Instantiate(unitDictionary[type], linePoints[pointIndex].position, Quaternion.identity);
+        UnitController unit = Instantiate(unitDictionary[type], linePoints[pointIndex].position + (Vector3)offset, Quaternion.identity);
         NetworkObject unitNetworkObject = unit.GetComponent<NetworkObject>();
         unitNetworkObject.SpawnWithOwnership(clientId, true);
 
@@ -66,13 +66,13 @@ public class UnitManager : NetworkBehaviour
         if(clientId == GameManager.Instance.HostID.Value)
         {
             player = IngameManager.Instance.BluePlayer;
-            unit.transform.position = linePoints[0].position;
+            unit.transform.position = linePoints[0].position + (Vector3)offset;
             unit.team = TeamType.Blue;
         }
         else
         {
             player = IngameManager.Instance.RedPlayer;
-            unit.transform.position = linePoints[linePoints.Count - 1].position;
+            unit.transform.position = linePoints[linePoints.Count - 1].position + (Vector3)offset;
             unit.team = TeamType.Red;
         }
 
