@@ -5,18 +5,38 @@ using UnityEngine;
 
 public class RangeAttack : UnitAttack
 {
-    [SerializeField] NetworkObject projectile;
+    private WaitForSeconds wfs;
 
     public override void InitCompo(UnitController _controller)
     {
         base.InitCompo(_controller);
 
-        this.projectile = controller.Info.projectile;
+        wfs = new WaitForSeconds(controller.Info.takeDamageDelay);
     }
 
     public override void Attack()
     {
-        NetworkObject pro = Instantiate(projectile, transform.position, Quaternion.identity);
-        pro.Spawn();
+        if (target == null)
+            return;
+
+        if (target.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> attackedObj))
+        {
+            StartCoroutine(Delay(attackedObj));
+            CreateProjectileClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void CreateProjectileClientRpc()
+    {
+        GameObject pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
+    }
+
+    private IEnumerator Delay(IDamageable<NetworkObject> attackedObj)
+    {
+        yield return wfs;
+
+        attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
+        PlayEffect();
     }
 }

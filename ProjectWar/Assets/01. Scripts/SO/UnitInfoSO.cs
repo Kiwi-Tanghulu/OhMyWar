@@ -27,8 +27,9 @@ public class UnitInfoSO : ScriptableObject
     public int attackDamage;
     public int attackDistance;
     public int attackDelay;
+    public float takeDamageDelay;
     public int serchDelay;
-    public NetworkObject projectile;
+    public GameObject projectile;
     public LayerMask targetLayer;
     public ParticleSystem attackEffect;
 

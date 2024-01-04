@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.Rendering.DebugUI;
 
 public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
@@ -16,6 +17,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     public bool IsDie => isDie;
     public event Action OnHeal;
     public event Action OnDie;
+    public UnityEvent OnDamagedEvent;
 
     public GameObject shieldEffect;
     public GameObject deadEffect;
@@ -25,7 +27,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     private void Awake()
     {
         currentHealth = new NetworkVariable<float>();
-        healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        healthBar = transform.Find("Visual/HealthBar").GetComponent<HealthBar>();
     }
 
     public override void InitCompo(UnitController _controller)
@@ -112,6 +114,16 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         {
             Die();
         }
+        else
+        {
+            OnDamagedClientRpc();
+        }
+    }
+
+    [ClientRpc]
+    private void OnDamagedClientRpc()
+    {
+        OnDamagedEvent?.Invoke();
     }
 
     public void TakeDamage(int damage = 0, ulong performerID = 0, Vector3 point = default)

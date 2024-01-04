@@ -133,7 +133,7 @@ public class TeleportSkill : SkillBase
             foreach (var unit in units)
             {
                 Instantiate(teleportEffect, unit.transform.position, Quaternion.identity);
-                unit.gameObject.SetActive(false);
+                unit.Find("Visual").gameObject.SetActive(false);
                 yield return new WaitForSeconds(teleportDelay);
             }
         }
@@ -176,7 +176,8 @@ public class TeleportSkill : SkillBase
             //    units[i].position = player.transform.position + (Vector3)unitDistances[i];
             //}
             Instantiate(teleportEffect, units[i].transform.position, Quaternion.identity);
-            units[i].gameObject.SetActive(true);
+            units[i].Find("Visual").gameObject.SetActive(true);
+            units[i].GetComponent<UnitController>().ChangeState(UnitStateType.Idle);
             Debug.Log("¥ŸΩ√∫∏ø©¡‹");
             yield return new WaitForSeconds(teleportDelay);
         }

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 public abstract class UnitAttack : UnitComponent
 {
@@ -24,6 +27,8 @@ public abstract class UnitAttack : UnitComponent
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
     public bool CanAttack => canAttack;
+
+    public UnityEvent OnAttackStartEvetn;
 
     public override void InitCompo(UnitController _controller)
     {
@@ -67,9 +72,16 @@ public abstract class UnitAttack : UnitComponent
         
         canAttack = false;
 
+        StartAttackClientRpc();
         StartCoroutine(AttackDelayCo());
 
         return true;
+    }
+
+    [ClientRpc]
+    private void StartAttackClientRpc()
+    {
+        OnAttackStartEvetn?.Invoke();
     }
 
     public abstract void Attack();
