@@ -23,6 +23,8 @@ public class Nexus : StructureBase, IUnitSpawner
     [Space(10f)]
     public List<StatData> Buffs = new List<StatData>();
 
+    [SerializeField] private int line;
+
     private SpriteRenderer spRenderer = null;
     private GameObject sightMask = null;
 
@@ -43,7 +45,7 @@ public class Nexus : StructureBase, IUnitSpawner
     public void SpawnUnit(int unitIndex, int lineIndex)
     {
         UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
-            SpawnPosition.position, SpawnPosition.position);
+            line, 1);
     }
 
     public override void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)

@@ -46,6 +46,7 @@ public class IngameManager : NetworkBehaviour
     public List<Transform> NexusPoint;
     public List<Transform> RedPoint;
     public List<LinePoint> linePoints;
+    public int MaxLinePointIndex = 2;
 
     public event Action<bool, int, float> OnGameFinishedEvent;
 
@@ -55,6 +56,11 @@ public class IngameManager : NetworkBehaviour
     {
         base.OnNetworkSpawn();
         OnGaming = true;
+    }
+
+    public Transform GetLinePoint(int lineIndex, int pointIndex)
+    {
+        return linePoints[lineIndex].points[pointIndex];
     }
 
     public void RegisterPlayer(Player player)
