@@ -67,7 +67,6 @@ public class IngameManager : NetworkBehaviour
 
         bool isBlue = player.IsBlue;
         CurrentSpawner = isBlue ? BlueCastle : RedCastle;
-        Debug.Log($"IsBlue : {isBlue} / Spawner : {(isBlue ? BlueCastle : RedCastle).name}");
 
         // if(IsServer)
         //     CurrentSpawner = BlueCastle;

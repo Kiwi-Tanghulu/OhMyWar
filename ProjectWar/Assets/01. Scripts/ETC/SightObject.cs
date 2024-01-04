@@ -1,23 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class SightObject : MonoBehaviour
+public class SightObject : NetworkBehaviour
 {
     [SerializeField] private GameObject minimapPoint;
+    [SerializeField] private Sprite redIcon;
+    [SerializeField] private Sprite blueIcon;
+    [SerializeField] private Color redColor;
+    [SerializeField] private Color blueColor;
+    private SpriteRenderer render;
     private bool isSight;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        minimapPoint = transform.Find("MinimapPoint").gameObject;
+        base.OnNetworkSpawn();
+
         isSight = false;
+        SetSight(false);
+        render = minimapPoint.GetComponent<SpriteRenderer>();
+        Debug.Log(render);
+        MinimapManager.Instance.RegistSightObject(this);
+
+        if (IsHost)
+        {
+            render.sprite = blueIcon;
+            render.color = blueColor;
+        }
+        else
+        {
+            render.sprite = redIcon;
+            render.color = redColor;
+        }
     }
 
     public void SetSight(bool value)
     {
-        if (isSight == value)
-            return;
-
         isSight = value;
         minimapPoint.SetActive(value);
     }

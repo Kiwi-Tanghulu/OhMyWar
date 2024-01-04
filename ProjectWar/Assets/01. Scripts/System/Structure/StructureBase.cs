@@ -52,6 +52,10 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         OnDestroyedEvent?.Invoke(performer);
         TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
+        if (TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        }
     }
 
     // 데미지를 넣기 위해 호출하는 함수
@@ -79,10 +83,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         //OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
         OnDamagedEvent?.Invoke(null, point, damage);
-        if (TeamManager.Instance.IsFriendly(gameObject))
-        {
-            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-        }
+        
     }
 
     public void ModifyHP(int value)

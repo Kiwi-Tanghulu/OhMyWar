@@ -65,7 +65,6 @@ public class UnitController : NetworkBehaviour
         {
             transform.Find("UnitSightMask").gameObject.SetActive(true);
             MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-            MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
         }
 
         InitState();
