@@ -26,16 +26,19 @@ public class HealAttack : UnitAttack
             {
                 attackedObj.Heal((int)healAmount);
                 if (effect != null)
+                {
+                    effect.transform.position = target.transform.position;
                     effect.Play();
+                }
             }
             else
             {
                 attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
                 if (hitEffect != null)
                 {
-                    HitEffect effect = Instantiate(hitEffect);
-                    effect.transform.position = target.transform.position;
-                    effect.Play();
+                    HitEffect atkeffect = Instantiate(hitEffect);
+                    atkeffect.transform.position = target.transform.position;
+                    atkeffect.Play();
                 }
             }
 
