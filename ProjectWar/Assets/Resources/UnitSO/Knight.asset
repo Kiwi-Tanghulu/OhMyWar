@@ -15,12 +15,13 @@ MonoBehaviour:
   unitType: 5
   cost: 30
   image: {fileID: 21300000, guid: afc03baea2f00954b9837c5db31c02e5, type: 3}
-  moveSpeed: 2
+  moveSpeed: 5
   stopDistance: 1
-  maxHealth: 50
-  attackDamage: 10
+  maxHealth: 40
+  attackDamage: 6
   attackDistance: 1
-  attackDelay: 2
+  attackDelay: 0.8
+  takeDamageDelay: 0
   serchDelay: 0
   projectile: {fileID: 0}
   targetLayer:

@@ -2594,13 +2594,13 @@ GameObject:
   - component: {fileID: 7429302351290691645}
   - component: {fileID: 509909083062471523}
   - component: {fileID: 3889499402292330371}
-  - component: {fileID: 8014587779585007840}
   - component: {fileID: -1699029922341592190}
   - component: {fileID: 1476212551838450155}
   - component: {fileID: 727245414401159826}
   - component: {fileID: -7129595317629509923}
   - component: {fileID: -3232048448098016442}
   - component: {fileID: 6010197094032135387}
+  - component: {fileID: 3768454344288290239}
   m_Layer: 5
   m_Name: Unit_Wizard
   m_TagString: Untagged
@@ -2664,7 +2664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2840764393
+  GlobalObjectIdHash: 2477292467
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2738,45 +2738,6 @@ MonoBehaviour:
   info: {fileID: 11400000, guid: d4c467f395ac3474fa4090e74df88e0c, type: 2}
   <CurrentState>k__BackingField: 0
   team: 0
---- !u!114 &8014587779585007840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610733452600853844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217d5fd52a5672241a4c26fb59e7f8f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackDistance: 0
-  attackDelay: 0
-  serchDelay: 0
-  canAttack: 0
-  shouldAttack: 0
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  attackEffect: {fileID: 0}
-  soundName: 
-  OnAttackStartEvetn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4121053560693612507}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &-1699029922341592190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2981,6 +2942,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3768454344288290239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5610733452600853844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eb76c0d0bf01b4c99d64f94a740db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEffect: {fileID: 2235624267442359283, guid: 67e14b8e9d67a2842b2bdcb4c81c2b84, type: 3}
+  OnAttackStartEvetn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4121053560693612507}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5664801053057637090
 GameObject:
   m_ObjectHideFlags: 0

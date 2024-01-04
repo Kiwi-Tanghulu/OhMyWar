@@ -6,19 +6,19 @@ using UnityEngine;
 [Serializable]
 public class Stat
 {
-    [SerializeField] private int value;
-    [SerializeField] private List<int> modifiers;
-    public event Action<int> OnValueChangeEvent;
+    [SerializeField] private float value;
+    [SerializeField] private List<float> modifiers;
+    public event Action<float> OnValueChangeEvent;
 
-    public Stat(int defaultValue)
+    public Stat(float defaultValue)
     {
         value = defaultValue;
-        modifiers = new List<int>();
+        modifiers = new List<float>();
     }
 
-    public int GetValue()
+    public float GetValue()
     {
-        int v = value;
+        float v = value;
 
         for(int i = 0; i < modifiers.Count; ++i)
         {

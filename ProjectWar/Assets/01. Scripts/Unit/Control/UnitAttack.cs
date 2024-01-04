@@ -7,16 +7,18 @@ using UnityEngine.Events;
 
 public abstract class UnitAttack : UnitComponent
 {
-    [SerializeField] protected float attackDamage;
-    [SerializeField] protected float attackDistance;
-    [SerializeField] protected float attackDelay;
-    [SerializeField] protected float serchDelay;
-    [SerializeField] protected bool canAttack = true;
-    [SerializeField] protected bool shouldAttack = false;
-    [SerializeField] protected LayerMask targetLayer;
-    [SerializeField] protected GameObject target;
-    [SerializeField] protected ParticleSystem attackEffect;
-    [SerializeField] protected string soundName;
+    protected float attackDamage;
+    protected float attackDistance;
+    protected float attackDelay;
+    protected float serchDelay;
+    protected bool canAttack = true;
+    protected bool shouldAttack = false;
+    protected LayerMask targetLayer;
+    protected GameObject target;
+    //protected ParticleSystem attackEffect;
+    protected ParticleSystem selfAttackEffect;
+    protected string soundName;
+    public HitEffect hitEffect;
 
     private WaitForSeconds attackWfs;
     private WaitForSeconds serchWfs;
@@ -39,7 +41,10 @@ public abstract class UnitAttack : UnitComponent
         this.attackDelay = controller.Info.attackDelay;
         this.serchDelay = controller.Info.serchDelay;
         this.targetLayer = controller.Info.targetLayer ^ (1 << gameObject.layer);
-        this.attackEffect = Instantiate(controller.Info.attackEffect, transform);
+        //if(controller.Info.attackEffect != null)
+        //    this.attackEffect = Instantiate(controller.Info.attackEffect, transform);
+        if (controller.Info.selfAttackEffect != null)
+            this.selfAttackEffect = Instantiate(controller.Info.selfAttackEffect, transform);
 
         attackWfs = new WaitForSeconds(attackDelay);
         serchWfs = new WaitForSeconds(serchDelay);
@@ -86,13 +91,26 @@ public abstract class UnitAttack : UnitComponent
 
     public abstract void Attack();
 
-    protected void PlayEffect()
+    protected virtual void PlayEffect()
     {
-        if (attackEffect == null)
-            return;
+        //if (attackEffect != null)
+        //{
+        //    attackEffect.transform.position = target.transform.position;
+        //    attackEffect.Play();
+        //}
 
-        attackEffect.transform.position = target.transform.position;
-        attackEffect.Play();
+        if(hitEffect != null)
+        {
+            HitEffect effect = Instantiate(hitEffect);
+            effect.transform.position = target.transform.position;
+            effect.Play();
+        }
+
+        if (selfAttackEffect != null)
+        {
+            selfAttackEffect.transform.position = transform.position;
+            selfAttackEffect.Play();
+        }
     }
 
 
@@ -135,9 +153,9 @@ public abstract class UnitAttack : UnitComponent
         }
     }
 
-    private void AttackDamageValueChange(int value) => attackDamage = value;
-    private void AttackDistanceValueChange(int value) => attackDistance = value;
-    private void AttackDelayValueChange(int value)
+    private void AttackDamageValueChange(float value) => attackDamage = value;
+    private void AttackDistanceValueChange(float value) => attackDistance = value;
+    private void AttackDelayValueChange(float value)
     {
         attackDelay = value;
         attackWfs = new WaitForSeconds(attackDelay);

@@ -6,7 +6,14 @@ using UnityEngine;
 public class HealAttack : UnitAttack
 {
     [SerializeField] private float healAmount;
-    [SerializeField] private ParticleSystem dealEffect;
+    [SerializeField] private ParticleSystem healEffect;
+
+    private ParticleSystem effect;
+
+    private void Start()
+    {
+        effect = Instantiate(healEffect, transform);
+    }
 
     public override void Attack()
     {
@@ -18,17 +25,33 @@ public class HealAttack : UnitAttack
             if (target.layer == 6)
             {
                 attackedObj.Heal((int)healAmount);
-                PlayEffect();
+                if (effect != null)
+                {
+                    effect.transform.position = target.transform.position;
+                    effect.Play();
+                }
             }
             else
             {
                 attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
-                if(dealEffect != null)
+                if (hitEffect != null)
                 {
-                    attackEffect.transform.position = target.transform.position;
-                    attackEffect.Play();
+                    HitEffect atkeffect = Instantiate(hitEffect);
+                    atkeffect.transform.position = target.transform.position;
+                    atkeffect.Play();
                 }
             }
+
+            PlayEffect();
+        }
+    }
+
+    protected override void PlayEffect()
+    {
+        if (selfAttackEffect != null)
+        {
+            selfAttackEffect.transform.position = transform.position;
+            selfAttackEffect.Play();
         }
     }
 }

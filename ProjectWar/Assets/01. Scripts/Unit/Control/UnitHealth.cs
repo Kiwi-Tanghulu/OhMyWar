@@ -137,7 +137,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         controller.ChangeState(UnitStateType.Stun);
     }
 
-    private void MaxHealthValueChange(int value) 
+    private void MaxHealthValueChange(float value) 
     {
         maxHealth = value;
         healthBar.SetHealthBar(currentHealth.Value / maxHealth);
