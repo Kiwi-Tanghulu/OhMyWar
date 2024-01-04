@@ -19,8 +19,9 @@ public class Nexus : StructureBase, IUnitSpawner
 
     public bool IsEmpty => (ownerID == ulong.MaxValue);
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         spRenderer = GetComponent<SpriteRenderer>();
     }
 	
@@ -57,6 +58,7 @@ public class Nexus : StructureBase, IUnitSpawner
                     isDestroyed = true;
                     OnDestroyedEvent?.Invoke(performer);
                     TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
+                    OnDie(performer);
                 }
             }
         }
@@ -68,6 +70,19 @@ public class Nexus : StructureBase, IUnitSpawner
     {
         ChangeOwner(performer);
         base.OnDie(performer);
+    }
+
+    [ClientRpc]
+    private void ChangerTeamClientRpc(int value)
+    {
+        gameObject.layer = value;
+
+        if(1 << (gameObject.layer) == TeamManager.Instance.BlueLayer)
+            spRenderer.sprite = blueSprite;
+        else
+            spRenderer.sprite = redSprite;
+
+        Debug.Log("chagne owner");
     }
 
     public void ChangeOwner(NetworkObject performer)
@@ -82,5 +97,7 @@ public class Nexus : StructureBase, IUnitSpawner
         else
             spRenderer.sprite = redSprite;
         // change spawn position
+
+        ChangerTeamClientRpc(performer.gameObject.layer);
     }
 }

@@ -8,8 +8,14 @@ public class UnitIdleState : UnitState
     {
         base.OnServerEnter();
 
-        //controller.Movement.Stop();
-        controller.Anim.SetBoolPropretyClientRpc("Move", false);
+        //controller.Anim.SetBoolPropretyClientRpc("Move", false);
+    }
+
+    protected override void ClientEnter()
+    {
+        base.ClientEnter();
+
+        controller.Anim.SetBoolProprety("Move", false);
     }
 
     protected override void OnServerUpdate()

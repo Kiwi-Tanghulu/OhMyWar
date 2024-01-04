@@ -43,7 +43,7 @@ public class FollowMouse : MonoBehaviour
 
         if (allowFollow || isFollowPlayer)
         {
-            transform.position = new Vector3(IngameManager.Instance.OwnerPlayer.position.x, IngameManager.Instance.OwnerPlayer.position.y, -10);
+            transform.position = new Vector3(IngameManager.Instance.OwnerPlayer.transform.position.x, IngameManager.Instance.OwnerPlayer.transform.position.y, -10);
             return;
         }
 

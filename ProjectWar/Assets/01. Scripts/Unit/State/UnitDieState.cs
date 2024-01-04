@@ -7,7 +7,15 @@ public class UnitDieState : UnitState
     protected override void OnServerEnter()
     {
         base.OnServerEnter();
+        
+        //controller.Anim.SetTriggerPropretyClientRpc("Die");
+    }
 
-        controller.Anim.SetTriggerPropretyClientRpc("Die");
+    protected override void ClientEnter()
+    {
+        base.ClientEnter();
+        controller.Visual.gameObject.SetActive(false);
+        Instantiate(controller.Health.deadEffect, transform.position, Quaternion.identity, controller.transform);
+        Debug.Log("die");
     }
 }

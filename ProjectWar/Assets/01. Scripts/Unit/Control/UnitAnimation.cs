@@ -17,6 +17,16 @@ public class UnitAnimation : UnitComponent
         anim = GetComponent<Animator>();
     }
 
+    public void SetBoolProprety(string name, bool value)
+    {
+        anim.SetBool(name, value);
+    }
+
+    public void SetTriggerProprety(string name)
+    {
+        anim.SetTrigger(name);
+    }
+
     [ClientRpc]
     public void SetBoolPropretyClientRpc(string name, bool value)
     {

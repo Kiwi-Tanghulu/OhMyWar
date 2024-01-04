@@ -5,8 +5,8 @@ using UnityEngine.Events;
 public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObject>
 {
     [SerializeField] protected int maxHP = 100;
-    private int currentHP = 0;
-    public int HP => currentHP;
+    private NetworkVariable<int> currentHP;
+    public int HP => currentHP.Value;
 
     [SerializeField] protected UnityEvent<NetworkObject> OnDestroyedEvent;
     [SerializeField] protected UnityEvent<NetworkObject, Vector3, int> OnDamagedEvent;
@@ -15,8 +15,9 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
     private HealthBar healthBar;
 
-    private void Start()
+    protected virtual void Awake()
     {
+        currentHP = new NetworkVariable<int>(maxHP);
         healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
     }
 
@@ -25,12 +26,12 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         if (isDestroyed)
             return;
-        
-        currentHP -= damage;
-        healthBar?.SetHealthBar(currentHP / maxHP);
+
+        currentHP.Value -= damage;
+        healthBar?.SetHealthBar(currentHP.Value / maxHP);
         OnDamagedEvent?.Invoke(performer, point, damage);
 
-        if(currentHP <= 0)
+        if(currentHP.Value <= 0)
         {
             isDestroyed = true;
             OnDie(performer);
@@ -60,19 +61,20 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     [ServerRpc] // 호스트가 모든 클라의 온대미지 호출
     private void TakeDamageServerRPC(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        TakeDamageClientRPC(damage, performerID, point);
+        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
+        //TakeDamageClientRPC(damage, performerID, point);
     }
     
     [ClientRpc] // 실질적 대미지 입히기
     private void TakeDamageClientRPC(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
-        OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
+        //OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
     }
 
     public void ModifyHP(int value)
     {
-        currentHP += value;
-        currentHP = Mathf.Clamp(currentHP, 0, maxHP);
-        healthBar?.SetHealthBar(currentHP / maxHP);
+        currentHP.Value += value;
+        currentHP.Value = Mathf.Clamp(currentHP.Value, 0, maxHP);
+        healthBar?.SetHealthBar(currentHP.Value / maxHP);
     }
 }

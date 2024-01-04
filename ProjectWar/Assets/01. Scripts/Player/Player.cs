@@ -7,6 +7,7 @@ public class Player : NetworkBehaviour
 {
     private int gold = 0;
     public int Gold => gold;
+    public int TotalGold = 0;
 
     public bool IsBlue = false;
 
@@ -29,9 +30,9 @@ public class Player : NetworkBehaviour
         GetComponent<PlayerSkillHandler>().Init();
 
         if (IsOwner)
-            IngameManager.Instance.OwnerPlayer = transform;
+            IngameManager.Instance.OwnerPlayer = this;
 
-        if(IsServer)
+        if(IsServer && IsOwner)
         {
             gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
             team = TeamType.Blue;
@@ -59,6 +60,8 @@ public class Player : NetworkBehaviour
 
     public void ModifyGold(int value)
     {
+        TotalGold += Mathf.Max(0, value);
+
         gold += value;
         gold = Mathf.Max(0, gold);
     }
