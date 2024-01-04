@@ -37,11 +37,13 @@ public class UnitController : NetworkBehaviour
         {
             gameObject.tag = unitManager.BlueUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.BlueLayer.value, 2);
+            transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.green;
         }
         else
         {
             gameObject.tag = unitManager.RedUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.RedLayer.value, 2);
+            transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
 
         gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");
@@ -59,8 +61,12 @@ public class UnitController : NetworkBehaviour
         Attack.InitCompo(this);
         Anim.InitCompo(this);
 
-        if(IsFriendly())
+        if (IsFriendly())
+        {
             transform.Find("UnitSightMask").gameObject.SetActive(true);
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+            MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
+        }
 
         InitState();
     }

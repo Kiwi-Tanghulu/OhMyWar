@@ -49,6 +49,9 @@ public class Player : NetworkBehaviour
 
         sightMask = transform.Find("PlayerSightMask").gameObject;
         sightMask.SetActive(IsOwner);
+
+        MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
     }
 
     private void Update()

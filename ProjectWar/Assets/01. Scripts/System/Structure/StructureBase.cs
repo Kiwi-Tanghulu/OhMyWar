@@ -1,4 +1,5 @@
 using Unity.Netcode;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,14 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         currentHP = new NetworkVariable<int>(maxHP);
         healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+    }
+
+    protected virtual void Start()
+    {
+        if(TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        }
     }
 
     // 실질적으로 데미지를 넣는 함수
