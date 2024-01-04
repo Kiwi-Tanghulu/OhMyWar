@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Knight3
   m_EditorClassIdentifier: 
   skillName: "[\uC561\uD2F0\uBE0C] \uC5C4\uB9C8\uC190\uD30C\uC774 "
-  skillContent: "\uB530\uB73B\uD55C \uC190\uAE38\uB85C \uC544\uAD70\uC758 \uBCF4\uD638\uB9C9\uC744
+  skillContent: "\uB530\uB73B\uD55C \uC190\uAE38\uB85C\n\uC544\uAD70\uC758 \uBCF4\uD638\uB9C9\uC744
     \uC0DD\uC131\uD569\uB2C8\uB2E4. "
+  skillIcon: {fileID: 21300000, guid: 7e90e810597984e9d992c5445b61875a, type: 3}

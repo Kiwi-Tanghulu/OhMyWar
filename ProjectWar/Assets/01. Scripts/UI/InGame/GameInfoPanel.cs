@@ -4,6 +4,9 @@ using UnityEngine;
 using DG.Tweening;
 public class GameInfoPanel : PanelUI
 {
+    [SerializeField] private GameObject knightPanel;
+    [SerializeField] private GameObject magicPanel;
+
     [SerializeField] private InputReader inputReader;
 
     [SerializeField] private RectTransform showTrm;
@@ -44,5 +47,17 @@ public class GameInfoPanel : PanelUI
             Hide();
         else
             Show();
+    }
+
+    public void SettingSkillIcon(CharacterType characterType)
+    {
+        if (characterType == CharacterType.Knight)
+        {
+            knightPanel.SetActive(true);
+        }
+        else
+        {
+            magicPanel.SetActive(true);
+        }
     }
 }

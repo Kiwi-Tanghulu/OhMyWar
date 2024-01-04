@@ -4,5 +4,6 @@ using UnityEngine;
 public class SkillInfoSO : ScriptableObject
 {
     public string skillName;
-    public string skillContent;
+    [TextArea] public string skillContent;
+    public Sprite skillIcon;
 }

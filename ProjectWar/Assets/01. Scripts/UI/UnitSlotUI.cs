@@ -8,8 +8,8 @@ public class UnitSlotUI : MonoBehaviour
     {
         SkillSlotUI ui = GetComponent<SkillSlotUI>();
         if(so.unitType == UnitType.Healer)
-            ui.SetContent($"체력 : {so.maxHealth}\n이동속도 : {so.moveSpeed}\n치유력 : {so.attackDamage}\n사정거리 : {so.attackDistance}");
+            ui.SetContent($"이름 : {so.unitType}\n체력 : {so.maxHealth}\n이동속도 : {so.moveSpeed}\n치유력 : {so.attackDamage}\n사정거리 : {so.attackDistance}");
         else
-            ui.SetContent($"체력 : {so.maxHealth}\n이동속도 : {so.moveSpeed}\n공격력 : {so.attackDamage}\n사정거리 : {so.attackDistance}");
+            ui.SetContent($"이름 : {so.unitType}\n체력 : {so.maxHealth}\n이동속도 : {so.moveSpeed}\n공격력 : {so.attackDamage}\n사정거리 : {so.attackDistance}");
     }
 }

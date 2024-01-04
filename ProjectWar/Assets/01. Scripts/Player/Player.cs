@@ -15,10 +15,17 @@ public class Player : NetworkBehaviour
     private List<PlayerComponent> components;
 
     public TeamType team { get; private set; }
+    public NetworkVariable<CharacterType> characterType = new NetworkVariable<CharacterType>();
 
     private GameObject sightMask = null;
 
     public List<StatData> Buffs = new List<StatData>();
+
+    public void SetCharacterType(CharacterType type)
+    {
+        characterType.Value = type;
+        characterType.SetDirty(true);
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -35,9 +42,14 @@ public class Player : NetworkBehaviour
         GetComponent<PlayerSkillHandler>().Init();
 
         if (IsOwner)
+        {
+            Debug.Log(characterType);
+            GameInfoPanel gameInfoPanel = FindObjectOfType<GameInfoPanel>();
+            gameInfoPanel.SettingSkillIcon(characterType.Value);
             IngameManager.Instance.OwnerPlayer = this;
+        }
 
-        if(OwnerClientId == GameManager.Instance.HostID.Value)
+        if (OwnerClientId == GameManager.Instance.HostID.Value)
         {
             gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
             team = TeamType.Blue;

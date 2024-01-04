@@ -122,9 +122,11 @@ public class IngameManager : NetworkBehaviour
         startedTime.Value = Time.time;
 
         BluePlayer = Instantiate(playerPrefabs[(int)blueType]);
+        BluePlayer.SetCharacterType(blueType);
         BluePlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.HostID.Value);
         
         RedPlayer = Instantiate(playerPrefabs[(int)redType]);
+        RedPlayer.SetCharacterType(redType);
         RedPlayer.GetComponent<NetworkObject>().SpawnAsPlayerObject(GameManager.Instance.GuestID.Value);
     }
 
