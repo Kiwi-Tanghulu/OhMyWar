@@ -39,6 +39,8 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         }
 
         controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent += MaxHealthValueChange;
+
+        currentHealth.OnValueChanged += SetHealthBar;
     }
 
     public override void OnNetworkDespawn()
@@ -136,4 +138,10 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         //actove shield effect;
         shieldEffect.SetActive(true);
     }
+
+    private void SetHealthBar(float prevHealth, float newHealth)
+    {
+        healthBar.SetHealthBar(newHealth / maxHealth);
+    }
+
 }

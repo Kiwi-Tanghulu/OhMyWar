@@ -2246,6 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info: {fileID: 11400000, guid: d6d0ad1980a160142a991a20c1122913, type: 2}
   <CurrentState>k__BackingField: 0
+  team: 0
 --- !u!114 &5201031032327328735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2360,8 +2361,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapPoint: {fileID: 923395124133025996}
-  redIcon: {fileID: 21300000, guid: 5dd3dd8c7d3872841aae89a3539bb5ef, type: 3}
-  blueIcon: {fileID: 21300000, guid: 5dd3dd8c7d3872841aae89a3539bb5ef, type: 3}
+  redIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  blueIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   redColor: {r: 1, g: 0, b: 0, a: 1}
   blueColor: {r: 0, g: 0, b: 1, a: 1}
 --- !u!114 &-8878630257159048608
