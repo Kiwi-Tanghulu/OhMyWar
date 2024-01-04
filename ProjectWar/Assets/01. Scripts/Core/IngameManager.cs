@@ -119,11 +119,11 @@ public class IngameManager : NetworkBehaviour
         EndGameServerRPC(winnerID);
     }
 
-    private void EndGame(bool isWin)
+    private void EndGame(bool isWin, float endTime)
     {
         OnGaming = false;
 
-        float gameTime = Time.time - startedTime.Value;
+        float gameTime = endTime - startedTime.Value;
         int earnedGold = OwnerPlayer.TotalGold;
 
         Debug.Log($"GameTime : {TimeSpan.FromSeconds(gameTime).ToString("hh':'mm':'ss")} / IsWin {isWin}");
@@ -133,13 +133,13 @@ public class IngameManager : NetworkBehaviour
     [ServerRpc]
     private void EndGameServerRPC(ulong winnerID)
     {
-        EndGameClientRPC(winnerID);
+        EndGameClientRPC(winnerID, Time.time);
     }
 
     [ClientRpc]
-    private void EndGameClientRPC(ulong winnerID)
+    private void EndGameClientRPC(ulong winnerID, float endTime)
     {
         bool isWin = NetworkManager.Singleton.LocalClientId == winnerID;
-        EndGame(isWin);
+        EndGame(isWin, endTime);
     }
 }
