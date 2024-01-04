@@ -45,7 +45,6 @@ public class Nexus : StructureBase, IUnitSpawner
             else if(attackerID != performer.OwnerClientId) // 다른 애가 때린 거라면
             {
                 ModifyHP(damage); // 힐 하기
-                OnDamagedEvent?.Invoke(performer, point, damage);
 
                 if(HP >= maxHP) // 공격자 전환
                     attackerID = performer.OwnerClientId;
@@ -53,7 +52,6 @@ public class Nexus : StructureBase, IUnitSpawner
             else
             {
                 ModifyHP(-damage);
-                OnDamagedEvent?.Invoke(performer, point, damage);
 
                 if(HP <= 0)
                 {

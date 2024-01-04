@@ -29,7 +29,6 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
         currentHP.Value -= damage;
         healthBar?.SetHealthBar(currentHP.Value / maxHP);
-        OnDamagedEvent?.Invoke(performer, point, damage);
 
         if(currentHP.Value <= 0)
         {
@@ -62,13 +61,15 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     private void TakeDamageServerRPC(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
         OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
-        //TakeDamageClientRPC(damage, performerID, point);
+        TakeDamageClientRPC(damage, performerID, point);
     }
     
     [ClientRpc] // 실질적 대미지 입히기
     private void TakeDamageClientRPC(int damage = 0, ulong performerID = 0, Vector3 point = default)
     {
         //OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
+        OnDamagedEvent?.Invoke(null, point, damage);
+
     }
 
     public void ModifyHP(int value)
