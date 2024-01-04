@@ -2596,7 +2596,7 @@ MonoBehaviour:
   clientProjectile: {fileID: 3127567777973484262, guid: a066c8235f0008b49bf735e95eae845f, type: 3}
   serverProjectile: {fileID: 4513646826079134591, guid: 6903b1ec597993147b2ae57cba799510, type: 3}
   firePosition: {fileID: 1535477088170604050}
-  projectileSpeed: 3
+  projectileSpeed: 10
 --- !u!114 &4208101056979735424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2612,6 +2612,7 @@ MonoBehaviour:
   soundNames: []
   soundName: SlashSound
   onShot: 1
+  delay: 0
   aud: {fileID: 7140885036062855302}
 --- !u!1 &4097874783068788441
 GameObject:
@@ -3860,6 +3861,7 @@ MonoBehaviour:
   soundNames: []
   soundName: HornSound
   onShot: 1
+  delay: 0
   aud: {fileID: 7140885036062855302}
 --- !u!1 &5965074286656431385
 GameObject:
