@@ -58,16 +58,6 @@ public class Player : NetworkBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(IsOwner == false)
-            return;
-
-        if (Keyboard.current.qKey.isPressed)
-            ModifyGold(1000);
-            
-    }
-
     public override void OnNetworkDespawn()
     {
         components.ForEach(component => component?.Release());
