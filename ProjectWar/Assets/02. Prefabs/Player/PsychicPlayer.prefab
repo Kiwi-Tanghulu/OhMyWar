@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5ae1ed839ae6564f9770630f3d9a4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cost: 700
+  cost: 200
   OnSkillActivedEvent:
     m_PersistentCalls:
       m_Calls:
@@ -5397,6 +5397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalGold: 0
   IsBlue: 0
+  characterType:
+    m_InternalValue: 0
   Buffs: []
 --- !u!114 &8557040919050872281
 MonoBehaviour:
