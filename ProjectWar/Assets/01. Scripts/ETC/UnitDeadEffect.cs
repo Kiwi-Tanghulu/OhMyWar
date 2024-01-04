@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class UnitDeadEffect : MonoBehaviour
+public class UnitDeadEffect : NetworkBehaviour
 {
+    private NetworkObject unit;
+
+    public void SetUnit(UnitController _unit)
+    {
+        unit = _unit.GetComponent<NetworkObject>();
+    }
+
     public void UnitDead()
     {
-        transform.root.GetComponent<NetworkObject>().Despawn();
+        if(IsServer)
+        {
+            unit.Despawn();
+        }
     }
 }
