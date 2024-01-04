@@ -35,6 +35,10 @@ public class IngameManager : NetworkBehaviour
 
     private NetworkVariable<float> startedTime = new NetworkVariable<float>();
 
+    public List<Transform> BluePoint;
+    public List<Transform> NexusPoint;
+    public List<Transform> RedPoint;
+
     public void RegisterPlayer(Player player)
     {
         if(player.IsBlue)
@@ -43,9 +47,18 @@ public class IngameManager : NetworkBehaviour
             RedPlayer = player;
 
         if (IsServer)
+        {
             castle = BlueCastle;
+            BlueCastle.SetSightMask(true);
+            RedCastle.SetSightMask(false);
+        }
         else
+        {
             castle = RedCastle;
+            BlueCastle.SetSightMask(false);
+            RedCastle.SetSightMask(true);
+        }
+
     }
 
     public void ToggleCurrentSpawner(Player player, int lineIndex)

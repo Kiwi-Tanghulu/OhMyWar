@@ -59,6 +59,9 @@ public class UnitController : NetworkBehaviour
         Attack.InitCompo(this);
         Anim.InitCompo(this);
 
+        if(IsFriendly())
+            transform.Find("UnitSightMask").gameObject.SetActive(true);
+
         InitState();
     }
 
@@ -76,9 +79,6 @@ public class UnitController : NetworkBehaviour
             return;
 
         states[CurrentState].UpdateState();
-
-        if (Input.GetKeyUp(KeyCode.Q))
-            Health.Stun();
     }
 
     public void SetOffset(Vector2 offset)
