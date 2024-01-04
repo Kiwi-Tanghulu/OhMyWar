@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +25,8 @@ public abstract class UnitAttack : UnitComponent
     public float AttackDistance => attackDistance;
     public float AttackDelay => attackDelay;
     public bool CanAttack => canAttack;
+
+    public Action OnAttackStartEvetn;
 
     public override void InitCompo(UnitController _controller)
     {

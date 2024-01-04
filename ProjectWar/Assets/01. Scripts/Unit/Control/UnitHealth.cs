@@ -25,7 +25,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     private void Awake()
     {
         currentHealth = new NetworkVariable<float>();
-        healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        healthBar = transform.Find("Visual/HealthBar").GetComponent<HealthBar>();
     }
 
     public override void InitCompo(UnitController _controller)

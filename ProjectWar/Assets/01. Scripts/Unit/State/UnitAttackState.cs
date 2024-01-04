@@ -45,6 +45,7 @@ public class UnitAttackState : UnitState
     private void StartAttack()
     {
         isAttack = true;
+        controller.Attack.OnAttackStartEvetn?.Invoke();
     }
 
     private void EndAttack()
