@@ -1186,8 +1186,9 @@ GameObject:
   - component: {fileID: 4952446992901612478}
   - component: {fileID: 5396956243545805694}
   - component: {fileID: 7311239265908995491}
+  - component: {fileID: 6143276920463536987}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: WalletPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1253,6 +1254,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6143276920463536987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214547295916329392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c029f05409469fb41ad5154245aa048b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiType: 0
+  <IsOpen>k__BackingField: 1
+  <IsWorld>k__BackingField: 0
+  <IsPooling>k__BackingField: 0
+  goldText: {fileID: 3556178191544291213}
+  upgradeButton: {fileID: 5497561281078830440}
+  factors:
+  - {x: 100, y: 1.2, z: 1.2}
+  - {x: 500, y: 1.2, z: 1.2}
+  - {x: 1000, y: 1.2, z: 1.2}
+  - {x: 1500, y: 1.2, z: 1.2}
 --- !u!1 &3536284121361273954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1745,11 +1769,23 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 7730128316071308214}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6143276920463536987}
+        m_TargetAssemblyTypeName: WalletPanel, Assembly-CSharp
+        m_MethodName: UpgradeWallet
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &3997065573831179174
 GameObject:
   m_ObjectHideFlags: 0

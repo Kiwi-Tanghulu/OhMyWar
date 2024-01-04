@@ -8,6 +8,7 @@ public class Player : NetworkBehaviour
     private int gold = 0;
     public int Gold => gold;
     public int TotalGold = 0;
+    public int MaxGold { get; private set; } = 500;
 
     public bool IsBlue = false;
 
@@ -60,9 +61,15 @@ public class Player : NetworkBehaviour
 
     public void ModifyGold(int value)
     {
-        TotalGold += Mathf.Max(0, value);
+        int prevGold = gold;
 
         gold += value;
-        gold = Mathf.Max(0, gold);
+        gold = Mathf.Clamp(gold, 0, MaxGold);
+        TotalGold += Mathf.Max(0, gold - prevGold);
+    }
+
+    public void SetMaxGold(int value)
+    {
+        MaxGold = value;
     }
 }

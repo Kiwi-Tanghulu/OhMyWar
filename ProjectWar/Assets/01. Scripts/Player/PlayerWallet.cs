@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class PlayerWallet : PlayerComponent
 {
-	private int increaseAmount = 1;
+	private int increaseAmount = 10;
 
     private float lastEarnTime = 0f;
     
-    public event Action<int> OnGoldChanged;
+    public event Action<int, int> OnGoldChanged;
 
     public override void Init(Player player)
     {
@@ -16,7 +16,7 @@ public class PlayerWallet : PlayerComponent
         if(player.IsOwner == false)
             Destroy(this);
 
-        GameObject.Find("MainCanvas").transform.Find("WalletPanel").GetComponent<WalletPanel>().Init(this);
+        GameObject.Find("Canvas").transform.Find("InGameUI/WalletPanel").GetComponent<WalletPanel>().Init(this);
     }
 
     private void Update()
@@ -25,7 +25,7 @@ public class PlayerWallet : PlayerComponent
             return;
         
         player.ModifyGold(increaseAmount);
-        OnGoldChanged?.Invoke(player.Gold);
+        OnGoldChanged?.Invoke(player.Gold, player.MaxGold);
         lastEarnTime = Time.time;
     }
 
@@ -35,9 +35,14 @@ public class PlayerWallet : PlayerComponent
         increaseAmount = Mathf.Max(0, increaseAmount);
     }
 
-    public void ModifyFactor(float factor)
+    public void ModifyAmountFactor(float factor)
     {
         increaseAmount = (int)(increaseAmount * factor);
         increaseAmount = Mathf.Max(0, increaseAmount);
+    }
+
+    public void ModifyMaxGoldFactor(float factor)
+    {
+        player.SetMaxGold((int)(player.MaxGold * factor));
     }
 }
