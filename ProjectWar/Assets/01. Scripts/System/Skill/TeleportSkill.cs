@@ -31,6 +31,8 @@ public class TeleportSkill : SkillBase
     private float currentPercent;
     private Vector2 playerTeleportPosition;
     private int currentLineIndex;
+    private int lineIndex;
+
 
     private TelePortPos[] currentTeleportPos;
     private PlayerMovement playerMovement = null;
@@ -85,7 +87,7 @@ public class TeleportSkill : SkillBase
 
         currentLineIndex = player.transform.position.y > maxMidY ? 0 : player.transform.position.y < minMidY ? 2 : 1;
         Debug.Log(currentLineIndex);
-        int lineIndex = 0;
+        lineIndex = 0;
         if (currentLineIndex == 2)
             lineIndex = 1;
         else if (currentLineIndex == 1)
@@ -148,6 +150,7 @@ public class TeleportSkill : SkillBase
             if (IsHost)
             {
                 units[i].GetComponent<NetworkTransform>().Teleport(player.transform.position + (Vector3)unitDistances[i],Quaternion.identity,new Vector3(1f,1f,1f));
+                units[i].GetComponent<UnitMovement>().SetLine(lineIndex);
                 Debug.Log("¿Å±è");
             }
         }
