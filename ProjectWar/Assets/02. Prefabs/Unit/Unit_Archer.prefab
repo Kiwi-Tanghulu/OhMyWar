@@ -1019,13 +1019,13 @@ GameObject:
   - component: {fileID: 2260915029835611722}
   - component: {fileID: 982808970122486043}
   - component: {fileID: 493735604810835029}
-  - component: {fileID: 9156456806011927699}
   - component: {fileID: 3043184988132398309}
   - component: {fileID: 6068673639590340615}
   - component: {fileID: 2721048401456666576}
   - component: {fileID: 2270900035252581892}
   - component: {fileID: 6618794476235531428}
   - component: {fileID: 4484947893500987300}
+  - component: {fileID: 1843765272096188963}
   m_Layer: 5
   m_Name: Unit_Archer
   m_TagString: Untagged
@@ -1163,45 +1163,6 @@ MonoBehaviour:
   info: {fileID: 11400000, guid: 7d61baec56dae1648a4d99497b9153f2, type: 2}
   <CurrentState>k__BackingField: 0
   team: 0
---- !u!114 &9156456806011927699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712850505771413865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 217d5fd52a5672241a4c26fb59e7f8f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackDistance: 0
-  attackDelay: 0
-  serchDelay: 0
-  canAttack: 0
-  shouldAttack: 0
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  attackEffect: {fileID: 0}
-  soundName: 
-  OnAttackStartEvetn:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5653586541900500667}
-        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &3043184988132398309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,6 +1367,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1843765272096188963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712850505771413865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35eb76c0d0bf01b4c99d64f94a740db0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  attackDistance: 0
+  attackDelay: 0
+  serchDelay: 0
+  canAttack: 1
+  shouldAttack: 0
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
+  attackEffect: {fileID: 0}
+  soundName: 
+  OnAttackStartEvetn:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5653586541900500667}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2311009015124977836
 GameObject:
   m_ObjectHideFlags: 0

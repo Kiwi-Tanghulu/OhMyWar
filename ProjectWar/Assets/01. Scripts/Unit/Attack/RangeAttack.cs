@@ -29,7 +29,8 @@ public class RangeAttack : UnitAttack
     [ClientRpc]
     private void CreateProjectileClientRpc()
     {
-        GameObject pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
+        Projectile pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
+        pro.Init(target, (target.transform.position - transform.position).normalized);
     }
 
     private IEnumerator Delay(IDamageable<NetworkObject> attackedObj)

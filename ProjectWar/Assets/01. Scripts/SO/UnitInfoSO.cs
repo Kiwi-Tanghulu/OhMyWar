@@ -29,7 +29,7 @@ public class UnitInfoSO : ScriptableObject
     public int attackDelay;
     public float takeDamageDelay;
     public int serchDelay;
-    public GameObject projectile;
+    public Projectile projectile;
     public LayerMask targetLayer;
     public ParticleSystem attackEffect;
 
