@@ -96,6 +96,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
             if(shieldAmount <= 0)
             {
                 shieldAmount = Mathf.Max(shieldAmount, 0);
+                shieldEffect.SetActive(false);
                 //something
             }
         }
@@ -133,5 +134,6 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         shieldAmount += value;
 
         //actove shield effect;
+        shieldEffect.SetActive(true);
     }
 }

@@ -13,6 +13,7 @@ public abstract class UnitAttack : UnitComponent
     [SerializeField] protected LayerMask targetLayer;
     [SerializeField] protected GameObject target;
     [SerializeField] protected ParticleSystem attackEffect;
+    [SerializeField] protected string soundName;
 
     private WaitForSeconds attackWfs;
     private WaitForSeconds serchWfs;
