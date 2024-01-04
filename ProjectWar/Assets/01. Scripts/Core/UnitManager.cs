@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -15,6 +16,8 @@ public class UnitManager : NetworkBehaviour
     public string RedUnitTag { get; private set; } = "RedUnit";
     [field: SerializeField]
     public string BlueUnitTag { get; private set; } = "BlueUnit";
+
+    public event Action UnitSpawnEvent;
 
     private void Awake()
     {
@@ -34,7 +37,8 @@ public class UnitManager : NetworkBehaviour
 
     public void SpawnUnit(UnitType type, ulong clientId, Vector2 spawnPosition, Vector2 targetPosition)
     {
-        Vector2 offset = new Vector2(0, Random.Range(-2f, 2f));
+        Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-2f, 2f));
+        UnitSpawnEvent?.Invoke();
         SpawnUnitServerRpc(type, clientId, spawnPosition, targetPosition, offset);
     }
 

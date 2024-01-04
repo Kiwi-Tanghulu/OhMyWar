@@ -14,6 +14,7 @@ public class UnitMovement : UnitComponent
 
     public bool ShouldMove => shouldMove;
     public bool IsArrived => isArrived;
+    public Vector2 TargetPos => targetPosition;
 
     public override void InitCompo(UnitController _controller)
     {

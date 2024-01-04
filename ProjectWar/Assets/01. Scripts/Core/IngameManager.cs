@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+
 public class IngameManager : NetworkBehaviour
 {
     private static IngameManager instance;
@@ -34,6 +35,10 @@ public class IngameManager : NetworkBehaviour
     public Castle castle { get; private set; } = null;
 
     private NetworkVariable<float> startedTime = new NetworkVariable<float>();
+
+    public List<Transform> BluePoint;
+    public List<Transform> NexusPoint;
+    public List<Transform> RedPoint;
 
     public void RegisterPlayer(Player player)
     {
