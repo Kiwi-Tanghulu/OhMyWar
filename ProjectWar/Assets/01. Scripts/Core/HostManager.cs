@@ -14,7 +14,7 @@ public class HostManager
     public event Action OnRoomCreatedEvent;
 
     private Allocation allocation;
-    private string joinCode;
+    public string joinCode { get; private set; }
 
     private const int MaxConnection = 2;
     
