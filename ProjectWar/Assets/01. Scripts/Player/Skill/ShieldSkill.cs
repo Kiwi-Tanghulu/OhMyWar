@@ -6,7 +6,7 @@ public class ShieldSkill : SkillBase
 {
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float radius;
-    [SerializeField] HitEffect effect;
+    [SerializeField] AnimationEffect effect;
 
     public override void OnNetworkSpawn()
     {
@@ -19,7 +19,7 @@ public class ShieldSkill : SkillBase
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll((Vector2)transform.position, radius, targetLayer);
 
-        HitEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
+        AnimationEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
         _effect.Play();
 
         for (int i = 0; i < cols.Length; i++)
