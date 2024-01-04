@@ -20,6 +20,8 @@ public class PlayerMovement : PlayerComponent
 
     public bool Moveable { get; private set; } = true;
 
+    public bool IsTeleport { get; private set; } = false;
+
     private bool isMove = false;
     private PlayerAnimator playerAnimator;
 
@@ -51,7 +53,7 @@ public class PlayerMovement : PlayerComponent
 
     private void FixedUpdate()
     {
-        if(Moveable == false)
+        if(Moveable == false || IsTeleport == true)
             return;
 
         moveDirection = targetPosition - (Vector2)transform.position;
@@ -115,5 +117,10 @@ public class PlayerMovement : PlayerComponent
         Moveable = able;
         if(Moveable == false && player.IsOwner)
             playerAnimator.AServerRPC(false);        
+    }
+
+    public void SetIsTeleport(bool value)
+    {
+        IsTeleport = value;
     }
 }

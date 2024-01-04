@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 using System.Linq;
-
+using DG.Tweening;
 [System.Serializable]
 public class TelePortPos
 {
@@ -12,6 +12,7 @@ public class TelePortPos
 }
 public class TeleportSkill : SkillBase
 {
+    [SerializeField] private float magicCircleTime;
     [SerializeField] private float maxMidY;
     [SerializeField] private float minMidY;
     [SerializeField] private TelePortPos[] blueTelePortPos;
@@ -21,6 +22,7 @@ public class TeleportSkill : SkillBase
     [SerializeField] private LayerMask targetLayer;
 
     [SerializeField] private GameObject teleportEffect;
+    [SerializeField] private GameObject magicCircleEffect;
 
     private List<Transform> units = new List<Transform>();
     private List<Vector2> unitDistances = new List<Vector2>();
@@ -29,7 +31,7 @@ public class TeleportSkill : SkillBase
     private int currentLineIndex;
 
     private TelePortPos[] currentTeleportPos;
-
+    private PlayerMovement playerMovement = null;
     protected override bool ActiveSkill()
     {
         Debug.Log("TeleportStart");
@@ -88,6 +90,11 @@ public class TeleportSkill : SkillBase
            currentTeleportPos[lineIndex].startPos + currentPercent * (currentTeleportPos[lineIndex].endPos - currentTeleportPos[lineIndex].startPos);
 
         StartCoroutine(TelePortStart());
+
+        if(playerMovement == null)
+            playerMovement = player.GetComponent<PlayerMovement>();
+
+        playerMovement.SetIsTeleport(true);
         
         return true;
     }
@@ -101,7 +108,11 @@ public class TeleportSkill : SkillBase
     private IEnumerator TelePortStart()
     {
         Debug.Log("TeleportEffectCoru");
-        if(units != null)
+
+        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f,0f,90f));
+
+
+        if (units != null)
         {
             Debug.Log("10");
             foreach (var unit in units)
@@ -124,6 +135,8 @@ public class TeleportSkill : SkillBase
 
     private IEnumerator TelePortEnd()
     {
+        Instantiate(magicCircleEffect, player.transform.position, Quaternion.Euler(0f,0f,90f));
+
         yield return new WaitForSeconds(1f);
 
         Instantiate(teleportEffect, player.transform.position, Quaternion.identity);
@@ -141,5 +154,6 @@ public class TeleportSkill : SkillBase
             units[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(teleportDelay);
         }
+        playerMovement.SetIsTeleport(false);
     }
 }
