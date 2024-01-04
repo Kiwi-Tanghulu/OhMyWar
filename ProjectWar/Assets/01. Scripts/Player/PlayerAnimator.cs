@@ -6,9 +6,11 @@ using UnityEngine;
 public class PlayerAnimator : NetworkBehaviour
 {
     private Animator animator;
+    private PlayerMovement playerMovement;
 
     private void Awake()
     {
+        playerMovement = transform.parent.GetComponent<PlayerMovement>();
         animator = GetComponent<Animator>();
     }
 
@@ -32,5 +34,9 @@ public class PlayerAnimator : NetworkBehaviour
     public void BClientRPC(bool value)
     {
         PlayMoveAnimation(value);
+    }
+    public void AnimationEndTrigger()
+    {
+        playerMovement.SetMoveable(true);
     }
 }
