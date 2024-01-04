@@ -31,7 +31,7 @@ public class TeleportSkill : SkillBase
         Debug.Log("TeleportStart");
 
         List<Transform> targetUnits = new List<Transform>();
-        units = null;
+        units = new List<Transform>();
         unitDistances = new List<Vector2>();
         currentPercent = 0f;
         string target = player.IsBlue ? "BlueUnit" : "RedUnit";
@@ -47,6 +47,7 @@ public class TeleportSkill : SkillBase
 
         if(targetUnits != null)
         {
+            Debug.Log("target unit count : " + targetUnits.Count);
             units = targetUnits.OrderBy(x => Vector2.Distance(player.transform.position, x.transform.position)).ToList();
             foreach (Transform unit in units)
             {
@@ -84,13 +85,16 @@ public class TeleportSkill : SkillBase
         Debug.Log("TeleportEffectCoru");
         if(units != null)
         {
+            Debug.Log("10");
             foreach (var unit in units)
             {
                 Instantiate(teleportEffect, unit.transform.position, Quaternion.identity);
                 unit.gameObject.SetActive(false);
                 yield return new WaitForSeconds(teleportDelay);
+                Debug.Log("11");
             }
         }
+
         if (IsHost)
         {
             Debug.Log(playerTeleportPosition);

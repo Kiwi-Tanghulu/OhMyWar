@@ -764,11 +764,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6ca8d030-e554-4cb7-a36c-f2ca33c671ea
+  cloudProjectId: 5f6ac809-2d57-4c1c-8593-1c5b585e247e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: ProjectWar
-  organizationId: unity_06psh0501
+  organizationId: jiseong613
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
