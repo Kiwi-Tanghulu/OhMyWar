@@ -14,9 +14,9 @@ public class UnitDeadEffect : NetworkBehaviour
 
     public void UnitDead()
     {
-        if(IsServer)
+        if (GameManager.Instance.HostID.Value == NetworkManager.Singleton.LocalClientId)
         {
-            unit.Despawn();
+            unit.Despawn(true);
         }
     }
 }

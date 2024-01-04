@@ -65,6 +65,7 @@ public class Player : NetworkBehaviour
 
         if (Keyboard.current.qKey.isPressed)
             ModifyGold(1000);
+            
     }
 
     public override void OnNetworkDespawn()

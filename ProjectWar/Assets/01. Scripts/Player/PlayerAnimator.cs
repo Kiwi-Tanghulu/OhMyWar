@@ -35,6 +35,7 @@ public class PlayerAnimator : NetworkBehaviour
     {
         PlayMoveAnimation(value);
     }
+
     public void AnimationEndTrigger()
     {
         playerMovement.SetMoveable(true);

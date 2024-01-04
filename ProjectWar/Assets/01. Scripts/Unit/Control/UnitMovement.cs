@@ -14,6 +14,8 @@ public class UnitMovement : UnitComponent
 
     public bool ShouldMove => shouldMove;
     public bool IsArrived => isArrived;
+    public int LineIndex { get; private set; } = 0;
+    public int TargetPointIndex { get; private set; } = -1;
 
     public override void InitCompo(UnitController _controller)
     {
@@ -24,7 +26,7 @@ public class UnitMovement : UnitComponent
 
         visualTrm = transform.Find("Visual");
 
-        controller.Stat.GetStat(UnitStatType.moveSpeed).OnValueChangeEvent += MoveSpeedValueChange; 
+        controller.Stat.GetStat(UnitStatType.moveSpeed).OnValueChangeEvent += MoveSpeedValueChange;
     }
 
     public override void OnNetworkDespawn()
@@ -51,6 +53,18 @@ public class UnitMovement : UnitComponent
         }
     }
 
+    public void SetLine(int lineIndex)
+    {
+        LineIndex = lineIndex;
+
+        if(TargetPointIndex == -1)
+        {
+            TargetPointIndex = 1;
+        }
+
+        SetTargetPosition(IngameManager.Instance.GetLinePoint(lineIndex, TargetPointIndex).position);
+    }
+
     public void Move()
     {
         if (!IsServer)
@@ -66,9 +80,14 @@ public class UnitMovement : UnitComponent
         if(Vector2.Distance(transform.position, targetPosition) <= stopDistance)
         {
             if (gameObject.tag == UnitManager.Instance.BlueUnitTag)
-                SetTargetPosition(IngameManager.Instance.RedCastle.SpawnPosition.position);
+                TargetPointIndex++;
             else
-                SetTargetPosition(IngameManager.Instance.BlueCastle.SpawnPosition.position);
+                TargetPointIndex--;
+
+            if(!(TargetPointIndex < 0 || TargetPointIndex > IngameManager.Instance.MaxLinePointIndex))
+                SetTargetPosition(IngameManager.Instance.GetLinePoint(LineIndex, TargetPointIndex).position);
+            else
+                SetTargetPosition(transform.position);
         }
     }
 
