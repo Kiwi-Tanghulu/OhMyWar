@@ -3003,7 +3003,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 256130371
   m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingOrder: 100
   m_SortAtRoot: 0
 --- !u!114 &7055062900982982330
 MonoBehaviour:
@@ -3131,6 +3131,7 @@ MonoBehaviour:
     m_Bits: 0
   radius: 5
   offset: {x: 0, y: 0}
+  effect: {fileID: 1250255920348657188, guid: df85451eb2829bb4faff5dcb7b23c95c, type: 3}
 --- !u!114 &5657881240591419711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3208,7 +3209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 866710321
+  GlobalObjectIdHash: 444774372
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3849,6 +3850,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 3.5
+  effect: {fileID: 4171253804667647213, guid: 970191f1d5b56c84591080c8e862e668, type: 3}
 --- !u!114 &1968481882249913616
 MonoBehaviour:
   m_ObjectHideFlags: 0

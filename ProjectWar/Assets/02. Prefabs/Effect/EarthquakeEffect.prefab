@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2354972480553529332}
   - component: {fileID: 2840139618341452040}
   - component: {fileID: 3741636370284652274}
+  - component: {fileID: 1250255920348657188}
   m_Layer: 0
   m_Name: EarthquakeEffect
   m_TagString: Untagged
@@ -106,3 +107,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1250255920348657188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620689009107721647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9dd09419156194eb6e51c8d266c877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

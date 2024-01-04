@@ -9,7 +9,7 @@ public class HealthBar : MonoBehaviour
     private Vector2 originBarSize;
     private Vector2 originBarPos;
 
-    private void Start()
+    private void Awake()
     {
         bar = transform.Find("Bar");
 

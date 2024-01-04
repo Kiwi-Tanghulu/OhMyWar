@@ -1740,7 +1740,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6838854757205540670}
   m_Father: {fileID: 6258505910636102474}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7000530827984498494
@@ -1773,7 +1774,7 @@ MonoBehaviour:
         m_CallState: 2
   clientProjectile: {fileID: 3127567777973484262, guid: a066c8235f0008b49bf735e95eae845f, type: 3}
   serverProjectile: {fileID: 4513646826079134591, guid: 6903b1ec597993147b2ae57cba799510, type: 3}
-  firePosition: {fileID: 0}
+  firePosition: {fileID: 6838854757205540670}
   projectileSpeed: 10
 --- !u!114 &3006350068891778722
 MonoBehaviour:
@@ -1791,7 +1792,7 @@ MonoBehaviour:
   soundName: SlashSound
   onShot: 1
   delay: 0
-  aud: {fileID: 0}
+  aud: {fileID: 3234085081246459823}
 --- !u!1 &2654089334897754454
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,6 +3172,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4753153751987657116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6838854757205540670}
+  m_Layer: 0
+  m_Name: FirePosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6838854757205540670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753153751987657116}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.078, y: 1.039, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3342753419023875324}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4768401486205208481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4977,7 +5009,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 256130371
   m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingOrder: 100
   m_SortAtRoot: 0
 --- !u!114 &7210892757353084930
 MonoBehaviour:

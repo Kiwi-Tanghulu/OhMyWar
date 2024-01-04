@@ -36,7 +36,7 @@ public class HealAttack : UnitAttack
                 attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
                 if (hitEffect != null)
                 {
-                    HitEffect atkeffect = Instantiate(hitEffect);
+                    AnimationEffect atkeffect = Instantiate(hitEffect);
                     atkeffect.transform.position = target.transform.position;
                     atkeffect.Play();
                 }

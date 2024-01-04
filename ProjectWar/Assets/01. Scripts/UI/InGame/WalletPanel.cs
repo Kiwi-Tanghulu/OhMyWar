@@ -14,10 +14,12 @@ public class WalletPanel : PanelUI
     private int level = 1;
 
     private PlayerWallet wallet;
+    private Player player;
 
-    public void Init(PlayerWallet wallet)
+    public void Init(PlayerWallet wallet, Player player)
     {
         this.wallet= wallet;
+        this.player = player;
         wallet.OnGoldChanged += HandleGoldChanged;
     }
 
@@ -36,6 +38,8 @@ public class WalletPanel : PanelUI
     {
         level++;
         level = Mathf.Min(level, factors.Count);
+
+        player.ModifyGold(-factors[level - 1].z);        
 
         // 계수는 수정하자
         wallet.SetMaxGold(factors[level - 1].x);

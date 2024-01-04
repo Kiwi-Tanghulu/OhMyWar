@@ -18,7 +18,7 @@ public abstract class UnitAttack : UnitComponent
     //protected ParticleSystem attackEffect;
     protected ParticleSystem selfAttackEffect;
     protected string soundName;
-    public HitEffect hitEffect;
+    public AnimationEffect hitEffect;
 
     private WaitForSeconds attackWfs;
     private WaitForSeconds serchWfs;
@@ -101,7 +101,7 @@ public abstract class UnitAttack : UnitComponent
 
         if(hitEffect != null)
         {
-            HitEffect effect = Instantiate(hitEffect);
+            AnimationEffect effect = Instantiate(hitEffect);
             effect.transform.position = target.transform.position;
             effect.Play();
         }

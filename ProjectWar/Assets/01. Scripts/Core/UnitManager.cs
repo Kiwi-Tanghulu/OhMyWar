@@ -44,6 +44,7 @@ public class UnitManager : NetworkBehaviour
         Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-1.5f, 1.5f));
         UnitSpawnEvent?.Invoke();
         SpawnUnitServerRpc(type, clientId, lineIndex, pointIndex, offset);
+        IngameManager.Instance.OwnerPlayer.ModifyGold(-(int)unitDictionary[type].Info.cost);
     }
 
     public void DespawnUnit(UnitController unit)
