@@ -104,13 +104,23 @@ public class Nexus : StructureBase, IUnitSpawner
         {
             IngameManager.Instance.BluePlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = blueSprite;
-            sightMask.SetActive(IsHost);
+
+            if(IsHost)
+            {
+                StopAllCoroutines();
+                sightMask.SetActive(IsHost);
+            }
         }
         else
         {
             IngameManager.Instance.RedPlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = redSprite;
-            sightMask.SetActive(!IsHost);
+
+            if(!IsHost)
+            {
+                StopAllCoroutines();
+               sightMask.SetActive(!IsHost);
+            }
         }
 
         Debug.Log("chagne owner");

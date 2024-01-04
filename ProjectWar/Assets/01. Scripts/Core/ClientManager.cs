@@ -37,6 +37,13 @@ public class ClientManager
         RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
         transport.SetRelayServerData(relayServerData);
 
+        // NetworkManager.Singleton.OnServerStopped += HandleServerStopped;
+
         NetworkManager.Singleton.StartClient();
+    }
+
+    private void HandleServerStopped(bool value)
+    {
+        Debug.Log($"Server Stopped / => {value}");
     }
 }
