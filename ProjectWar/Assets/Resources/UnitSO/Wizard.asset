@@ -16,7 +16,7 @@ MonoBehaviour:
   cost: 15
   image: {fileID: 21300000, guid: 60c50c50d98e97046ac46b1a91c85364, type: 3}
   moveSpeed: 2
-  stopDistance: 0
+  stopDistance: 1
   maxHealth: 15
   attackDamage: 25
   attackDistance: 5
