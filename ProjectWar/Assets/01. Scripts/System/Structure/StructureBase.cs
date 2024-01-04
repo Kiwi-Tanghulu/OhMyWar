@@ -52,6 +52,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         OnDestroyedEvent?.Invoke(performer);
         TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
+        
         if (TeamManager.Instance.IsFriendly(gameObject))
         {
             MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());

@@ -19,6 +19,7 @@ public class Nexus : StructureBase, IUnitSpawner
     [Space(10f)]
     [SerializeField] Sprite blueSprite = null;
     [SerializeField] Sprite redSprite = null;
+    [SerializeField] private MinimapImage minimapImage;
 
     [Space(10f)]
     public List<StatData> Buffs = new List<StatData>();
@@ -79,13 +80,16 @@ public class Nexus : StructureBase, IUnitSpawner
                 {
                     isDestroyed = true;
                     OnDestroyedEvent?.Invoke(performer);
-                    TeamManager.Instance.ChangeTeam(gameObject, performer.gameObject);
+                    
                     OnDie(performer);
                 }
             }
         }
         else
+        {
+
             base.OnDamaged(damage, performer, point);        
+        }
     }
 
     public override void OnDie(NetworkObject performer)
@@ -93,6 +97,7 @@ public class Nexus : StructureBase, IUnitSpawner
         StopAllCoroutines();
 
         ChangeOwner(performer);
+        IngameManager.Instance.ToggleCurrentSpawner(IngameManager.Instance.OwnerPlayer, line);
         base.OnDie(performer);
     }
 
@@ -101,13 +106,13 @@ public class Nexus : StructureBase, IUnitSpawner
     {
         gameObject.layer = value;
         sightMask.SetActive(false);
-        
-        if(1 << (gameObject.layer) == TeamManager.Instance.BlueLayer)
+
+        if (1 << (gameObject.layer) == TeamManager.Instance.BlueLayer)
         {
             IngameManager.Instance.BluePlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = blueSprite;
-
-            if(IsHost)
+            minimapImage.ChangeImage(TeamType.Blue);
+            if (IsHost)
             {
                 StopAllCoroutines();
                 sightMask.SetActive(IsHost);
@@ -117,8 +122,8 @@ public class Nexus : StructureBase, IUnitSpawner
         {
             IngameManager.Instance.RedPlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = redSprite;
-
-            if(!IsHost)
+            minimapImage.ChangeImage(TeamType.Red);
+            if (!IsHost)
             {
                 StopAllCoroutines();
                sightMask.SetActive(!IsHost);

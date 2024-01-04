@@ -21,6 +21,11 @@ public class SightObject : NetworkBehaviour
 
         MinimapManager.Instance.RegistSightObject(this);
 
+        ChangeImage(team);
+    }
+
+    public void ChangeImage(TeamType team)
+    {
         if (team == TeamType.Blue)
         {
             render.sprite = blueIcon;
