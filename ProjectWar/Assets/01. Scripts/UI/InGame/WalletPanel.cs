@@ -9,7 +9,7 @@ public class WalletPanel : PanelUI
     [SerializeField] Button upgradeButton;
 
     [Space(10f)]
-    [SerializeField] List<Vector3> factors;
+    [SerializeField] List<Vector3Int> factors;
 
     private int level = 1;
 
@@ -38,7 +38,7 @@ public class WalletPanel : PanelUI
         level = Mathf.Min(level, factors.Count);
 
         // 계수는 수정하자
-        wallet.ModifyAmountFactor(factors[level - 1].x);
-        wallet.ModifyMaxGoldFactor(factors[level - 1].y);
+        wallet.SetMaxGold(factors[level - 1].x);
+        wallet.SetAmount(factors[level - 1].y);
     }
 }

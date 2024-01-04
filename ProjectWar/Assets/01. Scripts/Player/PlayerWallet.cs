@@ -41,6 +41,16 @@ public class PlayerWallet : PlayerComponent
         increaseAmount = Mathf.Max(0, increaseAmount);
     }
 
+    public void SetAmount(int amount)
+    {
+        increaseAmount = amount;
+    }
+
+    public void SetMaxGold(int maxGold)
+    {
+        player.SetMaxGold(maxGold);
+    }
+
     public void ModifyMaxGoldFactor(float factor)
     {
         player.SetMaxGold((int)(player.MaxGold * factor));
