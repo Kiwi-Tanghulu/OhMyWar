@@ -60,6 +60,8 @@ public class LobbyPanel : FixedUI
             () => lobbyManager.CharacterButtonPressServerRPC(UserType.Red, CharacterType.Psychic));
 
         SettingPaenlInfo(myType, CharacterType.Knight);
+        blueLastClickCharacterBtn = blueCharacterBtn[0];
+        redLastClickCharacterBtn = redCharacterBtn[0];
     }
 
     public void OnBlueReady()
