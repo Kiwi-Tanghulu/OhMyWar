@@ -13,10 +13,11 @@ public class PlayerWallet : PlayerComponent
     {
         base.Init(player);
 
-        if(player.IsOwner == false)
-            Destroy(this);
-
-        GameObject.Find("Canvas").transform.Find("InGameUI/WalletPanel").GetComponent<WalletPanel>().Init(this);
+        if(player.IsOwner)
+        {
+            GameObject.Find("Canvas").transform.Find("InGameUI/WalletPanel").GetComponent<WalletPanel>().Init(this, player);
+            player.OnGoldChanged += OnGoldChanged;
+        }
     }
 
     private void Update()
@@ -25,7 +26,6 @@ public class PlayerWallet : PlayerComponent
             return;
         
         player.ModifyGold(increaseAmount);
-        OnGoldChanged?.Invoke(player.Gold, player.MaxGold);
         lastEarnTime = Time.time;
     }
 
@@ -39,6 +39,16 @@ public class PlayerWallet : PlayerComponent
     {
         increaseAmount = (int)(increaseAmount * factor);
         increaseAmount = Mathf.Max(0, increaseAmount);
+    }
+
+    public void SetAmount(int amount)
+    {
+        increaseAmount = amount;
+    }
+
+    public void SetMaxGold(int maxGold)
+    {
+        player.SetMaxGold(maxGold);
     }
 
     public void ModifyMaxGoldFactor(float factor)
