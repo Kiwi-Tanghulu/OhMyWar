@@ -18,6 +18,8 @@ public class PlayerMovement : PlayerComponent
     private int facingDirection = 0;
     public int FacingDirection => (visual.transform.eulerAngles.y == 0f ? 1 : -1);
 
+    public bool Moveable { get; private set; } = true;
+
     private bool isMove = false;
     private PlayerAnimator playerAnimator;
 
@@ -49,6 +51,9 @@ public class PlayerMovement : PlayerComponent
 
     private void FixedUpdate()
     {
+        if(Moveable == false)
+            return;
+
         moveDirection = targetPosition - (Vector2)transform.position;
         if (moveDirection.sqrMagnitude < 0.1f)
         {
@@ -103,5 +108,12 @@ public class PlayerMovement : PlayerComponent
     {
         SetTargetPosition(position);
         transform.position = position;
+    }
+
+    public void SetMoveable(bool able)
+    {
+        Moveable = able;
+        if(Moveable == false && player.IsOwner)
+            playerAnimator.AServerRPC(false);        
     }
 }
