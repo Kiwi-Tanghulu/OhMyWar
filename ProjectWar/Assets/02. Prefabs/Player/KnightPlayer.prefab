@@ -3131,6 +3131,7 @@ MonoBehaviour:
     m_Bits: 0
   radius: 5
   offset: {x: 0, y: 0}
+  effect: {fileID: 1250255920348657188, guid: df85451eb2829bb4faff5dcb7b23c95c, type: 3}
 --- !u!114 &5657881240591419711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3849,6 +3850,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 3.5
+  effect: {fileID: 4171253804667647213, guid: 970191f1d5b56c84591080c8e862e668, type: 3}
 --- !u!114 &1968481882249913616
 MonoBehaviour:
   m_ObjectHideFlags: 0

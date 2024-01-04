@@ -7,7 +7,7 @@ public class FreezeSkill : SkillBase
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float radius;
     [SerializeField] private Vector2 offset;
-    [SerializeField] HitEffect effect;
+    [SerializeField] AnimationEffect effect;
 
     public override void OnNetworkSpawn()
     {
@@ -19,8 +19,8 @@ public class FreezeSkill : SkillBase
     protected override bool ActiveSkill()
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll((Vector2)transform.position + offset, radius, targetLayer);
-
-        HitEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
+        Debug.Log("freeze");
+        AnimationEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
         _effect.Play();
 
         for(int i = 0; i < cols.Length; i++)
