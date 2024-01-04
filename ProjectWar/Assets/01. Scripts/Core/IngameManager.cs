@@ -39,6 +39,16 @@ public class IngameManager : NetworkBehaviour
     public List<Transform> NexusPoint;
     public List<Transform> RedPoint;
 
+    public event Action<bool, int, float> OnGameFinishedEvent;
+
+    public bool OnGaming = false;
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+        OnGaming = true;
+    }
+
     public void RegisterPlayer(Player player)
     {
         if(player.IsBlue)
@@ -111,8 +121,13 @@ public class IngameManager : NetworkBehaviour
 
     private void EndGame(bool isWin)
     {
+        OnGaming = false;
+
         float gameTime = Time.time - startedTime.Value;
         int earnedGold = OwnerPlayer.TotalGold;
+
+        Debug.Log($"GameTime : {TimeSpan.FromSeconds(gameTime).ToString("hh':'mm':'ss")} / IsWin {isWin}");
+        OnGameFinishedEvent?.Invoke(isWin, earnedGold, gameTime);
     }
 
     [ServerRpc]
