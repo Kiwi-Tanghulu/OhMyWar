@@ -19,12 +19,13 @@ MonoBehaviour:
   stopDistance: 1
   maxHealth: 12
   attackDamage: 6
-  attackDistance: 5
+  attackDistance: 6
   attackDelay: 0.5
   takeDamageDelay: 0
   serchDelay: 0
-  projectile: {fileID: 0}
+  projectile: {fileID: 8375000159765025173, guid: 4fda13350931fba4c8d4370c98fec5aa, type: 3}
   targetLayer:
     serializedVersion: 2
     m_Bits: 448
   attackEffect: {fileID: 3545812132836457610, guid: 17dd36be257b124419f3e61cf012d025, type: 3}
+  selfAttackEffect: {fileID: 0}
