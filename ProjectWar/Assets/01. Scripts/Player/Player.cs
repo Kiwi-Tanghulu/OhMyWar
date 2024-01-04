@@ -50,8 +50,12 @@ public class Player : NetworkBehaviour
         sightMask = transform.Find("PlayerSightMask").gameObject;
         sightMask.SetActive(IsOwner);
 
-        MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-        MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
+        Debug.Log(TeamManager.Instance.IsFriendly(gameObject));
+        if (TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+            MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
+        }
     }
 
     private void Update()

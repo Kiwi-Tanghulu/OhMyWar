@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Unity.Netcode;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -80,7 +79,10 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         //OnDamaged(damage, NetworkManager.Singleton.ConnectedClients[performerID].PlayerObject, point);
         OnDamagedEvent?.Invoke(null, point, damage);
-
+        if (TeamManager.Instance.IsFriendly(gameObject))
+        {
+            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        }
     }
 
     public void ModifyHP(int value)
