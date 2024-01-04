@@ -4977,7 +4977,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 256130371
   m_SortingLayer: 3
-  m_SortingOrder: 5
+  m_SortingOrder: 100
   m_SortAtRoot: 0
 --- !u!114 &7210892757353084930
 MonoBehaviour:
@@ -5397,6 +5397,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalGold: 0
   IsBlue: 0
+  characterType:
+    m_InternalValue: 0
   Buffs: []
 --- !u!114 &8557040919050872281
 MonoBehaviour:
