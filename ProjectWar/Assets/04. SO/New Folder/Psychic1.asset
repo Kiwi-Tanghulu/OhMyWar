@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Psychic1
   m_EditorClassIdentifier: 
   skillName: "[\uD328\uC2DC\uBE0C] \uC5C4\uCCAD\uB09C \uBC1C\uB180\uB9BC "
-  skillContent: "\uC8FC\uBCC0 \uC544\uAD70\uC758 \uC774\uB3D9\uC18D\uB3C4\uAC00 \uC99D\uAC00\uD569\uB2C8\uB2E4. "
+  skillContent: "\uC8FC\uBCC0 \uC544\uAD70\uC758 \n\uC774\uB3D9\uC18D\uB3C4\uAC00
+    \n\uC99D\uAC00\uD569\uB2C8\uB2E4. "
+  skillIcon: {fileID: 21300000, guid: 04c2e35ebbb1d4476b4c73ce0f2d7b2c, type: 3}
