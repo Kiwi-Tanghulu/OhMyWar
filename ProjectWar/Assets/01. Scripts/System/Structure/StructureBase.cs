@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Events;
@@ -77,5 +79,11 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         currentHP.Value += value;
         currentHP.Value = Mathf.Clamp(currentHP.Value, 0, maxHP);
         healthBar?.SetHealthBar(currentHP.Value / maxHP);
+    }
+
+    protected IEnumerator DelayCoroutine(float delay, Action callback)
+    {
+        yield return new WaitForSeconds(delay);
+        callback?.Invoke();
     }
 }

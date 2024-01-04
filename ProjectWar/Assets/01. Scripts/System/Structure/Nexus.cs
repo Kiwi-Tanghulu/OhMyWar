@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -38,6 +40,13 @@ public class Nexus : StructureBase, IUnitSpawner
         if (isDestroyed)
             return;
 
+        if(performer.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+        {
+            sightMask.SetActive(true);
+            StopAllCoroutines();
+            StartCoroutine(DelayCoroutine(4f, () => {sightMask.SetActive(false);Debug.Log("invoked");}));
+        }
+
         if (IsEmpty) // 비어있을 때
         {
             if(attackerID == ulong.MaxValue) // 클린한 상태
@@ -68,6 +77,8 @@ public class Nexus : StructureBase, IUnitSpawner
 
     public override void OnDie(NetworkObject performer)
     {
+        StopAllCoroutines();
+
         ChangeOwner(performer);
         base.OnDie(performer);
     }
