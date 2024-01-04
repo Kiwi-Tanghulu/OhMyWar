@@ -26,7 +26,7 @@ public class UnitInfoSO : ScriptableObject
     [Header("Attack")]
     public int attackDamage;
     public int attackDistance;
-    public int attackDelay;
+    public float attackDelay;
     public float takeDamageDelay;
     public int serchDelay;
     public GameObject projectile;

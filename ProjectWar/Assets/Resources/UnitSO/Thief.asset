@@ -18,9 +18,10 @@ MonoBehaviour:
   moveSpeed: 6
   stopDistance: 1
   maxHealth: 20
-  attackDamage: 10
+  attackDamage: 3
   attackDistance: 1
-  attackDelay: 1
+  attackDelay: 0.9
+  takeDamageDelay: 0
   serchDelay: 0
   projectile: {fileID: 0}
   targetLayer:
