@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class Player : NetworkBehaviour
     private GameObject sightMask = null;
 
     public List<StatData> Buffs = new List<StatData>();
+
+    public event Action<int, int> OnGoldChanged;
 
     public void SetCharacterType(CharacterType type)
     {
@@ -82,6 +85,8 @@ public class Player : NetworkBehaviour
         gold += value;
         gold = Mathf.Clamp(gold, 0, MaxGold);
         TotalGold += Mathf.Max(0, gold - prevGold);
+
+        OnGoldChanged?.Invoke(gold, MaxGold);
     }
 
     public void SetMaxGold(int value)
