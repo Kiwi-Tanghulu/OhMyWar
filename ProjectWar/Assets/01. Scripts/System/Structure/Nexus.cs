@@ -1,7 +1,15 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+
+[Serializable]
+public class StatData
+{
+    public UnitStatType type;
+    public int value;
+}
 
 public class Nexus : StructureBase, IUnitSpawner
 {
@@ -11,6 +19,9 @@ public class Nexus : StructureBase, IUnitSpawner
     [Space(10f)]
     [SerializeField] Sprite blueSprite = null;
     [SerializeField] Sprite redSprite = null;
+
+    [Space(10f)]
+    public List<StatData> Buffs = new List<StatData>();
 
     private SpriteRenderer spRenderer = null;
     private GameObject sightMask = null;
@@ -88,14 +99,16 @@ public class Nexus : StructureBase, IUnitSpawner
     {
         gameObject.layer = value;
         sightMask.SetActive(false);
-
+        
         if(1 << (gameObject.layer) == TeamManager.Instance.BlueLayer)
         {
+            IngameManager.Instance.BluePlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = blueSprite;
             sightMask.SetActive(IsHost);
         }
         else
         {
+            IngameManager.Instance.RedPlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = redSprite;
             sightMask.SetActive(!IsHost);
         }

@@ -18,6 +18,7 @@ public class Player : NetworkBehaviour
 
     private GameObject sightMask = null;
 
+    public List<StatData> Buffs = new List<StatData>();
 
     public override void OnNetworkSpawn()
     {

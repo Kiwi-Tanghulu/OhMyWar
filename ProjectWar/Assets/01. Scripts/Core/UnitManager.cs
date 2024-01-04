@@ -49,6 +49,14 @@ public class UnitManager : NetworkBehaviour
         NetworkObject unitNetworkObject = unit.GetComponent<NetworkObject>();
         unitNetworkObject.SpawnWithOwnership(clientId, true);
 
+        Player player = null;
+        if(clientId == GameManager.Instance.HostID.Value)
+            player = IngameManager.Instance.BluePlayer;
+        else
+            player = IngameManager.Instance.RedPlayer;
+
+        player.Buffs.ForEach(i => unit.Stat.AddModifier(i.type, i.value));
+
         if (!playerUnitContainer.ContainsKey(clientId))
             playerUnitContainer.Add(clientId, new());
 
