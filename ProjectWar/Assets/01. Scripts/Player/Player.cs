@@ -36,7 +36,7 @@ public class Player : NetworkBehaviour
         if (IsOwner)
             IngameManager.Instance.OwnerPlayer = this;
 
-        if(IsServer && IsOwner)
+        if(OwnerClientId == GameManager.Instance.HostID.Value)
         {
             gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
             team = TeamType.Blue;
@@ -49,12 +49,10 @@ public class Player : NetworkBehaviour
 
         sightMask = transform.Find("PlayerSightMask").gameObject;
         sightMask.SetActive(IsOwner);
-
-        Debug.Log(TeamManager.Instance.IsFriendly(gameObject));
+        
         if (TeamManager.Instance.IsFriendly(gameObject))
         {
             MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-            MinimapManager.Instance.RegistSightObject(GetComponent<SightObject>());
         }
     }
 

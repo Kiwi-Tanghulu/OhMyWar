@@ -7,17 +7,16 @@ public class SightObject : MonoBehaviour
     [SerializeField] private GameObject minimapPoint;
     private bool isSight;
 
-    private void Awake()
+    private void Start()
     {
-        minimapPoint = transform.Find("MinimapPoint").gameObject;
         isSight = false;
+        SetSight(false);
+
+        MinimapManager.Instance.RegistSightObject(this);
     }
 
     public void SetSight(bool value)
     {
-        if (isSight == value)
-            return;
-
         isSight = value;
         minimapPoint.SetActive(value);
     }
