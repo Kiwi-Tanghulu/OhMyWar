@@ -30,28 +30,25 @@ public class LobbyManager : NetworkBehaviour
         if (IsHost)
         {
             lobbyPanel.Init(UserType.Blue, this);
-  
+            lobbyPanel.HideClientPanel(123);
+            NetworkManager.Singleton.OnClientConnectedCallback += lobbyPanel.ShowClientPanel;
+            NetworkManager.Singleton.OnClientDisconnectCallback += lobbyPanel.HideClientPanel;
         }
         else
         {
             lobbyPanel.Init(UserType.Red, this);
-
         }
-        NetworkManager.Singleton.OnClientConnectedCallback += lobbyPanel.ShowClientPanel;
-        NetworkManager.Singleton.OnClientDisconnectCallback += lobbyPanel.HideClientPanel;
     }
 
     public override void OnNetworkDespawn()
     {
-        NetworkManager.Singleton.OnClientConnectedCallback -= lobbyPanel.ShowClientPanel;
-        NetworkManager.Singleton.OnClientDisconnectCallback -= lobbyPanel.HideClientPanel;
+        if (IsHost)
+        {
+            NetworkManager.Singleton.OnClientConnectedCallback -= lobbyPanel.ShowClientPanel;
+            NetworkManager.Singleton.OnClientDisconnectCallback -= lobbyPanel.HideClientPanel;
+        }
     }
 
-    [ClientRpc]
-    public void ServerDisconnectClientRPC(bool value)
-    {
-
-    }
 
     [ServerRpc(RequireOwnership = false)]
     public void CharacterButtonPressServerRPC(UserType user, CharacterType character)

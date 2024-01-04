@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 public class LobbyPanel : FixedUI
 {
+    [SerializeField] private TextMeshProUGUI roomCodeText;
+
     [SerializeField] private Color btnReadyColor;
     [SerializeField] private Color btnUnReadyColor;
 
@@ -40,10 +42,11 @@ public class LobbyPanel : FixedUI
         if (user == UserType.Red)
         {
             transform.Find("RedDefencePanel").gameObject.SetActive(false);
+            roomCodeText.gameObject.SetActive(false);
         }
         else
         {
-            transform.Find("BlueDefencePanel").gameObject.SetActive(false);
+            roomCodeText.text = HostManager.Instance.joinCode;
         }
 
         transform.Find($"Blue/KnightSelectBtn").GetComponent<Button>().onClick.AddListener(
@@ -85,11 +88,13 @@ public class LobbyPanel : FixedUI
     public void ShowClientPanel(ulong id)
     {
         transform.Find("Red").gameObject.SetActive(true);
+        transform.Find("BlueDefencePanel").gameObject.SetActive(false);
     }
 
     public void HideClientPanel(ulong id)
     {
         transform.Find("Red").gameObject.SetActive(false);
+        transform.Find("BlueDefencePanel").gameObject.SetActive(true);
     }
 
     public void SettingPaenlInfo(UserType user, CharacterType character)

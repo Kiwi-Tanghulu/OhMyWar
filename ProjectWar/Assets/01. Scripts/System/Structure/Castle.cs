@@ -24,6 +24,18 @@ public class Castle : StructureBase, IUnitSpawner
         sightMask = transform.Find("CastleSightMask").gameObject;
     }
 
+    public override void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
+    {
+        if (performer.OwnerClientId == NetworkManager.Singleton.LocalClientId)
+        {
+            sightMask.SetActive(true);
+            StopAllCoroutines();
+            StartCoroutine(DelayCoroutine(4f, () => sightMask.SetActive(false)));
+        }
+
+        base.OnDamaged(damage, performer, point);
+    }
+
     public void Init(ulong ownerID)
     {
         this.ownerID = ownerID;

@@ -15,6 +15,7 @@ public abstract class SkillBase : NetworkBehaviour, IOperable<Player>
 
     protected abstract bool ActiveSkill();
 
+
     public bool Operate(Player performer = null)
     {
         player = performer;
