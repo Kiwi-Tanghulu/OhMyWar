@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager
+public class AudioManager : MonoBehaviour
 {
 	public static AudioManager Instance = null;
     private const float MAX_VOLUME = 0;
@@ -10,14 +10,18 @@ public class AudioManager
     private const float MUTE_VOLUME = -80;
 
     private Dictionary<string, AudioClip> clips = new Dictionary<string, AudioClip>();
-    private AudioMixer audioMixer = null;
+    [SerializeField] private AudioMixer audioMixer = null;
+    [SerializeField] private AudioAssetsSO audioAssetsSO = null;
 
-    public AudioManager(AudioAssetsSO clipList, AudioMixer audioMixer)
+    private void Awake()
     {
-        this.audioMixer = audioMixer;
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
 
-        for(int i = 0; i < clipList.Count; i++)
-            RegisterAudio(clipList[i]);
+        for (int i = 0; i < audioAssetsSO.Count; i++)
+            RegisterAudio(audioAssetsSO[i]);
     }
 
     public void PlayAudio(string clipName, AudioSource player, bool oneshot = false)

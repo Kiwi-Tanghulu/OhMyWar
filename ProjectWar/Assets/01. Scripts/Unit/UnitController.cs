@@ -33,7 +33,7 @@ public class UnitController : NetworkBehaviour
         UnitManager unitManager = UnitManager.Instance;
         TeamManager teamManager = TeamManager.Instance;
 
-        if(IsServer && IsOwner)
+        if(OwnerClientId == GameManager.Instance.HostID.Value)
         {
             gameObject.tag = unitManager.BlueUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.BlueLayer.value, 2);
@@ -60,6 +60,14 @@ public class UnitController : NetworkBehaviour
         Anim.InitCompo(this);
 
         InitState();
+    }
+
+    public bool IsFriendly()
+    {
+        if(IsServer)
+            return gameObject.tag == UnitManager.Instance.BlueUnitTag;
+        else
+            return gameObject.tag == UnitManager.Instance.RedUnitTag;
     }
 
     private void Update()
