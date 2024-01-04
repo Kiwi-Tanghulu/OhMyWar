@@ -5520,6 +5520,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapPoint: {fileID: 8845917925530276459}
+  redIcon: {fileID: 21300000, guid: 9a511f0a7e4f52844b51fb4af8b216cb, type: 3}
+  blueIcon: {fileID: 21300000, guid: a78fc5e4e3adbcf47ab9444b38cd52be, type: 3}
+  redColor: {r: 1, g: 1, b: 1, a: 1}
+  blueColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &-2121223825311075287
 MonoBehaviour:
   m_ObjectHideFlags: 0

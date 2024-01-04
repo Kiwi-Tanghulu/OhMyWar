@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: MiniMapPoint
+    uniqueID: 2900671921
+    locked: 0
   - name: BG
     uniqueID: 3022627213
     locked: 0
@@ -60,9 +63,6 @@ TagManager:
     locked: 0
   - name: Effect
     uniqueID: 3473629087
-    locked: 0
-  - name: MiniMapPoint
-    uniqueID: 2900671921
     locked: 0
   - name: UI
     uniqueID: 1955785821
