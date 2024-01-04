@@ -11,31 +11,32 @@ public class UnitInfoSO : ScriptableObject
 {
     [Header("Info")]
     public UnitType unitType;
-    public int cost;
+    public float cost;
     public Sprite image;
 
     [Header("Movement")]
-    public int moveSpeed;
-    public int stopDistance;
+    public float moveSpeed;
+    public float stopDistance;
 
     [Space]
     [Header("Health")]
-    public int maxHealth;
+    public float maxHealth;
 
     [Space]
     [Header("Attack")]
-    public int attackDamage;
-    public int attackDistance;
-    public int attackDelay;
+    public float attackDamage;
+    public float attackDistance;
+    public float attackDelay;
     public float takeDamageDelay;
-    public int serchDelay;
+    public float serchDelay;
     public Projectile projectile;
     public LayerMask targetLayer;
     public ParticleSystem attackEffect;
+    public ParticleSystem selfAttackEffect;
 
     protected Dictionary<UnitStatType, FieldInfo> fieldInfoDictionary;
 
-    public void IncreaseStat(UnitStatType statType, int value)
+    public void IncreaseStat(UnitStatType statType, float value)
     {
         switch (statType)
         {

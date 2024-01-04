@@ -17,7 +17,7 @@ public class UnitStat : UnitComponent
         Type soType = controller.Info.GetType();
         foreach(UnitStatType type in Enum.GetValues(typeof(UnitStatType)))
         {
-            int value = (int)soType.GetField(type.ToString()).GetValue(controller.Info);
+            float value = (float)soType.GetField(type.ToString()).GetValue(controller.Info);
             stats.Add(type, new Stat(value));
         }
     }

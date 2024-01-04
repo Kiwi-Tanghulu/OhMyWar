@@ -3251,7 +3251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2463375564
+  GlobalObjectIdHash: 2574633814
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -3337,18 +3337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d55935bcf2010f4cb3238f9b0ec440e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackDistance: 0
-  attackDelay: 0
-  serchDelay: 0
-  canAttack: 0
-  shouldAttack: 0
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  attackEffect: {fileID: 0}
-  soundName: 
+  hitEffect: {fileID: 2235624267442359283, guid: 67e14b8e9d67a2842b2bdcb4c81c2b84, type: 3}
   OnAttackStartEvetn:
     m_PersistentCalls:
       m_Calls:
@@ -3365,7 +3354,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   healAmount: 10
-  dealEffect: {fileID: 4371187270557632065, guid: 07846a3ce4ea4d74d98af88b68199228, type: 3}
+  healEffect: {fileID: 0}
 --- !u!114 &-6421824669155446775
 MonoBehaviour:
   m_ObjectHideFlags: 0

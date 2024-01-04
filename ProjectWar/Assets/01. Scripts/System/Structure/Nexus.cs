@@ -97,7 +97,7 @@ public class Nexus : StructureBase, IUnitSpawner
         StopAllCoroutines();
 
         ChangeOwner(performer);
-        IngameManager.Instance.ToggleCurrentSpawner(IngameManager.Instance.OwnerPlayer, line);
+        //IngameManager.Instance.ToggleCurrentSpawner(IngameManager.Instance.OwnerPlayer, line);
         base.OnDie(performer);
     }
 

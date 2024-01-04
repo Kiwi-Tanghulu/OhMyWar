@@ -21,9 +21,11 @@ MonoBehaviour:
   attackDamage: 10
   attackDistance: 1
   attackDelay: 2
+  takeDamageDelay: 0
   serchDelay: 0
   projectile: {fileID: 0}
   targetLayer:
     serializedVersion: 2
     m_Bits: 448
   attackEffect: {fileID: 778403590197639471, guid: 2db545caeb328564fb055967ed888ec8, type: 3}
+  selfAttackEffect: {fileID: 4617414182301508116, guid: 8a2914d70d86f2e4cac25d11fd6a42cb, type: 3}

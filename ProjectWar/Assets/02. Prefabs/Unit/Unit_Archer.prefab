@@ -1089,7 +1089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1899966463
+  GlobalObjectIdHash: 3481196703
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1379,18 +1379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35eb76c0d0bf01b4c99d64f94a740db0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  attackDistance: 0
-  attackDelay: 0
-  serchDelay: 0
-  canAttack: 1
-  shouldAttack: 0
-  targetLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  attackEffect: {fileID: 0}
-  soundName: 
+  hitEffect: {fileID: 2235624267442359283, guid: 67e14b8e9d67a2842b2bdcb4c81c2b84, type: 3}
   OnAttackStartEvetn:
     m_PersistentCalls:
       m_Calls:

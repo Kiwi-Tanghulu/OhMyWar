@@ -101,5 +101,5 @@ public class UnitMovement : UnitComponent
         shouldMove = false;
     }
 
-    private void MoveSpeedValueChange(int value) => moveSpeed = value;
+    private void MoveSpeedValueChange(float value) => moveSpeed = value;
 }
