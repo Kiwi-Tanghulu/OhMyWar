@@ -15,4 +15,9 @@ public class HitEffect : MonoBehaviour
     {
         anim.SetTrigger("Play");
     }
+
+    public void End()
+    {
+        Destroy(gameObject);
+    }
 }

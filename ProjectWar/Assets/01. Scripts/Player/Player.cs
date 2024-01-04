@@ -39,12 +39,12 @@ public class Player : NetworkBehaviour
 
         if(OwnerClientId == GameManager.Instance.HostID.Value)
         {
-            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
+            //gameObject.layer = (int)Mathf.Log(TeamManager.Instance.BlueLayer, 2);
             team = TeamType.Blue;
         }
         else
         {
-            gameObject.layer = (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
+            //gameObject.layer = (int)Mathf.Log(TeamManager.Instance.RedLayer, 2);
             team = TeamType.Red;
         }
 
