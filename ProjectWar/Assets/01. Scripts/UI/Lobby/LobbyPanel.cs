@@ -5,6 +5,9 @@ using TMPro;
 using UnityEngine.UI;
 public class LobbyPanel : FixedUI
 {
+    [SerializeField] private Color btnReadyColor;
+    [SerializeField] private Color btnUnReadyColor;
+
     [SerializeField] private Color btnSelectedColor;
     [SerializeField] private RenderTexture[] characterTexture;
     private UserType myType;
@@ -22,20 +25,63 @@ public class LobbyPanel : FixedUI
     private Button redLastClickCharacterBtn;
     private GameObject redLastSkillIcon;
 
-    public void Init(UserType user, LobbyManager lobbyManager)
+    [SerializeField] private RectTransform blueReadyTextTrm;
+    [SerializeField] private RectTransform redReadyTextTrm;
+    [SerializeField] private Button blueReadyBtn;
+    [SerializeField] private Button redReadyBtn;
+
+    private LobbyManager lobbyManager;
+    public void Init(UserType user, LobbyManager _lobbyManager)
     {
         myType = user;
 
-        //if (user == UserType.Red)
+        lobbyManager = _lobbyManager;
 
-        transform.Find($"{user}/KnightSelectBtn").GetComponent<Button>().onClick.AddListener(
+        if (user == UserType.Red)
+        {
+            transform.Find("RedDefencePanel").gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.Find("BlueDefencePanel").gameObject.SetActive(false);
+        }
+
+        transform.Find($"Blue/KnightSelectBtn").GetComponent<Button>().onClick.AddListener(
             () => lobbyManager.CharacterButtonPressServerRPC(UserType.Blue, CharacterType.Knight));
-        transform.Find($"{user}/PsychicSelectBtn").GetComponent<Button>().onClick.AddListener(
+        transform.Find($"Blue/PsychicSelectBtn").GetComponent<Button>().onClick.AddListener(
             () => lobbyManager.CharacterButtonPressServerRPC(UserType.Blue, CharacterType.Psychic));
+
+        transform.Find($"Red/KnightSelectBtn").GetComponent<Button>().onClick.AddListener(
+            () => lobbyManager.CharacterButtonPressServerRPC(UserType.Red, CharacterType.Knight));
+        transform.Find($"Red/PsychicSelectBtn").GetComponent<Button>().onClick.AddListener(
+            () => lobbyManager.CharacterButtonPressServerRPC(UserType.Red, CharacterType.Psychic));
 
         SettingPaenlInfo(myType, CharacterType.Knight);
     }
 
+    public void OnBlueReady()
+    {
+        lobbyManager.BlueReadyServerRPC();
+    }
+
+    public void OnRedReady()
+    {
+        lobbyManager.RedReadyServerRPC();
+    }
+
+    public void ChangeBlueUI()
+    {
+        blueReadyBtn.image.color = btnReadyColor;
+        blueReadyTextTrm.gameObject.SetActive(true);
+        transform.Find("BlueDefencePanel").gameObject.SetActive(true);
+    }
+
+    public void ChangeRedUI()
+    {
+        redReadyBtn.image.color = btnReadyColor;
+        redReadyTextTrm.gameObject.SetActive(true);
+        transform.Find("RedDefencePanel").gameObject.SetActive(true);
+    }
     public void ShowClientPanel(ulong id)
     {
         transform.Find("Red").gameObject.SetActive(true);
@@ -48,29 +94,33 @@ public class LobbyPanel : FixedUI
 
     public void SettingPaenlInfo(UserType user, CharacterType character)
     {
-        if (myType == user)
+        if (user == UserType.Blue)
         {
+            if(blueLastSkillIcon != null)
+                blueLastSkillIcon.SetActive(false);
             blueUnitTexture.texture = characterTexture[(int)character];
 
+            if(blueLastClickCharacterBtn != null)
+                blueLastClickCharacterBtn.image.color = btnDefualtColor;
             blueCharacterBtn[(int)character].image.color = btnSelectedColor;
             blueLastClickCharacterBtn = blueCharacterBtn[(int)character];
-            blueLastClickCharacterBtn.image.color = btnDefualtColor;
 
             blueCharacterSkillIcon[(int)character].SetActive(true);
             blueLastSkillIcon = blueCharacterSkillIcon[(int)character];
-            blueLastSkillIcon.SetActive(false);
         }
         else
         {
+            if(redLastSkillIcon != null)
+                redLastSkillIcon.SetActive(false);
             redUnitTexture.texture = characterTexture[(int)character];
 
+            if(redLastClickCharacterBtn != null)
+                redLastClickCharacterBtn.image.color = btnDefualtColor;
             redCharacterBtn[(int)character].image.color = btnSelectedColor;
             redLastClickCharacterBtn = redCharacterBtn[(int)character];
-            redLastClickCharacterBtn.image.color = btnDefualtColor;
 
             redCharacterSkillIcon[(int)character].SetActive(true);
             redLastSkillIcon = redCharacterSkillIcon[(int)character];
-            redLastSkillIcon.SetActive(false);
         }
     }
 
@@ -78,4 +128,5 @@ public class LobbyPanel : FixedUI
     {
         LobbyManager.Instance.ReadyGame();
     }
+
 }

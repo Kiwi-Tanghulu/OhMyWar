@@ -70,6 +70,7 @@ public class TeleportSkill : SkillBase
            telePortPos[currentLineIndex].startPos + currentPercent * (telePortPos[currentLineIndex].endPos - telePortPos[currentLineIndex].startPos);
 
         StartCoroutine(TelePortStart());
+        
         return true;
     }
 
