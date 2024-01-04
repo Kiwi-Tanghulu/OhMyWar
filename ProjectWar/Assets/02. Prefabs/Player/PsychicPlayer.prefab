@@ -583,6 +583,7 @@ MonoBehaviour:
   OnSkillActivedEvent:
     m_PersistentCalls:
       m_Calls: []
+  magicCircleTime: 3
   maxMidY: -6
   minMidY: -13
   blueTelePortPos:
@@ -600,11 +601,12 @@ MonoBehaviour:
   - startPos: {x: 0, y: 0}
     endPos: {x: 0, y: 0}
   teleportRange: 8
-  teleportDelay: 0.3
+  teleportDelay: 0.2
   targetLayer:
     serializedVersion: 2
     m_Bits: 64
   teleportEffect: {fileID: 6952753609456024197, guid: 6e2a2571a7180124e9ed5ebaec71f19e, type: 3}
+  magicCircleEffect: {fileID: 94929810931407428, guid: 9305ff2ca93449849b979d5c8377cf54, type: 3}
 --- !u!1 &565613087023247946
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,7 +4900,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.0000012172386, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: -2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 270176467326346777}
@@ -5334,6 +5336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TotalGold: 0
   IsBlue: 0
+  Buffs: []
 --- !u!114 &8557040919050872281
 MonoBehaviour:
   m_ObjectHideFlags: 0
