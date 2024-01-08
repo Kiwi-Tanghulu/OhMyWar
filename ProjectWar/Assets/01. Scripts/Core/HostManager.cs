@@ -57,7 +57,8 @@ public class HostManager
                 ["JoinCode"] = new DataObject(DataObject.VisibilityOptions.Member, JoinCode)
             };
 
-            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync("Lobby", MaxConnection, lobbyOptions);
+            string playerName = PlayerPrefs.GetString("PlayerID", "누군가");
+            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync($"{playerName}의 게임", MaxConnection, lobbyOptions);
             LobbyID = lobby.Id;
         } catch(Exception err) {
             Debug.Log(err.Message);
