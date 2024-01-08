@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
@@ -14,7 +17,8 @@ public class HostManager
     public event Action OnRoomCreatedEvent;
 
     private Allocation allocation;
-    public string joinCode { get; private set; }
+    public string JoinCode { get; private set; }
+    public string LobbyID { get; private set; }
 
     private const int MaxConnection = 2;
     
@@ -32,9 +36,9 @@ public class HostManager
 
         try
         {
-            joinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
-            GUIUtility.systemCopyBuffer = joinCode;
-            Debug.Log(joinCode);
+            JoinCode = await Relay.Instance.GetJoinCodeAsync(allocation.AllocationId);
+            GUIUtility.systemCopyBuffer = JoinCode;
+            Debug.Log(JoinCode);
         }
         catch(Exception err)
         {
@@ -45,6 +49,19 @@ public class HostManager
         UnityTransport transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         RelayServerData relayServerData = new RelayServerData(allocation, "dtls");
         transport.SetRelayServerData(relayServerData);
+
+        try {
+            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
+            lobbyOptions.IsPrivate = false;
+            lobbyOptions.Data = new Dictionary<string, DataObject>() {
+                ["JoinCode"] = new DataObject(DataObject.VisibilityOptions.Member, JoinCode)
+            };
+
+            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync("Lobby", MaxConnection, lobbyOptions);
+            LobbyID = lobby.Id;
+        } catch(Exception err) {
+            Debug.Log(err.Message);
+        }
 
         NetworkManager.Singleton.StartHost();
         NetworkManager.Singleton.OnClientConnectedCallback += HandleClientConnected;
