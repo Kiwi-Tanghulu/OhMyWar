@@ -19,7 +19,7 @@ public class Nexus : StructureBase, IUnitSpawner
     [Space(10f)]
     [SerializeField] Sprite blueSprite = null;
     [SerializeField] Sprite redSprite = null;
-    [SerializeField] private MinimapImage minimapImage;
+    //[SerializeField] private MinimapImage minimapImage;
 
     [Space(10f)]
     public List<StatData> Buffs = new List<StatData>();
@@ -104,7 +104,6 @@ public class Nexus : StructureBase, IUnitSpawner
     [ClientRpc]
     private void ChangerTeamClientRpc(int value)
     {
-        Debug.Log("layer" + value);
         gameObject.layer = value;
         sightMask.SetActive(false);
 
@@ -112,7 +111,7 @@ public class Nexus : StructureBase, IUnitSpawner
         {
             IngameManager.Instance.BluePlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = blueSprite;
-            minimapImage.ChangeImage(TeamType.Blue);
+            //minimapImage.ChangeImage(TeamType.Blue);
             if (IsHost)
             {
                 StopAllCoroutines();
@@ -123,15 +122,13 @@ public class Nexus : StructureBase, IUnitSpawner
         {
             IngameManager.Instance.RedPlayer.Buffs.AddRange(Buffs);
             spRenderer.sprite = redSprite;
-            minimapImage.ChangeImage(TeamType.Red);
+            //minimapImage.ChangeImage(TeamType.Red);
             if (!IsHost)
             {
                 StopAllCoroutines();
                sightMask.SetActive(!IsHost);
             }
         }
-
-        Debug.Log("chagne owner");
     }
 
     public void ChangeOwner(NetworkObject performer)

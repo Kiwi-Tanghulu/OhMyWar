@@ -2225,8 +2225,6 @@ GameObject:
   - component: {fileID: -2689244155617786151}
   - component: {fileID: 3388565245960210339}
   - component: {fileID: 5646305610160496609}
-  - component: {fileID: 9020311011902148782}
-  - component: {fileID: -8878630257159048608}
   - component: {fileID: 6277853425874754072}
   m_Layer: 5
   m_Name: Unit_Infantry
@@ -2292,7 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1711558742
+  GlobalObjectIdHash: 1772652552
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2471,37 +2469,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &9020311011902148782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2295584189538182962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb94878da72ab54cad264647cceb8b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapPoint: {fileID: 923395124133025996}
-  redIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  blueIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  redColor: {r: 1, g: 0, b: 0, a: 1}
-  blueColor: {r: 0, g: 0, b: 1, a: 1}
---- !u!114 &-8878630257159048608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2295584189538182962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba196398e5542124ba6444dff0af208c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  viewDistace: 6.5
 --- !u!82 &6277853425874754072
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7155,11 +7122,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
---- !u!1 &923395124133025996 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7164521748801694782, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
-  m_PrefabInstance: {fileID: 8051856051825571058}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8547373806220310050 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1811484284764619472, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}

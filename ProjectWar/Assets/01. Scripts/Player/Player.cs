@@ -63,14 +63,14 @@ public class Player : NetworkBehaviour
             team = TeamType.Red;
         }
 
-        GetComponent<SightObject>().Init(team);
+        //GetComponent<SightObject>().Init(team);
         sightMask = transform.Find("PlayerSightMask").gameObject;
         sightMask.SetActive(IsOwner);
         
-        if (TeamManager.Instance.IsFriendly(gameObject))
-        {
-            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-        }
+        //if (TeamManager.Instance.IsFriendly(gameObject))
+        //{
+        //    MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        //}
     }
 
     public override void OnNetworkDespawn()

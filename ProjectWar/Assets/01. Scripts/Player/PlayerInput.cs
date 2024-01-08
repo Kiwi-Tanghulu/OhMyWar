@@ -31,7 +31,6 @@ public class PlayerInput : PlayerComponent
             index = 10;
         index--;
 
-        Debug.Log("Unit Spawn");
         IngameManager manager = IngameManager.Instance;
         manager?.SpawnUnit(index);
     }

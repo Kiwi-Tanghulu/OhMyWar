@@ -19,7 +19,7 @@ public class SightObject : NetworkBehaviour
         SetSight(false);
         render = minimapPoint.GetComponent<SpriteRenderer>();
 
-        MinimapManager.Instance.RegistSightObject(this);
+        //MinimapManager.Instance.RegistSightObject(this);
 
         ChangeImage(team);
     }

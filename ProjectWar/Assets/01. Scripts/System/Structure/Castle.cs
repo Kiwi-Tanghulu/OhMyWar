@@ -56,7 +56,6 @@ public class Castle : StructureBase, IUnitSpawner
     public override void OnDie(NetworkObject performer)
     {
         base.OnDie(performer);
-        Debug.Log("die1");
         IngameManager.Instance.CloseGame(performer.OwnerClientId);
     }
 

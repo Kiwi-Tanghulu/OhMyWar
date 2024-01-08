@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
-    private Transform bar;
+    [SerializeField] private Transform bar;
 
     private Vector2 originBarSize;
     private Vector2 originBarPos;
 
     private void Awake()
     {
-        bar = transform.Find("Bar");
-
         originBarPos = bar.localPosition;
         originBarSize = bar.localScale;
     }

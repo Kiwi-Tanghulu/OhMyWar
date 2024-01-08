@@ -53,8 +53,8 @@ public class UnitManager : NetworkBehaviour
 
     public void DespawnUnit(UnitController unit)
     {
-        MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
-        MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
+        //MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
+        //MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
         Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
     }
 

@@ -5366,8 +5366,6 @@ GameObject:
   - component: {fileID: 1140445113687957652}
   - component: {fileID: 5511270439040311736}
   - component: {fileID: 4520669644088886677}
-  - component: {fileID: -4793023699179996434}
-  - component: {fileID: -2121223825311075287}
   - component: {fileID: 3234085081246459823}
   m_Layer: 0
   m_Name: PsychicPlayer
@@ -5601,37 +5599,6 @@ MonoBehaviour:
   UnitTypeChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-4793023699179996434
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942373800574777997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb94878da72ab54cad264647cceb8b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapPoint: {fileID: 8845917925530276459}
-  redIcon: {fileID: 21300000, guid: 9a511f0a7e4f52844b51fb4af8b216cb, type: 3}
-  blueIcon: {fileID: 21300000, guid: a78fc5e4e3adbcf47ab9444b38cd52be, type: 3}
-  redColor: {r: 1, g: 1, b: 1, a: 1}
-  blueColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &-2121223825311075287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7942373800574777997}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba196398e5542124ba6444dff0af208c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 1}
-  viewDistace: 5.5
 --- !u!82 &3234085081246459823
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6562,11 +6529,6 @@ PrefabInstance:
 --- !u!4 &39919648896302213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1811484284764619472, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
-  m_PrefabInstance: {fileID: 1850554959957638741}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8845917925530276459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7164521748801694782, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
   m_PrefabInstance: {fileID: 1850554959957638741}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7344950245417278953
