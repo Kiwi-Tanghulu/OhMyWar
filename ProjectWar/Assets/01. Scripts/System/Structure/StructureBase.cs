@@ -12,6 +12,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
     [SerializeField] protected UnityEvent<NetworkObject> OnDestroyedEvent;
     [SerializeField] protected UnityEvent<NetworkObject, Vector3, int> OnDamagedEvent;
+    [SerializeField] protected TeamType team;
 
     protected bool isDestroyed = false;
 
@@ -38,6 +39,8 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
             return;
 
         currentHP.Value -= damage;
+        Debug.Log("currentHP : " + currentHP.Value);
+        Debug.Log("maxHP : " + maxHP);
         healthBar?.SetHealthBar(currentHP.Value / maxHP);
 
         if(currentHP.Value <= 0)

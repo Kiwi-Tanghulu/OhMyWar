@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class Castle : StructureBase, IUnitSpawner
 {
 	[SerializeField] List<Transform> spawnPositions = null;
 	[SerializeField] List<Nexus> midNexus = null;
     [SerializeField] Transform spawnPosition = null;
+    [SerializeField] private Light2D castleLight;
     public Transform SpawnPosition => spawnPosition;
 
 
@@ -22,6 +24,11 @@ public class Castle : StructureBase, IUnitSpawner
     {
         base.OnNetworkSpawn();
         sightMask = transform.Find("CastleSightMask").gameObject;
+        
+        if(IsServer && team == TeamType.Red)
+            castleLight.enabled = false;
+        else if(!IsServer && team == TeamType.Blue)
+            castleLight.enabled = false;
     }
 
     public override void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)

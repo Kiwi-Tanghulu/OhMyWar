@@ -4766,10 +4766,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitSightMask
       objectReference: {fileID: 0}
-    - target: {fileID: 4679945054420219505, guid: 724fe7802898798468f074373a442510, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5238096039783135150, guid: 724fe7802898798468f074373a442510, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
