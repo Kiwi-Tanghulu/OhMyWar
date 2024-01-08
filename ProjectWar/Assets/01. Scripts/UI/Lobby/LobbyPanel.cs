@@ -47,7 +47,7 @@ public class LobbyPanel : FixedUI
         }
         else
         {
-            roomCodeText.text = HostManager.Instance.joinCode;
+            roomCodeText.text = HostManager.Instance.JoinCode;
         }
 
         transform.Find($"Blue/KnightSelectBtn").GetComponent<Button>().onClick.AddListener(
