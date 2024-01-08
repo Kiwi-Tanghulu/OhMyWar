@@ -41,16 +41,20 @@ public class UnitManager : NetworkBehaviour
 
     public void SpawnUnit(UnitType type, ulong clientId, int lineIndex, int pointIndex)
     {
-        Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-1.5f, 1.5f));
-        UnitSpawnEvent?.Invoke();
-        SpawnUnitServerRpc(type, clientId, lineIndex, pointIndex, offset);
-        IngameManager.Instance.OwnerPlayer.ModifyGold(-(int)unitDictionary[type].Info.cost);
+        Player player = IngameManager.Instance.OwnerPlayer;
+        if(player.Gold >= (int)unitDictionary[type].Info.cost)
+        {
+            Vector2 offset = new Vector2(0, UnityEngine.Random.Range(-1.5f, 1.5f));
+            UnitSpawnEvent?.Invoke();
+            SpawnUnitServerRpc(type, clientId, lineIndex, pointIndex, offset);
+            player.ModifyGold(-(int)unitDictionary[type].Info.cost);
+        }
     }
 
     public void DespawnUnit(UnitController unit)
     {
-        MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
-        MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
+        //MinimapManager.Instance.UnRegistSightObject(unit.GetComponent<SightObject>());
+        //MinimapManager.Instance.UnRegistViewObject(unit.GetComponent<ViewObject>());
         Instantiate(deadObject, unit.transform.position, Quaternion.identity, unit.transform).SetUnit(unit);
     }
 

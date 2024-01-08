@@ -149,7 +149,7 @@ public class TeleportSkill : SkillBase
         {
             if (IsHost)
             {
-                units[i].GetComponent<NetworkTransform>().Teleport(player.transform.position + (Vector3)unitDistances[i],Quaternion.identity,new Vector3(1f,1f,1f));
+                units[i].GetComponent<NetworkTransform>().Teleport(player.transform.position + (Vector3)unitDistances[i],Quaternion.identity,new Vector3(1.35f,1.35f,1f));
                 units[i].GetComponent<UnitMovement>().SetLine(lineIndex);
                 Debug.Log("¿Å±è");
             }

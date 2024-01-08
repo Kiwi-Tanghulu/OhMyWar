@@ -39,14 +39,14 @@ public class UnitController : NetworkBehaviour
             gameObject.tag = unitManager.BlueUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.BlueLayer.value, 2);
             team = TeamType.Blue;
-            transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.green;
+            //transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.green;
         }
         else
         {
             gameObject.tag = unitManager.RedUnitTag;
             gameObject.layer = (int)Mathf.Log(teamManager.RedLayer.value, 2);
             team = TeamType.Red;
-            transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.red;
+            //transform.Find("MinimapPoint").GetComponentInChildren<SpriteRenderer>().color = Color.red;
         }
 
         gameObject.name = gameObject.name.Replace("(Clone)", $"_{gameObject.tag}");
@@ -67,10 +67,10 @@ public class UnitController : NetworkBehaviour
         if (IsFriendly())
         {
             transform.Find("UnitSightMask").gameObject.SetActive(true);
-            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+            //MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
         }
 
-        GetComponent<SightObject>().Init(team);
+        //GetComponent<SightObject>().Init(team);
 
         InitState();
     }

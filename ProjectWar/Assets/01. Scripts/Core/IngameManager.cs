@@ -132,6 +132,7 @@ public class IngameManager : NetworkBehaviour
 
     public void CloseGame(ulong winnerID)
     {
+        Debug.Log("die2");
         EndGameServerRPC(winnerID);
     }
 
@@ -144,11 +145,13 @@ public class IngameManager : NetworkBehaviour
 
         Debug.Log($"GameTime : {TimeSpan.FromSeconds(gameTime).ToString("hh':'mm':'ss")} / IsWin {isWin}");
         OnGameFinishedEvent?.Invoke(isWin, earnedGold, gameTime);
+        Debug.Log("die5");
     }
 
     [ServerRpc]
     private void EndGameServerRPC(ulong winnerID)
     {
+        Debug.Log("die3");
         EndGameClientRPC(winnerID, Time.time);
     }
 
@@ -156,6 +159,7 @@ public class IngameManager : NetworkBehaviour
     private void EndGameClientRPC(ulong winnerID, float endTime)
     {
         bool isWin = NetworkManager.Singleton.LocalClientId == winnerID;
+        Debug.Log("die4");
         EndGame(isWin, endTime);
     }
 }

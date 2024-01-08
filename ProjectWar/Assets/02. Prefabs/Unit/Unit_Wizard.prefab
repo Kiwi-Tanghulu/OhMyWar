@@ -2597,8 +2597,6 @@ GameObject:
   - component: {fileID: -1699029922341592190}
   - component: {fileID: 1476212551838450155}
   - component: {fileID: 727245414401159826}
-  - component: {fileID: -7129595317629509923}
-  - component: {fileID: -3232048448098016442}
   - component: {fileID: 6010197094032135387}
   - component: {fileID: 3768454344288290239}
   m_Layer: 5
@@ -2664,7 +2662,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 2840764393
+  GlobalObjectIdHash: 2477292467
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -2815,37 +2813,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!114 &-7129595317629509923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610733452600853844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb94878da72ab54cad264647cceb8b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapPoint: {fileID: 815271369895241976}
-  redIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  blueIcon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  redColor: {r: 1, g: 0, b: 0, a: 1}
-  blueColor: {r: 0, g: 0, b: 1, a: 1}
---- !u!114 &-3232048448098016442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5610733452600853844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba196398e5542124ba6444dff0af208c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  viewDistace: 6.5
 --- !u!82 &6010197094032135387
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9898,11 +9865,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
---- !u!1 &815271369895241976 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7164521748801694782, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
-  m_PrefabInstance: {fileID: 7511180025513919686}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8151160406847342102 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1811484284764619472, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}

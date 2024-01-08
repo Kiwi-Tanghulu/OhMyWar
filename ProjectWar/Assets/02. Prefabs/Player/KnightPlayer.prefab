@@ -3168,8 +3168,6 @@ GameObject:
   - component: {fileID: 1016454558271661607}
   - component: {fileID: 6543616251939707660}
   - component: {fileID: 2001400132191179588}
-  - component: {fileID: -1141108853557662605}
-  - component: {fileID: 3769583861860164981}
   - component: {fileID: 7140885036062855302}
   m_Layer: 0
   m_Name: KnightPlayer
@@ -3403,37 +3401,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.5102385}
   serializedVersion: 2
   m_Radius: 0.47623718
---- !u!114 &-1141108853557662605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813432924912359082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb94878da72ab54cad264647cceb8b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimapPoint: {fileID: 1319370212508136361}
-  redIcon: {fileID: 21300000, guid: 9a511f0a7e4f52844b51fb4af8b216cb, type: 3}
-  blueIcon: {fileID: 21300000, guid: a78fc5e4e3adbcf47ab9444b38cd52be, type: 3}
-  redColor: {r: 1, g: 1, b: 1, a: 1}
-  blueColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &3769583861860164981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813432924912359082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba196398e5542124ba6444dff0af208c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  viewDistace: 2.25
 --- !u!82 &7140885036062855302
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6604,11 +6571,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
---- !u!1 &1319370212508136361 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7164521748801694782, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}
-  m_PrefabInstance: {fileID: 8152120769718378391}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7494422979082509639 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1811484284764619472, guid: 758df2d70d1309949b786cf12b21c2cd, type: 3}

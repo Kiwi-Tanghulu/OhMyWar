@@ -25,10 +25,10 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
     protected virtual void Start()
     {
-        if(TeamManager.Instance.IsFriendly(gameObject))
-        {
-            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
-        }
+        //if(TeamManager.Instance.IsFriendly(gameObject))
+        //{
+        //    MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+        //}
     }
 
     // 실질적으로 데미지를 넣는 함수
@@ -55,7 +55,7 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         
         if (TeamManager.Instance.IsFriendly(gameObject))
         {
-            MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
+            //MinimapManager.Instance.RegistViewObject(GetComponent<ViewObject>());
         }
     }
 
