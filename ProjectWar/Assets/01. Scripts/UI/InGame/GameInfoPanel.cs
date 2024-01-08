@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using TMPro;
+
 public class GameInfoPanel : PanelUI
 {
     [SerializeField] private GameObject knightPanel;
@@ -11,6 +13,8 @@ public class GameInfoPanel : PanelUI
 
     [SerializeField] private RectTransform showTrm;
     [SerializeField] private RectTransform hideTrm;
+
+    [SerializeField] private TextMeshProUGUI lineText;
 
     [SerializeField] private float showDuration;
     [SerializeField] private float hideDuration;
@@ -59,5 +63,25 @@ public class GameInfoPanel : PanelUI
         {
             magicPanel.SetActive(true);
         }
+    }
+
+    public void ChangeLineText(int lineIndex)
+    {
+        string line = "";
+
+        switch (lineIndex)
+        {
+            case 0:
+                line = "»ó";
+                break;
+            case 1:
+                line = "Áß";
+                break;
+            case 2:
+                line = "ÇÏ";
+                break;
+        }
+
+        lineText.text = line;
     }
 }
