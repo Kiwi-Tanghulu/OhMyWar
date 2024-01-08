@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Events;
 
 [Serializable]
 public class LinePoint
@@ -29,7 +30,6 @@ public class IngameManager : NetworkBehaviour
     [field: SerializeField] public Nexus BottomNexus { get; private set; } = null;
 
     [SerializeField] List<Player> playerPrefabs;
-    [SerializeField] private GameObject lineArrow;
 
     public Player OwnerPlayer;
 
@@ -50,6 +50,7 @@ public class IngameManager : NetworkBehaviour
     public int MaxLinePointIndex = 2;
 
     public event Action<bool, int, float> OnGameFinishedEvent;
+    public UnityEvent<int> LineChangeEvent;
 
     public bool OnGaming = false;
 
@@ -58,7 +59,7 @@ public class IngameManager : NetworkBehaviour
         base.OnNetworkSpawn();
         OnGaming = true;
 
-        SetLineArrow();
+        LineChangeEvent?.Invoke(FocusedLine);
     }
 
     public Transform GetLinePoint(int lineIndex, int pointIndex)
@@ -107,7 +108,8 @@ public class IngameManager : NetworkBehaviour
         else if(lineIndex == 2) // bottom
             CheckNexus(BottomNexus, player);
 
-        SetLineArrow();
+        LineChangeEvent?.Invoke(FocusedLine);
+        //SetLineArrow();
     }
 
     private void CheckNexus(Nexus nexus, Player player)
@@ -166,19 +168,5 @@ public class IngameManager : NetworkBehaviour
         bool isWin = NetworkManager.Singleton.LocalClientId == winnerID;
         Debug.Log("die4");
         EndGame(isWin, endTime);
-    }
-
-    private void SetLineArrow()
-    {
-        if (IsServer)
-        {
-            lineArrow.transform.position = BluePoint[FocusedLine].position;
-            lineArrow.transform.rotation = Quaternion.Euler(0, 0, 25f - 25 * FocusedLine);
-        }
-        else
-        {
-            lineArrow.transform.position = RedPoint[FocusedLine].position;
-            lineArrow.transform.rotation = Quaternion.Euler(0, 0, 180f - 25f + 25 * FocusedLine);
-        }
     }
 }
