@@ -11,6 +11,12 @@ public class NicknamePanel : MonoBehaviour
 
     [Space(10f)]
     [SerializeField] UnityEvent OnSetEvent;
+    
+    private void Start()
+    {
+        if(PlayerPrefs.GetString("PlayerID", null) != null)
+            gameObject.SetActive(false);
+    }
 
     public void IsAble()
     {
@@ -19,10 +25,11 @@ public class NicknamePanel : MonoBehaviour
 
     public void SetNickname()
     {
+        Debug.Log($"{inputField.text} / {inputField.text.Split(' ').Length}");
         if(inputField.text.Split(' ').Length <= 0)
             return;
 
-        if(inputField.text.Length <= 0 && inputField.text.Length > length)
+        if(inputField.text.Length <= 0 || inputField.text.Length > length)
             return;
 
         PlayerPrefs.SetString("PlayerID", inputField.text);
