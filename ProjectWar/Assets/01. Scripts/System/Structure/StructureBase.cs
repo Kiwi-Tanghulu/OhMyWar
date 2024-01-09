@@ -7,8 +7,8 @@ using UnityEngine.Events;
 public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObject>
 {
     [SerializeField] protected int maxHP = 100;
-    private NetworkVariable<int> currentHP;
-    public int HP => currentHP.Value;
+    private NetworkVariable<float> currentHP;
+    public float HP => currentHP.Value;
 
     [SerializeField] protected UnityEvent<NetworkObject> OnDestroyedEvent;
     [SerializeField] protected UnityEvent<NetworkObject, Vector3, int> OnDamagedEvent;
@@ -20,8 +20,9 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
 
     protected virtual void Awake()
     {
-        currentHP = new NetworkVariable<int>(maxHP);
+        currentHP = new NetworkVariable<float>(maxHP);
         healthBar = transform.Find("HealthBar").GetComponent<HealthBar>();
+        currentHP.OnValueChanged += SetHealthBar;
     }
 
     protected virtual void Start()
@@ -41,7 +42,6 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
         currentHP.Value -= damage;
         Debug.Log("currentHP : " + currentHP.Value);
         Debug.Log("maxHP : " + maxHP);
-        healthBar?.SetHealthBar(currentHP.Value / maxHP);
 
         if(currentHP.Value <= 0)
         {
@@ -94,12 +94,16 @@ public abstract class StructureBase : NetworkBehaviour, IDamageable<NetworkObjec
     {
         currentHP.Value += value;
         currentHP.Value = Mathf.Clamp(currentHP.Value, 0, maxHP);
-        healthBar?.SetHealthBar(currentHP.Value / maxHP);
     }
 
     protected IEnumerator DelayCoroutine(float delay, Action callback)
     {
         yield return new WaitForSeconds(delay);
         callback?.Invoke();
+    }
+
+    protected private void SetHealthBar(float prev, float current)
+    {
+        healthBar?.SetHealthBar(current / (float)maxHP);
     }
 }
