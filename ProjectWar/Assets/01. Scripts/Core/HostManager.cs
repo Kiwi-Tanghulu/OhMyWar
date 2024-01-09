@@ -54,7 +54,7 @@ public class HostManager
             CreateLobbyOptions lobbyOptions = new CreateLobbyOptions();
             lobbyOptions.IsPrivate = false;
             lobbyOptions.Data = new Dictionary<string, DataObject>() {
-                ["JoinCode"] = new DataObject(DataObject.VisibilityOptions.Member, JoinCode)
+                ["JoinCode"] = new DataObject(DataObject.VisibilityOptions.Public, JoinCode)
             };
 
             string playerName = PlayerPrefs.GetString("PlayerID", "누군가");
