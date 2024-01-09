@@ -55,6 +55,6 @@ public class AudioManager : MonoBehaviour
 
         clips.Add(clip.name, clip);
         //Debug.Log(clip.name);
-        Debug.Log(clips[clip.name]);
+        //Debug.Log(clips[clip.name]);
     }
 }
