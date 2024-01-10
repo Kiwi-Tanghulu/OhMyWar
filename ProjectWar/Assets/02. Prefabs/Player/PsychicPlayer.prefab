@@ -5367,6 +5367,7 @@ GameObject:
   - component: {fileID: 5511270439040311736}
   - component: {fileID: 4520669644088886677}
   - component: {fileID: 3234085081246459823}
+  - component: {fileID: 4262501197453912351}
   m_Layer: 0
   m_Name: PsychicPlayer
   m_TagString: Untagged
@@ -5695,6 +5696,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4262501197453912351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7942373800574777997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84256dbd946d7964bb7d7b041ec4fc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectStatType: 0
+  chageAmount: 5
 --- !u!1 &8216392507775487758
 GameObject:
   m_ObjectHideFlags: 0

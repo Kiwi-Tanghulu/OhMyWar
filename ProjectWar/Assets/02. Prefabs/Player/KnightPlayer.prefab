@@ -3169,6 +3169,7 @@ GameObject:
   - component: {fileID: 6543616251939707660}
   - component: {fileID: 2001400132191179588}
   - component: {fileID: 7140885036062855302}
+  - component: {fileID: 5849719387228189175}
   m_Layer: 0
   m_Name: KnightPlayer
   m_TagString: Player
@@ -3497,6 +3498,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5849719387228189175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813432924912359082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84256dbd946d7964bb7d7b041ec4fc71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectStatType: 2
+  chageAmount: 10
 --- !u!1 &4978119339969865411
 GameObject:
   m_ObjectHideFlags: 0

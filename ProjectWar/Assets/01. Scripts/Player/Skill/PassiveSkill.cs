@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
 public class PassiveSkill : NetworkBehaviour
 {
     public UnitStatType effectStatType;
@@ -18,13 +17,15 @@ public class PassiveSkill : NetworkBehaviour
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col)
-    {
-        ActivePassiveSkill(col.gameObject);   
+    {   
+        if(IsServer && col.gameObject.layer == gameObject.layer)
+            ActivePassiveSkill(col.gameObject);   
     }
 
     protected virtual void OnTriggerExit2D(Collider2D col)
     {
-        DeactivePassiveSkill(col.gameObject);
+        if (IsServer && col.gameObject.layer == gameObject.layer)
+            DeactivePassiveSkill(col.gameObject);
     }
 
     private void ActivePassiveSkill(GameObject obj)
@@ -32,6 +33,7 @@ public class PassiveSkill : NetworkBehaviour
         if (obj.TryGetComponent<UnitStat>(out UnitStat stat))
         {
             stat.AddModifier(effectStatType, chageAmount);
+            Debug.Log("set passive");
         }
     }
 
@@ -40,6 +42,7 @@ public class PassiveSkill : NetworkBehaviour
         if (obj.TryGetComponent<UnitStat>(out UnitStat stat))
         {
             stat.RemoveModifier(effectStatType, chageAmount);
+            Debug.Log("unset passive");
         }
     }
 }
