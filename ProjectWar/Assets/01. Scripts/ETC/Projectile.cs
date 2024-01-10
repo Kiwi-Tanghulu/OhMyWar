@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class Projectile : MonoBehaviour
+public class Projectile : NetworkBehaviour
 {
     private Collider2D target;
     [SerializeField] private float moveSpeed;
@@ -11,6 +12,9 @@ public class Projectile : MonoBehaviour
 
     public void Init(GameObject target, Vector2 movedir)
     {
+        if (!IsServer)
+            return;
+
         moveDir = movedir;
         this.target = target.GetComponent<Collider2D>();
         transform.right = moveDir;
@@ -18,12 +22,9 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        transform.position += (Vector3)(moveDir * moveSpeed * Time.deltaTime);
-    }
+        if (!IsServer)
+            return;
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision == target)
-            Destroy(gameObject);
+        transform.position += (Vector3)(moveDir * moveSpeed * Time.deltaTime);
     }
 }

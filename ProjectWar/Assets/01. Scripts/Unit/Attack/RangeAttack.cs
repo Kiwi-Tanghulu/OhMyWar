@@ -6,6 +6,7 @@ using UnityEngine;
 public class RangeAttack : UnitAttack
 {
     private WaitForSeconds wfs;
+    private Projectile pro;
 
     public override void InitCompo(UnitController _controller)
     {
@@ -22,14 +23,15 @@ public class RangeAttack : UnitAttack
         if (target.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> attackedObj))
         {
             StartCoroutine(Delay(attackedObj));
-            CreateProjectileClientRpc();
+            CreateProjectileServerRpc();
         }
     }
 
-    [ClientRpc]
-    private void CreateProjectileClientRpc()
+    [ServerRpc]
+    private void CreateProjectileServerRpc()
     {
-        Projectile pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
+        pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
+        pro.GetComponent<NetworkObject>().Spawn();
         pro.Init(target, (target.transform.position - transform.position).normalized);
     }
 
@@ -39,5 +41,6 @@ public class RangeAttack : UnitAttack
 
         attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
         PlayEffect();
+        pro.GetComponent<NetworkObject>().Despawn();
     }
 }

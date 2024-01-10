@@ -21,7 +21,7 @@ MonoBehaviour:
   attackDamage: 12
   attackDistance: 3
   attackDelay: 1.2
-  takeDamageDelay: 0
+  takeDamageDelay: 0.3
   serchDelay: 0
   projectile: {fileID: 2825244541125654157, guid: 2ebdfce0b33eb704182f647d5323f059, type: 3}
   targetLayer:
