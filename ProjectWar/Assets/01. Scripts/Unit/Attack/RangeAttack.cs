@@ -23,13 +23,15 @@ public class RangeAttack : UnitAttack
         if (target.TryGetComponent<IDamageable<NetworkObject>>(out IDamageable<NetworkObject> attackedObj))
         {
             StartCoroutine(Delay(attackedObj));
-            CreateProjectileServerRpc();
+            CreateProjectile();
         }
     }
 
-    [ServerRpc]
-    private void CreateProjectileServerRpc()
+    private void CreateProjectile()
     {
+        if (!IsServer)
+            return;
+
         pro = Instantiate(controller.Info.projectile, transform.position, Quaternion.identity);
         pro.GetComponent<NetworkObject>().Spawn();
         pro.Init(target, (target.transform.position - transform.position).normalized);
@@ -39,8 +41,12 @@ public class RangeAttack : UnitAttack
     {
         yield return wfs;
 
-        attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
         PlayEffect();
+
+        if (!IsServer)
+            yield break;
+
+        attackedObj.TakeDamage((int)attackDamage, OwnerClientId);
         pro.GetComponent<NetworkObject>().Despawn();
     }
 }
