@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3481196703
+  GlobalObjectIdHash: 1899966463
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -1145,7 +1145,8 @@ MonoBehaviour:
         m_CallState: 2
   shieldEffect: {fileID: 4052190675701546317}
   deadEffect: {fileID: 4081589766689769864, guid: 99cf0acd671bbe2448a4bd7f7ea55d56, type: 3}
-  shieldAmount: 0
+  shieldAmount:
+    m_InternalValue: 0
 --- !u!114 &493735604810835029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1998,7 +1999,7 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
+  m_MaskInteraction: 1
   m_SpriteSortPoint: 0
 --- !u!1 &4114325391529940004
 GameObject:

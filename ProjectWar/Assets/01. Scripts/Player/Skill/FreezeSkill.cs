@@ -23,13 +23,17 @@ public class FreezeSkill : SkillBase
         AnimationEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
         _effect.Play();
 
-        for(int i = 0; i < cols.Length; i++)
+        if(IsServer)
         {
-            if (cols[i].TryGetComponent<IStunable>(out IStunable stunObj))
+            for (int i = 0; i < cols.Length; i++)
             {
-                stunObj.Stun();
+                if (cols[i].TryGetComponent<IStunable>(out IStunable stunObj))
+                {
+                    stunObj.Stun();
+                }
             }
         }
+        
 
         return true;
     }

@@ -3148,7 +3148,7 @@ MonoBehaviour:
   soundName: EarthquakeSound
   onShot: 1
   delay: 0
-  aud: {fileID: 0}
+  aud: {fileID: 7140885036062855302}
 --- !u!1 &4813432924912359082
 GameObject:
   m_ObjectHideFlags: 0
@@ -3832,6 +3832,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   radius: 3.5
+  shieldAmount: 50
   effect: {fileID: 4171253804667647213, guid: 970191f1d5b56c84591080c8e862e668, type: 3}
 --- !u!114 &1968481882249913616
 MonoBehaviour:

@@ -22,11 +22,13 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     public GameObject shieldEffect;
     public GameObject deadEffect;
 
-    [SerializeField] private float shieldAmount;
+    [SerializeField] private NetworkVariable<float> shieldAmount;
 
     private void Awake()
     {
         currentHealth = new NetworkVariable<float>();
+        shieldAmount = new NetworkVariable<float>();
+        
         healthBar = transform.Find("Visual/HealthBar").GetComponent<HealthBar>();
     }
 
@@ -43,6 +45,7 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
         controller.Stat.GetStat(UnitStatType.maxHealth).OnValueChangeEvent += MaxHealthValueChange;
 
         currentHealth.OnValueChanged += SetHealthBar;
+        shieldAmount.OnValueChanged += ShieldEffect;
     }
 
     public override void OnNetworkDespawn()
@@ -92,14 +95,14 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
     {
         float dmg = damage;
 
-        if(shieldAmount != 0)
+        if(shieldAmount.Value != 0)
         {
-            dmg = damage - shieldAmount;
-            shieldAmount -= damage;
+            dmg = damage - shieldAmount.Value;
+            shieldAmount.Value -= damage;
 
-            if(shieldAmount <= 0)
+            if(shieldAmount.Value <= 0)
             {
-                shieldAmount = Mathf.Max(shieldAmount, 0);
+                shieldAmount.Value = Mathf.Max(shieldAmount.Value, 0);
                 shieldEffect.SetActive(false);
                 //something
             }
@@ -145,10 +148,19 @@ public class UnitHealth : UnitComponent, IDamageable<NetworkObject>, IStunable
 
     public void SetShield(float value)
     {
-        shieldAmount += value;
+        shieldAmount.Value += value;
 
         //actove shield effect;
         shieldEffect.SetActive(true);
+    }
+
+    private void ShieldEffect(float prev, float current)
+    {
+        if(prev < current)
+            shieldEffect.SetActive(true);
+
+        if(current <= 0)
+            shieldEffect.SetActive(false);
     }
 
     private void SetHealthBar(float prevHealth, float newHealth)

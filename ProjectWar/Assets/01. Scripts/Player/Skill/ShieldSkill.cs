@@ -6,13 +6,14 @@ public class ShieldSkill : SkillBase
 {
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private float radius;
+    [SerializeField] private float shieldAmount;
     [SerializeField] AnimationEffect effect;
 
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
 
-        targetLayer = 1 << (transform.root.gameObject.layer - 1);
+        targetLayer = 1 << (transform.root.gameObject.layer);
     }
 
     protected override bool ActiveSkill()
@@ -22,13 +23,17 @@ public class ShieldSkill : SkillBase
         AnimationEffect _effect = Instantiate(effect, transform.position, Quaternion.identity);
         _effect.Play();
 
-        for (int i = 0; i < cols.Length; i++)
+        if(IsServer)
         {
-            if (cols[i].TryGetComponent<IStunable>(out IStunable stunObj))
+            for (int i = 0; i < cols.Length; i++)
             {
-                stunObj.Stun();
+                if (cols[i].TryGetComponent<UnitHealth>(out UnitHealth u))
+                {
+                    u.SetShield(shieldAmount);
+                }
             }
         }
+        
 
         return true;
     }

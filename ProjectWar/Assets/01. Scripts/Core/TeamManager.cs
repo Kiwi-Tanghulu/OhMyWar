@@ -30,7 +30,7 @@ public class TeamManager : NetworkBehaviour
 
     public LayerMask GetEnemyLayer(int layer)
     {
-        LayerMask myLayer = 1 << (layer - 1);
+        LayerMask myLayer = 1 << layer;
 
         return myLayer == BlueLayer ? RedLayer : BlueLayer;
     }
