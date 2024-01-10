@@ -32,6 +32,7 @@ public class LobbyPanel : FixedUI
     [SerializeField] private RectTransform redReadyTextTrm;
     [SerializeField] private Button blueReadyBtn;
     [SerializeField] private Button redReadyBtn;
+    [SerializeField] GameObject guideText;
 
     private LobbyManager lobbyManager;
     public void Init(UserType user, LobbyManager _lobbyManager)
@@ -63,6 +64,9 @@ public class LobbyPanel : FixedUI
         SettingPaenlInfo(myType, CharacterType.Knight);
         blueLastClickCharacterBtn = blueCharacterBtn[0];
         redLastClickCharacterBtn = redCharacterBtn[0];
+
+        if (user == UserType.Red)
+            HideGuideText();
     }
 
     public void OnBlueReady()
@@ -92,6 +96,7 @@ public class LobbyPanel : FixedUI
     {
         transform.Find("Red").gameObject.SetActive(true);
         transform.Find("BlueDefencePanel").gameObject.SetActive(false);
+        HideGuideText();
     }
 
     public void HideClientPanel(ulong id)
@@ -141,5 +146,10 @@ public class LobbyPanel : FixedUI
     {
         NetworkManager.Singleton.Shutdown();
         SceneLoader.Instance.LoadSceneAsync("MenuScene");
+    }
+
+    public void HideGuideText()
+    {
+        guideText.SetActive(false);
     }
 }
