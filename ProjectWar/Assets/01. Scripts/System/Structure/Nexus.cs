@@ -46,8 +46,7 @@ public class Nexus : StructureBase, IUnitSpawner
 	
     public void SpawnUnit(int unitIndex, int lineIndex)
     {
-        UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId,
-            line, 1);
+        UnitManager.Instance.SpawnUnit((UnitType)unitIndex, NetworkManager.LocalClientId, line, 1);
     }
 
     public override void OnDamaged(int damage = 0, NetworkObject performer = null, Vector3 point = default)
