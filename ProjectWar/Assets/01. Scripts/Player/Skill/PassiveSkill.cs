@@ -13,7 +13,6 @@ public class PassiveSkill : NetworkBehaviour
     private void Awake()
     {
         col = GetComponent<Collider2D>();
-        col.isTrigger = true;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D col)
